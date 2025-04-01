@@ -1,0 +1,81 @@
+-- Création de la base de données
+CREATE DATABASE IF NOT EXISTS bookingDB;
+USE bookingDB;
+
+-- Table Utilisateur
+CREATE TABLE Utilisateur (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    type ENUM('nouveau', 'ancien') DEFAULT 'nouveau'
+);
+
+-- Table Hébergement
+CREATE TABLE Hebergement (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(150) NOT NULL,
+    adresse VARCHAR(255) NOT NULL,
+    description TEXT,
+    photos VARCHAR(255),
+    prix DECIMAL(10,2) NOT NULL
+);
+
+-- Table Réservation
+CREATE TABLE Reservation (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    utilisateur_id INT NOT NULL,
+    hebergement_id INT NOT NULL,
+    date_arrivee DATE NOT NULL,
+    date_depart DATE NOT NULL,
+    nb_adultes INT NOT NULL,
+    nb_enfants INT DEFAULT 0,
+    nb_chambres INT DEFAULT 1,
+    FOREIGN KEY (utilisateur_id) REFERENCES Utilisateur(id),
+    FOREIGN KEY (hebergement_id) REFERENCES Hebergement(id)
+);
+
+-- Table Paiement
+CREATE TABLE Paiement (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_id INT NOT NULL,
+    montant DECIMAL(10,2) NOT NULL,
+    statut VARCHAR(50) NOT NULL,
+    FOREIGN KEY (reservation_id) REFERENCES Reservation(id)
+);
+
+-- Insertion d'exemples d'enregistrements pour Utilisateur
+INSERT INTO Utilisateur (nom, email, mot_de_passe, type) VALUES 
+('Alice Dupont', 'alice@example.com', 'passAlice', 'nouveau'),
+('Bob Martin', 'bob@example.com', 'passBob', 'ancien'),
+('Claire Durand', 'claire@example.com', 'passClaire', 'nouveau'),
+('David Petit', 'david@example.com', 'passDavid', 'ancien'),
+('Eva Laurent', 'eva@example.com', 'passEva', 'nouveau'),
+('François Moreau', 'francois@example.com', 'passFrançois', 'ancien');
+
+-- Insertion d'exemples pour Hébergement
+INSERT INTO Hebergement (nom, adresse, description, photos, prix) VALUES 
+('Hotel Parisien', '10 rue de Paris, 75001 Paris', 'Hôtel 4 étoiles au cœur de Paris', 'hotel_parisien.jpg', 150.00),
+('Villa Provence', '20 rue de Provence, 13090 Aix-en-Provence', 'Villa avec piscine ensoleillée', 'villa_provence.jpg', 200.00),
+('Appartement Lyon', '5 rue de Lyon, 69000 Lyon', 'Appartement moderne au centre-ville', 'appart_lyon.jpg', 100.00),
+('Chalet Montagne', 'Route des Alpes, 38000 Grenoble', 'Chalet cosy pour les vacances d’hiver', 'chalet_montagne.jpg', 180.00),
+('Complexe Balnéaire', 'Boulevard de la Mer, 84000 Avignon', 'Complexe avec accès direct à la plage', 'complexe_balneaire.jpg', 220.00),
+('Studio Lille', '15 rue de Lille, 59000 Lille', 'Studio confortable pour séjour court', 'studio_lille.jpg', 80.00);
+
+-- Insertion d'exemples pour Réservation
+INSERT INTO Reservation (utilisateur_id, hebergement_id, date_arrivee, date_depart, nb_adultes, nb_enfants, nb_chambres) VALUES
+(1, 2, '2025-07-01', '2025-07-10', 2, 0, 1),
+(2, 1, '2025-08-15', '2025-08-20', 1, 1, 1),
+(3, 3, '2025-09-05', '2025-09-12', 2, 2, 1),
+(4, 4, '2025-10-10', '2025-10-15', 2, 0, 1),
+(5, 5, '2025-06-20', '2025-06-25', 1, 0, 1),
+(6, 6, '2025-11-01', '2025-11-07', 2, 1, 1);
+
+-- Insertion d'exemples pour Paiement
+INSERT INTO Paiement (reservation_id, montant, statut) VALUES
+(1, 2000.00, 'Validé'),
+(2, 750.00, 'Validé'),
+(3, 1200.00, 'En attente'),
+(4, 900.00, 'Validé'),
+(5, 1100.00, 'Annulé'),
+(6, 560.00, 'Validé');
