@@ -49,7 +49,8 @@ public class HebergementPanel extends JPanel {
         // ----- Partie gauche : Photo -----
         JLabel photoLabel = new JLabel();
         photoLabel.setPreferredSize(new Dimension(150, 100));
-        String imagePath = "assets/images/" + h.getPhotos();
+        String imagePath = "src/assets/images/" + h.getPhotos();
+        //java.net.URL url = getClass().getResource(imagePath);
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
             ImageIcon icon = new ImageIcon(imagePath);
