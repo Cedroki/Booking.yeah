@@ -5,7 +5,7 @@ import DAO.AvisDAO;
 import model.Avis;
 import javax.swing.*;
 
-publiAc class AvisController {
+public class AvisController {
     private AvisPanel view;
     private AvisDAO avisDAO;
 
