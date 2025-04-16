@@ -167,4 +167,100 @@ public class HebergementDAO implements DAO<Hebergement> {
         }
         return list;
     }
+
+    public List<Hebergement> findByFourchette(String fourchette) {
+        List<Hebergement> result = new ArrayList<>();
+
+        String sql = "SELECT * FROM hebergement WHERE fourchette = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, fourchette);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Hebergement h = new Hebergement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("description"),
+                        rs.getString("photos"),
+                        rs.getDouble("prix"),
+                        rs.getString("categorie"),
+                        rs.getString("fourchette")
+                );
+                result.add(h);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public List<Hebergement> findByFourchetteAndCategorie(String fourchette, String categorie) {
+        List<Hebergement> result = new ArrayList<>();
+        String sql = "SELECT * FROM hebergement WHERE fourchette = ? AND categorie = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, fourchette);
+            stmt.setString(2, categorie);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Hebergement h = new Hebergement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("description"),
+                        rs.getString("photos"),
+                        rs.getDouble("prix"),
+                        rs.getString("categorie"),
+                        rs.getString("fourchette")
+                );
+                result.add(h);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public List<Hebergement> findByCategorie(String categorie) {
+        List<Hebergement> result = new ArrayList<>();
+        String sql = "SELECT * FROM hebergement WHERE categorie = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categorie);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Hebergement h = new Hebergement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("description"),
+                        rs.getString("photos"),
+                        rs.getDouble("prix"),
+                        rs.getString("categorie"),
+                        rs.getString("fourchette")
+                );
+                result.add(h);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 }

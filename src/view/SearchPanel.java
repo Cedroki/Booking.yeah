@@ -14,6 +14,7 @@ public class SearchPanel extends JPanel {
     private JComboBox<String> priceComboBox;
     private JButton searchButton;
 
+
     public SearchPanel() {
         // Arrière-plan et FlowLayout
         setBackground(new Color(245, 247, 250));

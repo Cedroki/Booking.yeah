@@ -31,6 +31,17 @@ public class HebergementPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(hebergementListPanel);
         add(scrollPane, BorderLayout.CENTER);
     }
+    public void updateHebergements(List<Hebergement> hebergements) {
+        hebergementListPanel.removeAll(); // On vide la liste
+
+        for (Hebergement h : hebergements) {
+            hebergementListPanel.add(createHebergementItem(h));
+            hebergementListPanel.add(Box.createVerticalStrut(10));
+        }
+
+        hebergementListPanel.revalidate();
+        hebergementListPanel.repaint();
+    }
 
     /**
      * Crée le panneau d'affichage d'un hébergement avec :
