@@ -28,22 +28,12 @@ public class HebergementViewPanel extends JPanel {
         add(hebergementPanel, BorderLayout.CENTER);
 
         searchPanel.getSearchButton().addActionListener(e -> {
-            String selectedFourchette = searchPanel.getSelectedPrice();
-            String selectedCategorie = searchPanel.getSelectedCategorie();
+            String ville = searchPanel.getSearchedVille();
+            String fourchette = searchPanel.getSelectedPrice();
+            String categorie = searchPanel.getSelectedCategorie();
 
-            boolean filterFourchette = !selectedFourchette.equalsIgnoreCase("Aucun");
-            boolean filterCategorie = !selectedCategorie.equalsIgnoreCase("Aucune");
-
-            if (!filterFourchette && !filterCategorie) {
-                hebergementPanel.updateHebergements(hebergementDAO.findAll());
-            } else if (filterFourchette && filterCategorie) {
-                hebergementPanel.updateHebergements(
-                        hebergementDAO.findByFourchetteAndCategorie(selectedFourchette, selectedCategorie));
-            } else if (filterFourchette) {
-                hebergementPanel.updateHebergements(hebergementDAO.findByFourchette(selectedFourchette));
-            } else {
-                hebergementPanel.updateHebergements(hebergementDAO.findByCategorie(selectedCategorie));
-            }
+            List<Hebergement> result = hebergementDAO.findByFilters(ville, fourchette, categorie);
+            hebergementPanel.updateHebergements(result);
         });
 
     }
