@@ -3,6 +3,8 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+//gg
+
 public class LoginFrame extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;

@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//Gg
+
 public class ClientDAO implements DAO<Client> {
 
     @Override

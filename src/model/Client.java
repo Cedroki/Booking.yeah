@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Timestamp;
 
+//gg
+
 public class Client {
     private int id;
     private String nom;

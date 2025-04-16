@@ -7,7 +7,7 @@ import DAO.AdminDAO;
 import model.Client;
 import model.Admin;
 import javax.swing.*;
-//gg
+//ggw
 
 public class LoginController {
     private LoginFrame loginFrame;

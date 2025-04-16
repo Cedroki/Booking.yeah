@@ -2,6 +2,8 @@ import javax.swing.SwingUtilities;
 import view.LoginFrame;
 import controller.LoginController;
 
+//gg
+
 public class MainApp {
     public static void main(String[] args) {
         // Optionnel : changer le Look & Feel
