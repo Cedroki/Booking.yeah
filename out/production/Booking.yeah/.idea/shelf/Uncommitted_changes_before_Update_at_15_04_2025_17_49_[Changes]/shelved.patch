@@ -1,0 +1,95 @@
+Index: src/util/DBConnection.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package util;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.DriverManager;\r\nimport java.sql.SQLException;\r\n\r\npublic class DBConnection {\r\n    private static final String URL = \"jdbc:mysql://localhost:3306/bookingDB?useSSL=false&serverTimezone=UTC\";\r\n    private static final String USER = \"root\";\r\n    private static final String PASSWORD = \"\";\r\n\r\n    private static Connection connection = null;\r\n\r\n    public static Connection getConnection() throws SQLException {\r\n        if (connection == null || connection.isClosed()) {\r\n            connection = DriverManager.getConnection(URL, USER, PASSWORD);\r\n        }\r\n        return connection;\r\n    }\r\n\r\n    public static void closeConnection() {\r\n        if (connection != null) {\r\n            try {\r\n                connection.close();\r\n            } catch (SQLException e) {\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/util/DBConnection.java b/src/util/DBConnection.java
+--- a/src/util/DBConnection.java	(revision da9e2920b1ef85f091f840951ff92c5052d9df02)
++++ b/src/util/DBConnection.java	(date 1744729376475)
+@@ -5,9 +5,9 @@
+ import java.sql.SQLException;
+ 
+ public class DBConnection {
+-    private static final String URL = "jdbc:mysql://localhost:3306/bookingDB?useSSL=false&serverTimezone=UTC";
++    private static final String URL = "jdbc:mysql://localhost:8889/bookingdb?useSSL=false&serverTimezone=UTC";
+     private static final String USER = "root";
+-    private static final String PASSWORD = "";
++    private static final String PASSWORD = "root";
+ 
+     private static Connection connection = null;
+ 
+Index: .idea/Booking.yeah.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$\" isTestSource=\"false\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/Booking.yeah.iml b/.idea/Booking.yeah.iml
+--- a/.idea/Booking.yeah.iml	(revision da9e2920b1ef85f091f840951ff92c5052d9df02)
++++ b/.idea/Booking.yeah.iml	(date 1744731753183)
+@@ -5,8 +5,10 @@
+     <content url="file://$MODULE_DIR$">
+       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/src/resources" isTestSource="false" />
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="mysql-connector-j-9.2" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"temurin-21\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision da9e2920b1ef85f091f840951ff92c5052d9df02)
++++ b/.idea/misc.xml	(date 1744728606290)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="temurin-21" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/libraries/mysql_connector_j_9_2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/mysql_connector_j_9_2.xml b/.idea/libraries/mysql_connector_j_9_2.xml
+new file mode 100644
+--- /dev/null	(date 1744728260893)
++++ b/.idea/libraries/mysql_connector_j_9_2.xml	(date 1744728260893)
+@@ -0,0 +1,21 @@
++<component name="libraryTable">
++  <library name="mysql-connector-j-9.2">
++    <CLASSES>
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/build/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/demo/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/generated/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/legacy/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/main/core-api/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/main/core-impl/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/main/protocol-impl/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/main/user-api/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/main/user-impl/java" />
++      <root url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0/src/test/java" />
++    </SOURCES>
++    <jarDirectory url="file://$PROJECT_DIR$/../../../../Program Files/MySQL/mysql-connector-j-9.2.0" recursive="false" />
++  </library>
++</component>
+\ No newline at end of file
