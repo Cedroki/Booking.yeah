@@ -4,16 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="test">
-      <change beforePath="$PROJECT_DIR$/.idea/Booking.yeah.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Booking.yeah.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DBConnection.java" afterDir="false" />
-    </list>
+    <list default="true" id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="ajout connexion admin" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -58,7 +60,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
@@ -83,7 +85,7 @@
       <workItem from="1743502671053" duration="1058000" />
       <workItem from="1744723871392" duration="1035000" />
       <workItem from="1744724948451" duration="307000" />
-      <workItem from="1744725369656" duration="6850000" />
+      <workItem from="1744725369656" duration="20120000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
@@ -109,7 +111,63 @@
       <option name="project" value="LOCAL" />
       <updated>1744724611426</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="creation d'un nouveau compte">
+      <option name="closed" value="true" />
+      <created>1744815424953</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744815424953</updated>
+    </task>
+    <task id="LOCAL-00005" summary="filtre">
+      <option name="closed" value="true" />
+      <created>1744818287263</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744818287263</updated>
+    </task>
+    <task id="LOCAL-00006" summary="filtre complet avec categorie destination et prix">
+      <option name="closed" value="true" />
+      <created>1744820678258</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744820678258</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ajout BDD">
+      <option name="closed" value="true" />
+      <created>1744820926790</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744820926790</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ajout connexion admin">
+      <option name="closed" value="true" />
+      <created>1744886339005</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744886339005</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ajout connexion admin">
+      <option name="closed" value="true" />
+      <created>1744887104112</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744887104112</updated>
+    </task>
+    <task id="LOCAL-00010" summary="ajout connexion admin">
+      <option name="closed" value="true" />
+      <created>1744887483746</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744887483746</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +175,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="creation d'un nouveau compte" />
+    <MESSAGE value="filtre" />
+    <MESSAGE value="filtre complet avec categorie destination et prix" />
+    <MESSAGE value="ajout BDD" />
+    <MESSAGE value="ajout connexion admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout connexion admin" />
   </component>
 </project>
