@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.List;
-
+//m
 public class HebergementPanel extends JPanel {
     private HebergementDAO hebergementDAO;
     private JPanel hebergementListPanel;
@@ -17,11 +17,11 @@ public class HebergementPanel extends JPanel {
         // Instanciation du DAO
         hebergementDAO = new HebergementDAO();
 
-        // Panel qui contiendra la liste des hébergements
+        // Panneau qui contiendra la liste des hébergements
         hebergementListPanel = new JPanel();
         hebergementListPanel.setLayout(new BoxLayout(hebergementListPanel, BoxLayout.Y_AXIS));
 
-        // Récupérer tous les hébergements
+        // Récupérer tous les hébergements via le DAO
         List<Hebergement> hebergements = hebergementDAO.findAll();
         for (Hebergement h : hebergements) {
             hebergementListPanel.add(createHebergementItem(h));
@@ -47,8 +47,8 @@ public class HebergementPanel extends JPanel {
      * Crée le panneau d'affichage d'un hébergement avec :
      * - À gauche : la photo,
      * - Au centre : les informations (nom, adresse, description),
-     * - À droite : le prix par nuit en haut et, tout en bas, trois boutons ("Réserver", "Avis", "Mes promos")
-     *   disposés uniformément avec la même police (taille 10 points) et des dimensions de 90×20 pixels.
+     * - À droite : le prix par nuit en haut et, en bas, trois boutons ("Réserver", "Avis", "Mes promos")
+     *   avec une police uniforme et des dimensions de 90×20 pixels.
      *
      * @param h L'objet Hebergement à afficher.
      * @return Un JPanel contenant l'affichage complet.
@@ -61,7 +61,6 @@ public class HebergementPanel extends JPanel {
         JLabel photoLabel = new JLabel();
         photoLabel.setPreferredSize(new Dimension(150, 100));
         String imagePath = "src/assets/images/" + h.getPhotos();
-        //java.net.URL url = getClass().getResource(imagePath);
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
             ImageIcon icon = new ImageIcon(imagePath);
@@ -94,23 +93,23 @@ public class HebergementPanel extends JPanel {
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Prix en haut du panneau droit
+        // Affichage du prix en haut du panneau droit
         JLabel priceLabel = new JLabel(String.format("%.2f € / nuit", h.getPrix()));
         priceLabel.setFont(priceLabel.getFont().deriveFont(Font.PLAIN, 14f));
         priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
         rightPanel.add(priceLabel, BorderLayout.NORTH);
 
-        // Panneau des boutons, placé en bas
+        // Panneau des boutons, situé en bas du panneau droit
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         buttonPanel.setOpaque(false);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
-        // Taille et police uniforme pour tous les boutons
         Dimension btnSize = new Dimension(90, 20);
-        Font btnFont = new Font("SansSerif", Font.PLAIN, 9);  // Taille 10 points (entier)
+        Font btnFont = new Font("SansSerif", Font.PLAIN, 9);
         Color btnBackground = new Color(0, 90, 158);
         Color btnForeground = Color.WHITE;
 
+        // Bouton "Réserver" avec action pour ouvrir la fenêtre de réservation
         JButton btnReserver = new JButton("Réserver");
         btnReserver.setPreferredSize(btnSize);
         btnReserver.setFont(btnFont);
@@ -119,7 +118,13 @@ public class HebergementPanel extends JPanel {
         btnReserver.setFocusPainted(false);
         btnReserver.setOpaque(true);
         btnReserver.setBorderPainted(false);
+        btnReserver.addActionListener(e -> {
+            // Remplacez "1" par l'ID réel du client connecté
+            ReservationFrame reservationFrame = new ReservationFrame(h, 1);
+            reservationFrame.setVisible(true);
+        });
 
+        // Bouton "Avis"
         JButton btnAvis = new JButton("Avis");
         btnAvis.setPreferredSize(btnSize);
         btnAvis.setFont(btnFont);
@@ -129,6 +134,7 @@ public class HebergementPanel extends JPanel {
         btnAvis.setOpaque(true);
         btnAvis.setBorderPainted(false);
 
+        // Bouton "Mes promos"
         JButton btnPromos = new JButton("Mes promos");
         btnPromos.setPreferredSize(btnSize);
         btnPromos.setFont(btnFont);
@@ -142,7 +148,6 @@ public class HebergementPanel extends JPanel {
         buttonPanel.add(btnAvis);
         buttonPanel.add(btnPromos);
 
-        // Ajouter le panneau des boutons en bas du rightPanel
         rightPanel.add(buttonPanel, BorderLayout.SOUTH);
         panel.add(rightPanel, BorderLayout.EAST);
 
