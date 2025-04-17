@@ -3,7 +3,8 @@ package controller;
 import DAO.AdminDAO;
 import model.Admin;
 import view.AdminLoginFrame;
-import view.AdminPanel;
+import view.AdminFrame;
+
 
 import javax.swing.*;
 
@@ -23,7 +24,7 @@ public class AdminLoginController {
             if (admin != null && admin.getMotDePasse().equals(password)) {
                 JOptionPane.showMessageDialog(frame, "Connexion réussie !");
                 frame.dispose();
-                new AdminPanel().setVisible(true);
+                new AdminFrame().setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(frame, "Identifiants incorrects !");
             }

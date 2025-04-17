@@ -2,7 +2,8 @@ package controller;
 
 import view.LoginFrame;
 import view.MainFrame;
-import view.AdminPanel; // 👈 à créer si pas encore fait
+import view.AdminFrame;
+
 import DAO.ClientDAO;
 import DAO.AdminDAO;
 import model.Client;
@@ -36,7 +37,7 @@ public class LoginController {
             if (client != null && client.getMotDePasse().equals(password)) {
                 JOptionPane.showMessageDialog(loginFrame, "Connexion client réussie ! Bienvenue " + client.getNom());
                 loginFrame.dispose();
-                new MainFrame().setVisible(true); // 👈 interface CLIENT
+                new MainFrame(client).setVisible(true);  // ✅ passe bien le client ici
             } else {
                 JOptionPane.showMessageDialog(loginFrame, "Email ou mot de passe client incorrect !");
             }
@@ -45,7 +46,7 @@ public class LoginController {
             if (admin != null && admin.getMotDePasse().equals(password)) {
                 JOptionPane.showMessageDialog(loginFrame, "Connexion administrateur réussie ! Bienvenue " + admin.getNom());
                 loginFrame.dispose();
-                new AdminPanel().setVisible(true); // 👈 interface ADMIN
+                new AdminFrame().setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(loginFrame, "Email ou mot de passe administrateur incorrect !");
             }
