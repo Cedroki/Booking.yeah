@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.List;
-
+//m
 public class HebergementPanel extends JPanel {
     private HebergementDAO hebergementDAO;
     private JPanel hebergementListPanel;
