@@ -271,3 +271,17 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+AJOUTER A LA BDD :
+
+
+ALTER TABLE hebergement ADD COLUMN ville VARCHAR(100);
+
+UPDATE hebergement SET ville = 'Paris' WHERE id = 1;
+UPDATE hebergement SET ville = 'Aix-en-Provence' WHERE id = 2;
+UPDATE hebergement SET ville = 'Lyon' WHERE id = 3;
+UPDATE hebergement SET ville = 'Grenoble' WHERE id = 4;
+UPDATE hebergement SET ville = 'Marbella' WHERE id = 5;
+UPDATE hebergement SET ville = 'Lille' WHERE id = 6;

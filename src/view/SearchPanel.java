@@ -13,21 +13,24 @@ public class SearchPanel extends JPanel {
     private JComboBox<String> categoryComboBox;
     private JComboBox<String> priceComboBox;
     private JButton searchButton;
+    private JTextField destinationField;
+
+
 
     public SearchPanel() {
         // Arrière-plan et FlowLayout
         setBackground(new Color(245, 247, 250));
         setLayout(new FlowLayout(FlowLayout.CENTER, 8, 8));
 
-        // Label et comboBox pour Destination
+        // Label pour la destination
         JLabel destinationLabel = new JLabel("Destination:");
         destinationLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
         add(destinationLabel);
 
-        String[] destinations = {"Aucune", "Espagne", "Lille", "Lyon", "Paris"};
-        destinationComboBox = new JComboBox<>(destinations);
-        destinationComboBox.setPreferredSize(new Dimension(80, 22));
-        add(destinationComboBox);
+// Champ texte libre
+        destinationField = new JTextField(10);
+        destinationField.setPreferredSize(new Dimension(100, 22));
+        add(destinationField);
 
         // Label et JSpinner pour Date d'arrivée
         JLabel arrivalLabel = new JLabel("Arrivée:");
@@ -122,4 +125,9 @@ public class SearchPanel extends JPanel {
     public JButton getSearchButton() {
         return searchButton;
     }
+
+    public String getSearchedVille() {
+        return destinationField.getText().trim();
+    }
+
 }
