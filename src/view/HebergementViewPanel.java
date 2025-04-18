@@ -3,16 +3,14 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-
 import DAO.HebergementDAO;
 import model.Hebergement;
 
 public class HebergementViewPanel extends JPanel {
-    private SearchPanel searchPanel;       // Filtres
-    private HebergementPanel hebergementPanel; // Liste hébergements
+    private SearchPanel searchPanel;
+    private HebergementPanel hebergementPanel;
     private HebergementDAO hebergementDAO = new HebergementDAO();
-
-    private double reduction = 0.0; // 🔥 Taux de promotion
+    private double reduction = 0.0; // Par défaut, pas de promo
 
     public HebergementViewPanel() {
         setLayout(new BorderLayout());
@@ -23,18 +21,22 @@ public class HebergementViewPanel extends JPanel {
         add(searchPanel, BorderLayout.NORTH);
         add(hebergementPanel, BorderLayout.CENTER);
 
-        // Action bouton de recherche
+        // 🎯 Action bouton Rechercher
         searchPanel.getSearchButton().addActionListener(e -> {
             String ville = searchPanel.getSearchedVille();
             String fourchette = searchPanel.getSelectedPrice();
             String categorie = searchPanel.getSelectedCategorie();
 
             List<Hebergement> result = hebergementDAO.findByFilters(ville, fourchette, categorie);
-            hebergementPanel.updateHebergements(result, reduction); // 🔥 appliquer la promo
+            hebergementPanel.updateHebergements(result, reduction);
         });
+
+        // 🔥 Affichage initial avec promo si applicable
+        List<Hebergement> initialList = hebergementDAO.findAll();
+        hebergementPanel.updateHebergements(initialList, reduction);
     }
 
-    // Setter pour la réduction (appelé depuis MainFrame)
+    // Permet au MainFrame de fixer le taux de réduction (depuis la promo du client connecté)
     public void setReduction(double reduction) {
         this.reduction = reduction;
     }
