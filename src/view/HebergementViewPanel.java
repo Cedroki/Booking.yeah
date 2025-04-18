@@ -6,49 +6,41 @@ import java.util.List;
 import DAO.HebergementDAO;
 import model.Hebergement;
 
-
 public class HebergementViewPanel extends JPanel {
-    private SearchPanel searchPanel;       // Les filtres et champs de recherche
-    private HebergementPanel hebergementPanel; // La liste des hébergements
+    private SearchPanel searchPanel;
+    private HebergementPanel hebergementPanel;
     private HebergementDAO hebergementDAO = new HebergementDAO();
-
+    private double reduction = 0.0; // Par défaut, pas de promo
 
     public HebergementViewPanel() {
-        // On utilise un BorderLayout : on place les filtres en haut (NORTH) et la liste au centre.
         setLayout(new BorderLayout());
 
-        // Instanciation des sous-panneaux
         searchPanel = new SearchPanel();
         hebergementPanel = new HebergementPanel();
 
-        // Ajouter le panneau de recherche en haut
         add(searchPanel, BorderLayout.NORTH);
-
-        // Ajouter le panneau d'affichage des hébergements en bas (centre)
         add(hebergementPanel, BorderLayout.CENTER);
 
+        // 🎯 Action bouton Rechercher
         searchPanel.getSearchButton().addActionListener(e -> {
-            String selectedFourchette = searchPanel.getSelectedPrice();
-            String selectedCategorie = searchPanel.getSelectedCategorie();
+            String ville = searchPanel.getSearchedVille();
+            String fourchette = searchPanel.getSelectedPrice();
+            String categorie = searchPanel.getSelectedCategorie();
 
-            boolean filterFourchette = !selectedFourchette.equalsIgnoreCase("Aucun");
-            boolean filterCategorie = !selectedCategorie.equalsIgnoreCase("Aucune");
-
-            if (!filterFourchette && !filterCategorie) {
-                hebergementPanel.updateHebergements(hebergementDAO.findAll());
-            } else if (filterFourchette && filterCategorie) {
-                hebergementPanel.updateHebergements(
-                        hebergementDAO.findByFourchetteAndCategorie(selectedFourchette, selectedCategorie));
-            } else if (filterFourchette) {
-                hebergementPanel.updateHebergements(hebergementDAO.findByFourchette(selectedFourchette));
-            } else {
-                hebergementPanel.updateHebergements(hebergementDAO.findByCategorie(selectedCategorie));
-            }
+            List<Hebergement> result = hebergementDAO.findByFilters(ville, fourchette, categorie);
+            hebergementPanel.updateHebergements(result, reduction);
         });
 
+        // 🔥 Affichage initial avec promo si applicable
+        List<Hebergement> initialList = hebergementDAO.findAll();
+        hebergementPanel.updateHebergements(initialList, reduction);
     }
 
-    // Getters si besoin (ex : pour rafraîchir la recherche)
+    // Permet au MainFrame de fixer le taux de réduction (depuis la promo du client connecté)
+    public void setReduction(double reduction) {
+        this.reduction = reduction;
+    }
+
     public SearchPanel getSearchPanel() {
         return searchPanel;
     }

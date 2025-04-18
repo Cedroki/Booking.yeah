@@ -1,54 +1,63 @@
 package view;
 
+import DAO.HebergementDAO;
+import DAO.PromotionDAO;
+import model.Client;
+import model.Hebergement;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MainFrame extends JFrame {
-    private JPanel headerPanel;      // Contient le titre et le menu
-    private JLabel titleLabel;       // Affiche "Booking.com"
 
-    private JPanel menuPanel;        // Barre de menu avec les boutons
+    private JPanel headerPanel;
+    private JLabel titleLabel;
+
+    private JPanel menuPanel;
     private JButton btnHebergement;
     private JButton btnMesReservations;
     private JButton btnAvis;
     private JButton btnMesPromotions;
 
-    private JPanel contentPanel;     // Zone centrale qui utilisera CardLayout pour les vues
+    private JPanel contentPanel;
     private CardLayout cardLayout;
 
-    // Panneaux pour chaque vue
-    private HebergementViewPanel hebergementViewPanel;  // Pour la vue "Hébergement"
-    private JPanel reservationsPanel;                   // Pour "Mes réservations"
-    private JPanel avisPanel;                           // Pour "Avis"
-    private JPanel promotionsPanel;                     // Pour "Mes promotions"
+    private HebergementViewPanel hebergementViewPanel;
+    private JPanel reservationsPanel;
+    private JPanel avisPanel;
+    private JPanel promotionsPanel;
 
-    public MainFrame() {
+    private Client currentClient;
+    private double promotionRate = 0.0;
+
+    public MainFrame(Client client) {
         super("Booking Application");
+        this.currentClient = client;
+
+        // 🧠 Récupère la réduction pour l'utilisateur (ancien/nouveau)
+        this.promotionRate = new PromotionDAO().getDiscountForClientType(client.getType());
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900, 600);
         setLocationRelativeTo(null);
+
         initComponents();
     }
 
     private void initComponents() {
-        // -----------------------
-        // Création du headerPanel : titre et menu
-        // -----------------------
+        // ---------- HEADER ----------
         headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(0, 53, 128)); // Fond bleu similaire à Booking.com
+        headerPanel.setBackground(new Color(0, 53, 128));
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
 
-        // Titre affiché "Booking.com"
         titleLabel = new JLabel("Booking.molko");
         titleLabel.setForeground(Color.WHITE);
-        // Choisissez ici la police qui se rapproche de celle de Booking.com.
-        // Vous pouvez remplacer "SansSerif" par une police spécifique si vous l'avez installée.
         titleLabel.setFont(new Font("SansSerif", Font.PLAIN, 36));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Menu Panel (boutons de navigation)
         menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        menuPanel.setBackground(new Color(0, 53, 128)); // Même fond bleu
+        menuPanel.setBackground(new Color(0, 53, 128));
 
         btnHebergement = createMenuButton("Hébergement");
         btnMesReservations = createMenuButton("Mes réservations");
@@ -60,30 +69,33 @@ public class MainFrame extends JFrame {
         menuPanel.add(btnAvis);
         menuPanel.add(btnMesPromotions);
 
-        // Ajouter le titre, un espace et le menu dans le headerPanel
         headerPanel.add(Box.createVerticalStrut(10));
         headerPanel.add(titleLabel);
         headerPanel.add(Box.createVerticalStrut(10));
         headerPanel.add(menuPanel);
-
         add(headerPanel, BorderLayout.NORTH);
 
-        // -----------------------
-        // Création du panneau de contenu avec CardLayout
-        // -----------------------
+        // ---------- CONTENU CENTRAL ----------
         cardLayout = new CardLayout();
         contentPanel = new JPanel(cardLayout);
 
-        // Instanciation des panneaux pour chaque vue
         hebergementViewPanel = new HebergementViewPanel();
+        hebergementViewPanel.setReduction(promotionRate); // 🔥 transmet la réduction ici
+        hebergementViewPanel.getHebergementPanel().setClientAndReduction(currentClient, promotionRate); // 🔥 transmet aussi le client
+
+        // ✅ Appliquer la promo dès le démarrage
+        List<Hebergement> allHebergements = new HebergementDAO().findAll();
+        hebergementViewPanel.getHebergementPanel().updateHebergements(allHebergements, promotionRate);
+
         reservationsPanel = new JPanel();
         reservationsPanel.add(new JLabel("Mes réservations"));
+
         avisPanel = new JPanel();
         avisPanel.add(new JLabel("Avis"));
+
         promotionsPanel = new JPanel();
         promotionsPanel.add(new JLabel("Mes promotions"));
 
-        // Ajout des panneaux dans le contentPanel avec leurs identifiants
         contentPanel.add(hebergementViewPanel, "hebergement");
         contentPanel.add(reservationsPanel, "reservations");
         contentPanel.add(avisPanel, "avis");
@@ -91,21 +103,13 @@ public class MainFrame extends JFrame {
 
         add(contentPanel, BorderLayout.CENTER);
 
-        // -----------------------
-        // Configuration des actions des boutons de navigation
-        // -----------------------
+        // ---------- ÉVÈNEMENTS DE NAVIGATION ----------
         btnHebergement.addActionListener(e -> cardLayout.show(contentPanel, "hebergement"));
         btnMesReservations.addActionListener(e -> cardLayout.show(contentPanel, "reservations"));
         btnAvis.addActionListener(e -> cardLayout.show(contentPanel, "avis"));
         btnMesPromotions.addActionListener(e -> cardLayout.show(contentPanel, "promotions"));
     }
 
-    /**
-     * Méthode utilitaire pour créer un bouton de menu avec une taille agrandie,
-     * police en style normal (non en gras), fond bleu et texte blanc.
-     * @param text Le texte du bouton.
-     * @return Le JButton personnalisé.
-     */
     private JButton createMenuButton(String text) {
         JButton button = new JButton(text);
         button.setFont(button.getFont().deriveFont(Font.PLAIN, 16f));
@@ -118,7 +122,6 @@ public class MainFrame extends JFrame {
         return button;
     }
 
-    // Méthode accessoire pour obtenir le panneau de contenu si besoin
     public JPanel getContentPanel() {
         return contentPanel;
     }

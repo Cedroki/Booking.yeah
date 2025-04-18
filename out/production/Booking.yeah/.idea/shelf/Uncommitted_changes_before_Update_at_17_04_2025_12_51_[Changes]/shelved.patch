@@ -1,0 +1,18 @@
+Index: out/production/Booking.yeah/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/production/Booking.yeah/.idea/.gitignore b/out/production/Booking.yeah/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1743502675281)
++++ b/out/production/Booking.yeah/.idea/.gitignore	(date 1743502675281)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml

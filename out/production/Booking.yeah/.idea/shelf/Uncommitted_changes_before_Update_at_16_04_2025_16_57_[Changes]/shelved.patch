@@ -1,0 +1,22 @@
+Index: src/util/DBConnection.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package util;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.DriverManager;\r\nimport java.sql.SQLException;\r\n\r\npublic class DBConnection {\r\n    private static final String URL = \"jdbc:mysql://localhost:3306/bookingDB?useSSL=false&serverTimezone=UTC\";\r\n    private static final String USER = \"root\";\r\n    private static final String PASSWORD = \"\";\r\n\r\n    private static Connection connection = null;\r\n\r\n    public static Connection getConnection() throws SQLException {\r\n        if (connection == null || connection.isClosed()) {\r\n            connection = DriverManager.getConnection(URL, USER, PASSWORD);\r\n        }\r\n        return connection;\r\n    }\r\n\r\n    public static void closeConnection() {\r\n        if (connection != null) {\r\n            try {\r\n                connection.close();\r\n            } catch (SQLException e) {\r\n                e.printStackTrace();\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/util/DBConnection.java b/src/util/DBConnection.java
+--- a/src/util/DBConnection.java	(revision 5c3e64276e8870bf3fc51b966ff8d64da110b079)
++++ b/src/util/DBConnection.java	(date 1744732586591)
+@@ -5,9 +5,9 @@
+ import java.sql.SQLException;
+ 
+ public class DBConnection {
+-    private static final String URL = "jdbc:mysql://localhost:3306/bookingDB?useSSL=false&serverTimezone=UTC";
++    private static final String URL = "jdbc:mysql://localhost:8889/bookingdb?useSSL=false&serverTimezone=UTC";
+     private static final String USER = "root";
+-    private static final String PASSWORD = "";
++    private static final String PASSWORD = "root";
+ 
+     private static Connection connection = null;
+ 

@@ -9,9 +9,9 @@ public class Hebergement {
     private double prix;
     private String categorie;   // Ex : "Villa", "Chalet", etc.
     private String fourchette;  // Ex : ">200", "100-150", etc.
+    private String ville;
 
-    // Constructeur complet
-    public Hebergement(int id, String nom, String adresse, String description, String photos, double prix, String categorie, String fourchette) {
+    public Hebergement(int id, String nom, String adresse, String description, String photos, double prix, String categorie, String fourchette, String ville) {
         this.id = id;
         this.nom = nom;
         this.adresse = adresse;
@@ -20,7 +20,9 @@ public class Hebergement {
         this.prix = prix;
         this.categorie = categorie;
         this.fourchette = fourchette;
+        this.ville = ville;
     }
+
 
     // Constructeur sans id (pour insertion)
     public Hebergement(String nom, String adresse, String description, String photos, double prix, String categorie, String fourchette) {
@@ -82,6 +84,8 @@ public class Hebergement {
     public void setFourchette(String fourchette) {
         this.fourchette = fourchette;
     }
+    public String getVille() { return ville; }
+    public void setVille(String ville) {this.ville = ville; }
 
     @Override
     public String toString() {
