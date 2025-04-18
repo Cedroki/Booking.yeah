@@ -19,7 +19,6 @@ public class RegisterFrame extends JFrame {
         setSize(400, 250);
         setLocationRelativeTo(null);
         setResizable(false);
-
         initComponents();
     }
 
@@ -80,14 +79,15 @@ public class RegisterFrame extends JFrame {
         }
 
         Client client = new Client(nom, email, motDePasse, "nouveau");
-
         ClientDAO clientDAO = new ClientDAO();
+
         if (clientDAO.insert(client)) {
             JOptionPane.showMessageDialog(this, "Compte créé avec succès !");
-            LoginFrame loginFrame = new LoginFrame();
-            new controller.LoginController(loginFrame);
-            loginFrame.setVisible(true);
-            dispose();
+            dispose(); // Ferme la fenêtre d'inscription
+
+            // ✅ Redirection immédiate vers l'accueil avec MainFrame
+            MainFrame mainFrame = new MainFrame(client);
+            mainFrame.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Erreur lors de la création du compte. Email déjà utilisé ?", "Erreur", JOptionPane.ERROR_MESSAGE);
         }

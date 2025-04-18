@@ -1,10 +1,13 @@
 package view;
 
+import DAO.HebergementDAO;
 import DAO.PromotionDAO;
 import model.Client;
+import model.Hebergement;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MainFrame extends JFrame {
 
@@ -78,6 +81,11 @@ public class MainFrame extends JFrame {
 
         hebergementViewPanel = new HebergementViewPanel();
         hebergementViewPanel.setReduction(promotionRate); // 🔥 transmet la réduction ici
+        hebergementViewPanel.getHebergementPanel().setClientAndReduction(currentClient, promotionRate); // 🔥 transmet aussi le client
+
+        // ✅ Appliquer la promo dès le démarrage
+        List<Hebergement> allHebergements = new HebergementDAO().findAll();
+        hebergementViewPanel.getHebergementPanel().updateHebergements(allHebergements, promotionRate);
 
         reservationsPanel = new JPanel();
         reservationsPanel.add(new JLabel("Mes réservations"));
