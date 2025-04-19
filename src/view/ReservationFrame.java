@@ -8,7 +8,6 @@ import java.awt.*;
 import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
@@ -16,154 +15,175 @@ public class ReservationFrame extends JFrame {
 
     private Hebergement hebergement;
     private int clientId;
-    private double reduction; // 🔥 réduction client
-    private JLabel lblPhoto;
-    private JLabel lblName, lblAddress, lblDescription, lblPrice, lblTotal;
+    private double reduction;
+    private JLabel lblTotal;
     private JSpinner spinnerArrivee, spinnerDepart;
     private JTextField adultsField, childrenField, roomsField;
-    private JButton reserveButton;
-    private JButton calculeButton;
-
+    private JButton reserveButton, calculeButton;
     private ReservationController reservationController;
 
     public ReservationFrame(Hebergement hebergement, int clientId, double reduction) {
         this.hebergement = hebergement;
         this.clientId = clientId;
-        this.reduction = reduction; // 🔥 injectée ici
+        this.reduction = reduction;
         this.reservationController = new ReservationController();
 
-        setTitle("Réserver " + hebergement.getNom());
+        setTitle("Réserver - " + hebergement.getNom());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(550, 500);
+        setSize(600, 600);
         setLocationRelativeTo(null);
+        setResizable(false);
         initComponents();
     }
 
     private void initComponents() {
         setLayout(new BorderLayout());
         JPanel detailsPanel = new JPanel(new GridBagLayout());
+        detailsPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(10, 15, 10, 15);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        Font labelFont = new Font("SansSerif", Font.PLAIN, 12);
+
+        Font labelFont = new Font("Segoe UI", Font.PLAIN, 14);
+        Font boldFont = new Font("Segoe UI", Font.BOLD, 15);
 
         // Image
-        lblPhoto = new JLabel();
-        lblPhoto.setPreferredSize(new Dimension(150, 100));
+        JLabel lblPhoto = new JLabel();
+        lblPhoto.setPreferredSize(new Dimension(180, 120));
         String imagePath = "src/assets/images/" + hebergement.getPhotos();
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
             ImageIcon icon = new ImageIcon(imagePath);
-            Image image = icon.getImage().getScaledInstance(150, 100, Image.SCALE_SMOOTH);
-            lblPhoto.setIcon(new ImageIcon(image));
+            Image scaled = icon.getImage().getScaledInstance(180, 120, Image.SCALE_SMOOTH);
+            lblPhoto.setIcon(new ImageIcon(scaled));
         } else {
             lblPhoto.setText("Image non disponible");
         }
-        JPanel photoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        photoPanel.add(lblPhoto);
+
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-        detailsPanel.add(photoPanel, gbc);
+        gbc.anchor = GridBagConstraints.CENTER;
+        detailsPanel.add(lblPhoto, gbc);
         gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.WEST;
 
-        // Nom
-        gbc.gridy = 1;
-        gbc.gridx = 0;
-        lblName = new JLabel("Nom : " + hebergement.getNom());
-        lblName.setFont(labelFont);
-        detailsPanel.add(lblName, gbc);
-
-        // Adresse
-        gbc.gridy = 2;
-        lblAddress = new JLabel("Adresse : " + hebergement.getAdresse());
-        lblAddress.setFont(labelFont);
-        detailsPanel.add(lblAddress, gbc);
-
-        // Description
-        gbc.gridy = 3;
-        lblDescription = new JLabel("<html>Description : " + hebergement.getDescription() + "</html>");
-        lblDescription.setFont(labelFont);
-        detailsPanel.add(lblDescription, gbc);
-
-        // Prix
-        gbc.gridy = 4;
-        String prixTexte = String.format("Prix : %.2f € / nuit", hebergement.getPrix());
+        // Infos
+        String prixTexte = String.format("%.2f € / nuit", hebergement.getPrix());
         if (reduction > 0) {
             double newPrix = hebergement.getPrix() * (1 - reduction);
-            prixTexte = String.format("<html>Prix : <strike>%.2f €</strike> <font color='green'>%.2f € (-%.0f%%)</font></html>",
+            prixTexte = String.format("<html><strike>%.2f €</strike> <font color='green'>%.2f € (-%.0f%%)</font></html>",
                     hebergement.getPrix(), newPrix, reduction * 100);
         }
-        lblPrice = new JLabel(prixTexte);
-        lblPrice.setFont(labelFont);
-        detailsPanel.add(lblPrice, gbc);
 
-        // Date arrivée
-        gbc.gridy = 5;
-        detailsPanel.add(createLabel("Date d'arrivée :", labelFont), gbc);
-        gbc.gridx = 1;
+        String[][] champs = {
+                {"Nom :", hebergement.getNom()},
+                {"Adresse :", hebergement.getAdresse()},
+                {"Description :", "<html>" + hebergement.getDescription() + "</html>"},
+                {"Prix :", prixTexte}
+        };
+
+        for (int i = 0; i < champs.length; i++) {
+            gbc.gridx = 0;
+            gbc.gridy = i + 1;
+            JLabel l1 = new JLabel(champs[i][0]);
+            l1.setFont(boldFont);
+            detailsPanel.add(l1, gbc);
+
+            gbc.gridx = 1;
+            JLabel l2 = new JLabel(champs[i][1]);
+            l2.setFont(labelFont);
+            detailsPanel.add(l2, gbc);
+        }
+
+        // Dates
         spinnerArrivee = new JSpinner(new SpinnerDateModel(new java.util.Date(), null, null, Calendar.DAY_OF_MONTH));
         spinnerArrivee.setEditor(new JSpinner.DateEditor(spinnerArrivee, "dd/MM/yyyy"));
-        detailsPanel.add(spinnerArrivee, gbc);
 
-        // Date départ
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        detailsPanel.add(createLabel("Date de départ :", labelFont), gbc);
-        gbc.gridx = 1;
         spinnerDepart = new JSpinner(new SpinnerDateModel(new java.util.Date(), null, null, Calendar.DAY_OF_MONTH));
         spinnerDepart.setEditor(new JSpinner.DateEditor(spinnerDepart, "dd/MM/yyyy"));
-        detailsPanel.add(spinnerDepart, gbc);
 
-        // Nombre adultes
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        detailsPanel.add(createLabel("Nombre d'adultes :", labelFont), gbc);
-        gbc.gridx = 1;
-        adultsField = new JTextField("1", 5);
-        adultsField.setFont(labelFont);
-        detailsPanel.add(adultsField, gbc);
+        addLigne(detailsPanel, 5, "Date d'arrivée :", spinnerArrivee, labelFont, gbc);
+        addLigne(detailsPanel, 6, "Date de départ :", spinnerDepart, labelFont, gbc);
 
-        // Nombre enfants
-        gbc.gridx = 0;
-        gbc.gridy = 8;
-        detailsPanel.add(createLabel("Nombre d'enfants :", labelFont), gbc);
-        gbc.gridx = 1;
-        childrenField = new JTextField("0", 5);
-        childrenField.setFont(labelFont);
-        detailsPanel.add(childrenField, gbc);
+        // Champs
+        adultsField = new JTextField("1");
+        childrenField = new JTextField("0");
+        roomsField = new JTextField("1");
 
-        // Nombre chambres
-        gbc.gridx = 0;
-        gbc.gridy = 9;
-        detailsPanel.add(createLabel("Nombre de chambres :", labelFont), gbc);
-        gbc.gridx = 1;
-        roomsField = new JTextField("1", 5);
-        roomsField.setFont(labelFont);
-        detailsPanel.add(roomsField, gbc);
+        addLigne(detailsPanel, 7, "Nombre d'adultes :", adultsField, labelFont, gbc);
+        addLigne(detailsPanel, 8, "Nombre d'enfants :", childrenField, labelFont, gbc);
+        addLigne(detailsPanel, 9, "Nombre de chambres :", roomsField, labelFont, gbc);
 
-        // Prix total estimé
-        gbc.gridx = 0;
-        gbc.gridy = 10;
-        detailsPanel.add(createLabel("Total estimé :", labelFont), gbc);
-        gbc.gridx = 1;
         lblTotal = new JLabel("-");
-        lblTotal.setFont(labelFont);
-        detailsPanel.add(lblTotal, gbc);
+        lblTotal.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        addLigne(detailsPanel, 10, "Total estimé :", lblTotal, labelFont, gbc);
 
         add(detailsPanel, BorderLayout.CENTER);
 
-        // Boutons bas
-        JPanel buttonPanel = new JPanel();
-        calculeButton = new JButton("Calculer total");
-        reserveButton = new JButton("Réserver");
+        // Boutons
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        buttonPanel.setBackground(Color.WHITE);
+        calculeButton = createStyledButton("Calculer total");
+        reserveButton = createStyledButton("Réserver");
 
         calculeButton.addActionListener(e -> calculerTotal());
         reserveButton.addActionListener(e -> reserver());
 
         buttonPanel.add(calculeButton);
         buttonPanel.add(reserveButton);
+
         add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private void addLigne(JPanel panel, int row, String label, JComponent champ, Font font, GridBagConstraints gbc) {
+        gbc.gridy = row;
+        gbc.gridx = 0;
+        JLabel l = new JLabel(label);
+        l.setFont(font);
+        panel.add(l, gbc);
+
+        gbc.gridx = 1;
+        champ.setFont(font);
+        panel.add(champ, gbc);
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text) {
+            boolean hovered = false;
+
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Color bg = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
+                g2.setColor(bg);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+                g2.dispose();
+                super.paintComponent(g);
+            }
+
+            {
+                setOpaque(false);
+                setContentAreaFilled(false);
+                setBorderPainted(false);
+                setForeground(Color.WHITE);
+                setFont(new Font("Segoe UI", Font.BOLD, 14));
+                setPreferredSize(new Dimension(150, 40));
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseEntered(java.awt.event.MouseEvent e) {
+                        hovered = true;
+                        repaint();
+                    }
+
+                    public void mouseExited(java.awt.event.MouseEvent e) {
+                        hovered = false;
+                        repaint();
+                    }
+                });
+            }
+        };
+        return button;
     }
 
     private void calculerTotal() {
@@ -207,11 +227,5 @@ public class ReservationFrame extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Erreur lors de la réservation.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    private JLabel createLabel(String text, Font font) {
-        JLabel lbl = new JLabel(text);
-        lbl.setFont(font);
-        return lbl;
     }
 }
