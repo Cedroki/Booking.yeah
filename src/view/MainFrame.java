@@ -4,8 +4,10 @@ import DAO.HebergementDAO;
 import DAO.PromotionDAO;
 import model.Client;
 import model.Hebergement;
+import controller.SearchController;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.List;
 
@@ -34,28 +36,29 @@ public class MainFrame extends JFrame {
     public MainFrame(Client client) {
         super("Booking Application");
         this.currentClient = client;
-
-        // 🧠 Récupère la réduction pour l'utilisateur (ancien/nouveau)
         this.promotionRate = new PromotionDAO().getDiscountForClientType(client.getType());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Plein écran
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
 
         initComponents();
     }
 
     private void initComponents() {
-        // ---------- HEADER ----------
+        // HEADER
         headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(0, 53, 128));
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
+        headerPanel.setBackground(new Color(0, 53, 128));
+        headerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         titleLabel = new JLabel("Booking.molko");
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setFont(new Font("SansSerif", Font.PLAIN, 36));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // Menu boutons
         menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         menuPanel.setBackground(new Color(0, 53, 128));
 
@@ -69,23 +72,26 @@ public class MainFrame extends JFrame {
         menuPanel.add(btnAvis);
         menuPanel.add(btnMesPromotions);
 
-        headerPanel.add(Box.createVerticalStrut(10));
         headerPanel.add(titleLabel);
         headerPanel.add(Box.createVerticalStrut(10));
         headerPanel.add(menuPanel);
+
         add(headerPanel, BorderLayout.NORTH);
 
-        // ---------- CONTENU CENTRAL ----------
+        // CONTENU CENTRAL
         cardLayout = new CardLayout();
         contentPanel = new JPanel(cardLayout);
 
+        // PANEL PRINCIPAL (hébergements)
         hebergementViewPanel = new HebergementViewPanel();
-        hebergementViewPanel.setReduction(promotionRate); // 🔥 transmet la réduction ici
-        hebergementViewPanel.getHebergementPanel().setClientAndReduction(currentClient, promotionRate); // 🔥 transmet aussi le client
+        hebergementViewPanel.setReduction(promotionRate);
+        hebergementViewPanel.getHebergementPanel().setClientAndReduction(currentClient, promotionRate);
 
-        // ✅ Appliquer la promo dès le démarrage
-        List<Hebergement> allHebergements = new HebergementDAO().findAll();
-        hebergementViewPanel.getHebergementPanel().updateHebergements(allHebergements, promotionRate);
+        // ⚡ Connexion du SearchPanel avec le bon HebergementPanel
+        new SearchController(
+                hebergementViewPanel.getSearchPanel(),
+                hebergementViewPanel.getHebergementPanel()
+        );
 
         reservationsPanel = new JPanel();
         reservationsPanel.add(new JLabel("Mes réservations"));
@@ -103,7 +109,7 @@ public class MainFrame extends JFrame {
 
         add(contentPanel, BorderLayout.CENTER);
 
-        // ---------- ÉVÈNEMENTS DE NAVIGATION ----------
+        // Navigation
         btnHebergement.addActionListener(e -> cardLayout.show(contentPanel, "hebergement"));
         btnMesReservations.addActionListener(e -> cardLayout.show(contentPanel, "reservations"));
         btnAvis.addActionListener(e -> cardLayout.show(contentPanel, "avis"));
@@ -112,13 +118,23 @@ public class MainFrame extends JFrame {
 
     private JButton createMenuButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(button.getFont().deriveFont(Font.PLAIN, 16f));
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         button.setPreferredSize(new Dimension(180, 40));
-        button.setBackground(new Color(0, 90, 158));
-        button.setForeground(Color.WHITE);
-        button.setOpaque(true);
-        button.setBorderPainted(false);
+        button.setBackground(Color.WHITE);
+        button.setForeground(new Color(0, 53, 128));
         button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createLineBorder(new Color(255, 200, 0), 2, true));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setOpaque(true);
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(230, 230, 250));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(Color.WHITE);
+            }
+        });
         return button;
     }
 

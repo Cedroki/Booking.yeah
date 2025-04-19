@@ -20,52 +20,41 @@ public class AdminFrame extends JFrame {
     private JPanel promotionPanel;
 
     public AdminFrame() {
-        setTitle("Espace Administrateur");
+        setTitle("Espace Administrateur - Booking.molko");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Plein écran
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // MENU VERTICAL
+        initComponents();
+    }
+
+    private void initComponents() {
+        // MENU LATÉRAL GAUCHE
         JPanel sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
-        sidePanel.setBackground(new Color(45, 45, 45));
-        sidePanel.setPreferredSize(new Dimension(180, getHeight()));
+        sidePanel.setBackground(new Color(0, 53, 128));
+        sidePanel.setPreferredSize(new Dimension(200, getHeight()));
 
         JLabel titleLabel = new JLabel("Admin");
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 10));
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(30, 10, 20, 10));
 
-        JButton hebergementsButton = new JButton("Hébergements");
-        JButton promotionsButton = new JButton("Promotions");
-
-        Color blue = new Color(0, 90, 158);
-
-        for (JButton btn : new JButton[]{hebergementsButton, promotionsButton}) {
-            btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-            btn.setFocusPainted(false);
-            btn.setFont(new Font("SansSerif", Font.PLAIN, 14));
-            btn.setUI(new javax.swing.plaf.basic.BasicButtonUI());
-            btn.setBackground(blue);
-            btn.setForeground(Color.WHITE);
-            btn.setOpaque(true);
-            btn.setBorderPainted(false);
-            btn.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btn.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        }
+        JButton hebergementsButton = createMenuButton("Hébergements");
+        JButton promotionsButton = createMenuButton("Promotions");
 
         sidePanel.add(titleLabel);
-        sidePanel.add(Box.createVerticalStrut(40));
-        sidePanel.add(hebergementsButton);
         sidePanel.add(Box.createVerticalStrut(20));
+        sidePanel.add(hebergementsButton);
+        sidePanel.add(Box.createVerticalStrut(10));
         sidePanel.add(promotionsButton);
         sidePanel.add(Box.createVerticalGlue());
 
         add(sidePanel, BorderLayout.WEST);
 
-        // ZONE PRINCIPALE - CardLayout
+        // CONTENU PRINCIPAL
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -78,7 +67,7 @@ public class AdminFrame extends JFrame {
 
         add(mainPanel, BorderLayout.CENTER);
 
-        // Actions boutons menu
+        // Navigation
         hebergementsButton.addActionListener(e -> {
             cardLayout.show(mainPanel, "HEBERGEMENT");
             refreshTable();
@@ -98,23 +87,24 @@ public class AdminFrame extends JFrame {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton addButton = new JButton("Ajouter");
-        JButton editButton = new JButton("Modifier");
-        JButton deleteButton = new JButton("Supprimer");
+        buttonPanel.setBackground(new Color(245, 247, 250));
+
+        JButton addButton = createStyledButton("Ajouter");
+        JButton editButton = createStyledButton("Modifier");
+        JButton deleteButton = createStyledButton("Supprimer");
 
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Ajouter
+        // Logique des boutons
         addButton.addActionListener(e -> {
             HebergementAddDialog dialog = new HebergementAddDialog(this, hebergementDAO);
             dialog.setVisible(true);
             refreshTable();
         });
 
-        // Modifier
         editButton.addActionListener(e -> {
             int selectedRow = hebergementTable.getSelectedRow();
             if (selectedRow >= 0) {
@@ -130,7 +120,6 @@ public class AdminFrame extends JFrame {
             }
         });
 
-        // Supprimer
         deleteButton.addActionListener(e -> {
             int selectedRow = hebergementTable.getSelectedRow();
             if (selectedRow >= 0) {
@@ -149,6 +138,70 @@ public class AdminFrame extends JFrame {
         });
 
         return panel;
+    }
+
+    private JButton createMenuButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(0, 90, 158));
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setMaximumSize(new Dimension(180, 40));
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0, 110, 200));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(0, 90, 158));
+            }
+        });
+
+        return button;
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text) {
+            private boolean hovered = false;
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Color bg = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
+                g2.setColor(bg);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
+                g2.dispose();
+                super.paintComponent(g);
+            }
+
+            {
+                setOpaque(false);
+                setContentAreaFilled(false);
+                setBorderPainted(false);
+                setForeground(Color.WHITE);
+                setFont(new Font("Segoe UI", Font.BOLD, 13));
+                setFocusPainted(false);
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                setPreferredSize(new Dimension(130, 35));
+                addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseEntered(java.awt.event.MouseEvent e) {
+                        hovered = true;
+                        repaint();
+                    }
+
+                    public void mouseExited(java.awt.event.MouseEvent e) {
+                        hovered = false;
+                        repaint();
+                    }
+                });
+            }
+        };
+        return button;
     }
 
     private void refreshTable() {

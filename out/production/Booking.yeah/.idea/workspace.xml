@@ -4,73 +4,86 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71868695-6e39-4a00-a796-dad9961b0fd1" name="Changes" comment="Ajout  dun commentaire">
+    <list default="true" id="971d65e4-eef5-4729-b5ee-16ad64bc558a" name="Changes" comment="commit test">
+      <change beforePath="$PROJECT_DIR$/.idea/Booking.yeah.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Booking.yeah.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/Booking.yeah.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/Booking.yeah.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/libraries/mysql_connector_j_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/libraries/mysql_connector_j_9_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/libraries/mysql_connector_j_9_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/util/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/util/DBConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementViewPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementViewPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HebergementViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HebergementViewPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SearchPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="package-info" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;rayan213dz&quot;
+    &quot;assignee&quot;: &quot;Cedroki&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Cedroki/Booking.yeah&quot;,
-    &quot;accountId&quot;: &quot;c54af8a5-04a1-491c-b7c8-d9ee75d7b0bc&quot;
+    &quot;accountId&quot;: &quot;7d5b1df0-3c35-47c8-9575-b2ca12b60b4c&quot;
   }
 }</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="2v7jJL1dH3Cb2RTguneqV1WPrkH" />
+  <component name="ProjectId" id="2v7hBxWuL9VCuUmlbRuBpsvxglF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/MySQL/mysql-connector-j-9.2.0&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainApp.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.31445312",
+    "project.structure.side.proportion": "0.34236804",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -82,84 +95,42 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="71868695-6e39-4a00-a796-dad9961b0fd1" name="Changes" comment="" />
-      <created>1743502933605</created>
+      <changelist id="971d65e4-eef5-4729-b5ee-16ad64bc558a" name="Changes" comment="" />
+      <created>1743501887375</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1743502933605</updated>
-      <workItem from="1743502934768" duration="669000" />
-      <workItem from="1744015713168" duration="6000" />
-      <workItem from="1744723221747" duration="1754000" />
-      <workItem from="1744725003350" duration="6943000" />
-      <workItem from="1744795086190" duration="2679000" />
-      <workItem from="1744814143641" duration="2773000" />
-      <workItem from="1744976009170" duration="688000" />
+      <updated>1743501887375</updated>
+      <workItem from="1743501888688" duration="1610000" />
+      <workItem from="1743600145210" duration="1902000" />
+      <workItem from="1744818753116" duration="1284000" />
+      <workItem from="1744978529172" duration="1000000" />
+      <workItem from="1744979548587" duration="7674000" />
     </task>
-    <task id="LOCAL-00001" summary="commit test rayan">
+    <task id="LOCAL-00001" summary="ceci est le premier commit">
       <option name="closed" value="true" />
-      <created>1743502998220</created>
+      <created>1743502248714</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1743502998220</updated>
+      <updated>1743502248714</updated>
     </task>
-    <task id="LOCAL-00002" summary="commit test rayan">
+    <task id="LOCAL-00002" summary="commit test">
       <option name="closed" value="true" />
-      <created>1744723954310</created>
+      <created>1744818889963</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1744723954310</updated>
+      <updated>1744818889963</updated>
     </task>
-    <task id="LOCAL-00003" summary="commit test rayan">
+    <task id="LOCAL-00003" summary="commit test">
       <option name="closed" value="true" />
-      <created>1744724683654</created>
+      <created>1744979440903</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1744724683654</updated>
+      <updated>1744979440903</updated>
     </task>
-    <task id="LOCAL-00004" summary="commit test rayan">
-      <option name="closed" value="true" />
-      <created>1744724727564</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1744724727564</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Ajout directory image">
-      <option name="closed" value="true" />
-      <created>1744729741060</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1744729741060</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Ajout  dun commentaire">
-      <option name="closed" value="true" />
-      <created>1744814284811</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1744814284811</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Ajout  dun commentaire">
-      <option name="closed" value="true" />
-      <created>1744814704194</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1744814704194</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Ajout  dun commentaire">
-      <option name="closed" value="true" />
-      <created>1744976258789</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1744976258789</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,21 +148,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commit test rayan" />
-    <MESSAGE value="Ajout directory image" />
-    <MESSAGE value="Ajout  dun commentaire" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout  dun commentaire" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/controller/LoginController.java</url>
-          <line>16</line>
-          <properties field="adminDAO" class="controller.LoginController" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="ceci est le premier commit" />
+    <MESSAGE value="commit test" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit test" />
   </component>
 </project>

@@ -23,7 +23,7 @@ public class HebergementViewPanel extends JPanel {
 
         // 🎯 Action bouton Rechercher
         searchPanel.getSearchButton().addActionListener(e -> {
-            String ville = searchPanel.getSearchedVille();
+            String ville = searchPanel.getSelectedDestination();
             String fourchette = searchPanel.getSelectedPrice();
             String categorie = searchPanel.getSelectedCategorie();
 
