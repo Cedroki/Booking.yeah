@@ -161,7 +161,7 @@ public class PaymentFrame extends JFrame {
             }
         }
 
-        // Création et enregistrement du paiement
+        // Création et enregistrement du paiementss
         Paiement paiement = new Paiement(reservation.getId(), montantTotal);
         PaiementDAO paiementDAO = new PaiementDAO();
         boolean success = paiementDAO.insert(paiement);
