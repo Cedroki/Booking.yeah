@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import controller.AdminLoginController;
+
 
 public class StartFrame extends JFrame {
 
@@ -47,6 +49,14 @@ public class StartFrame extends JFrame {
             new RegisterFrame().setVisible(true);
             dispose(); // ferme la fenêtre d'accueil
         });
+
+        JButton adminLoginButton = new JButton("Connexion Admin");
+        adminLoginButton.addActionListener(e -> {
+            AdminLoginFrame adminFrame = new AdminLoginFrame();
+            new AdminLoginController(adminFrame);
+            adminFrame.setVisible(true);
+        });
+
 
         panel.add(loginButton);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));

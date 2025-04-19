@@ -6,8 +6,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//Gg
-
 public class ClientDAO implements DAO<Client> {
 
     @Override
@@ -67,6 +65,7 @@ public class ClientDAO implements DAO<Client> {
             ps.setString(2, client.getEmail());
             ps.setString(3, client.getMotDePasse());
             ps.setString(4, client.getType());
+
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
@@ -128,10 +127,9 @@ public class ClientDAO implements DAO<Client> {
                         rs.getTimestamp("date_creation")
                 );
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return client;
     }
-
 }
