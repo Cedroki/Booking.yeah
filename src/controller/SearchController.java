@@ -6,16 +6,19 @@ import model.Hebergement;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import view.HebergementPanel;
 
 public class SearchController {
     private SearchPanel searchPanel;
     private HebergementDAO hebergementDAO;
     private JPanel resultsPanel;
+    private HebergementPanel hebergementPanel; // ajouté
 
-    public SearchController(SearchPanel searchPanel, JPanel resultsPanel) {
+
+    public SearchController(SearchPanel searchPanel, HebergementPanel hebergementPanel) {
         this.searchPanel = searchPanel;
-        this.resultsPanel = resultsPanel;
-        hebergementDAO = new HebergementDAO();
+        this.hebergementPanel = hebergementPanel;
+        this.hebergementDAO = new HebergementDAO();
         initController();
     }
 
@@ -24,20 +27,15 @@ public class SearchController {
     }
 
     private void doSearch() {
-        // Récupération de la destination via le menu déroulant.
-        String destination = searchPanel.getSelectedDestination();
-        // Récupération du filtre catégorie
-        String categorie = searchPanel.getSelectedCategorie();
-        // Récupération du filtre prix (même s'il n'est pas utilisé ici)
-        String price = searchPanel.getSelectedPrice();
+        String destination = searchPanel.getSelectedDestination().trim();
+        String categorie = searchPanel.getSelectedCategorie().trim();
+        String price = searchPanel.getSelectedPrice().trim();
 
         System.out.println("Bouton Rechercher cliqué !");
         System.out.println("Valeurs récupérées : destination=[" + destination + "], categorie=[" + categorie + "], price=[" + price + "]");
 
-        // Pour cet exemple, on filtre uniquement sur la catégorie.
-        // Vous pouvez adapter ici pour ajouter éventuellement un filtre sur la destination.
-        List<Hebergement> results = hebergementDAO.findByCriteria("", categorie);
-        updateResultsTable(results);
+        List<Hebergement> results = hebergementDAO.findByCriteria(destination, categorie);
+        hebergementPanel.updateHebergements(results); // ✅ cache le coup de cœur automatiquement
     }
 
     private void updateResultsTable(List<Hebergement> results) {

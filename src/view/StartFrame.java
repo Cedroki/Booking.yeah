@@ -2,67 +2,98 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import controller.AdminLoginController;
-
+import controller.LoginController;
 
 public class StartFrame extends JFrame {
 
-    private JButton loginButton;
-    private JButton registerButton;
-
     public StartFrame() {
-        setTitle("Bienvenue sur Booking");
+        setTitle("Bienvenue sur Booking.molko");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 200);
+        setSize(500, 300);
         setLocationRelativeTo(null);
         setResizable(false);
-
         initComponents();
+        setVisible(true);
     }
 
     private void initComponents() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(new Color(245, 247, 250));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JLabel titleLabel = new JLabel("Bienvenue sur Booking.molko");
-        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(0, 53, 128));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         panel.add(titleLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        panel.add(Box.createRigidArea(new Dimension(0, 30)));
 
-        loginButton = new JButton("Se connecter");
-        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginButton.setPreferredSize(new Dimension(200, 40));
-        loginButton.addActionListener(e -> {
+        panel.add(center(createStyledButton("Se connecter", () -> {
             LoginFrame loginFrame = new LoginFrame();
-            new controller.LoginController(loginFrame);
+            new LoginController(loginFrame);
             loginFrame.setVisible(true);
-            dispose(); // ferme la fenêtre d'accueil
-        });
+            dispose();
+        })));
 
+        panel.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        registerButton = new JButton("Créer un compte");
-        registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        registerButton.setPreferredSize(new Dimension(200, 40));
-        registerButton.addActionListener(e -> {
+        panel.add(center(createStyledButton("Créer un compte", () -> {
             new RegisterFrame().setVisible(true);
-            dispose(); // ferme la fenêtre d'accueil
-        });
-
-        JButton adminLoginButton = new JButton("Connexion Admin");
-        adminLoginButton.addActionListener(e -> {
-            AdminLoginFrame adminFrame = new AdminLoginFrame();
-            new AdminLoginController(adminFrame);
-            adminFrame.setVisible(true);
-        });
-
-
-        panel.add(loginButton);
-        panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        panel.add(registerButton);
+            dispose();
+        })));
 
         add(panel);
     }
 
+    private JPanel center(JButton button) {
+        JPanel wrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        wrapper.setBackground(new Color(245, 247, 250));
+        wrapper.add(button);
+        return wrapper;
+    }
+
+    private JButton createStyledButton(String text, Runnable onClick) {
+        JButton button = new JButton(text) {
+            private boolean hovered = false;
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Color bg = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
+                g2.setColor(bg);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30); // ✅ arrondi tous les coins
+                g2.dispose();
+                super.paintComponent(g);
+            }
+
+            {
+                setOpaque(false);
+                setContentAreaFilled(false);
+                setBorderPainted(false);
+                setForeground(Color.WHITE);
+                setFont(new Font("Segoe UI", Font.BOLD, 14));
+                setFocusPainted(false);
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseEntered(java.awt.event.MouseEvent e) {
+                        hovered = true;
+                        repaint();
+                    }
+
+                    public void mouseExited(java.awt.event.MouseEvent e) {
+                        hovered = false;
+                        repaint();
+                    }
+                });
+            }
+        };
+
+        button.setPreferredSize(new Dimension(200, 40));
+        button.addActionListener(e -> onClick.run());
+        return button;
+    }
 }

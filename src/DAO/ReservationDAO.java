@@ -105,4 +105,36 @@ public class ReservationDAO implements DAO<Reservation> {
         }
         return false;
     }
+
+    public List<Reservation> findByClientId(int clientId) {
+        List<Reservation> list = new ArrayList<>();
+        String sql = "SELECT * FROM reservation WHERE utilisateur_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, clientId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Reservation reservation = new Reservation(
+                        rs.getInt("id"),
+                        rs.getInt("utilisateur_id"),
+                        rs.getInt("hebergement_id"),
+                        rs.getDate("date_arrivee"),
+                        rs.getDate("date_depart"),
+                        rs.getInt("nb_adultes"),
+                        rs.getInt("nb_enfants"),
+                        rs.getInt("nb_chambres")
+                );
+                list.add(reservation);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }
