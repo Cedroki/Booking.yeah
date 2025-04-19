@@ -2,6 +2,7 @@ package view;
 
 import controller.ReservationController;
 import model.Hebergement;
+import model.Reservation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -211,7 +212,8 @@ public class ReservationFrame extends JFrame {
         int nbEnfants = Integer.parseInt(childrenField.getText());
         int nbChambres = Integer.parseInt(roomsField.getText());
 
-        boolean success = reservationController.addReservation(
+        // ✅ correction ici
+        Reservation reservation = reservationController.addReservation(
                 clientId,
                 hebergement.getId(),
                 dateArrivee,
@@ -221,7 +223,7 @@ public class ReservationFrame extends JFrame {
                 nbChambres
         );
 
-        if (success) {
+        if (reservation != null) {
             JOptionPane.showMessageDialog(this, "Réservation confirmée !");
             dispose();
         } else {
