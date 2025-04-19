@@ -206,28 +206,50 @@ public class ReservationFrame extends JFrame {
     }
 
     private void reserver() {
-        Date dateArrivee = new Date(((java.util.Date) spinnerArrivee.getValue()).getTime());
-        Date dateDepart = new Date(((java.util.Date) spinnerDepart.getValue()).getTime());
-        int nbAdultes = Integer.parseInt(adultsField.getText());
-        int nbEnfants = Integer.parseInt(childrenField.getText());
-        int nbChambres = Integer.parseInt(roomsField.getText());
+        try {
+            Date dateArrivee = new Date(((java.util.Date) spinnerArrivee.getValue()).getTime());
+            Date dateDepart = new Date(((java.util.Date) spinnerDepart.getValue()).getTime());
+            int nbAdultes = Integer.parseInt(adultsField.getText());
+            int nbEnfants = Integer.parseInt(childrenField.getText());
+            int nbChambres = Integer.parseInt(roomsField.getText());
 
-        // ✅ correction ici
-        Reservation reservation = reservationController.addReservation(
-                clientId,
-                hebergement.getId(),
-                dateArrivee,
-                dateDepart,
-                nbAdultes,
-                nbEnfants,
-                nbChambres
-        );
+            long nuits = ChronoUnit.DAYS.between(dateArrivee.toLocalDate(), dateDepart.toLocalDate());
+            if (nuits <= 0) {
+                JOptionPane.showMessageDialog(this, "Dates invalides", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        if (reservation != null) {
-            JOptionPane.showMessageDialog(this, "Réservation confirmée !");
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Erreur lors de la réservation.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            double prixUnitaire = hebergement.getPrix();
+            if (reduction > 0) prixUnitaire *= (1 - reduction);
+            double montantTotal = prixUnitaire * nuits * nbChambres;
+
+            if (montantTotal <= 0) {
+                JOptionPane.showMessageDialog(this, "Montant invalide (0 €)", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Reservation reservation = reservationController.addReservation(
+                    clientId,
+                    hebergement.getId(),
+                    dateArrivee,
+                    dateDepart,
+                    nbAdultes,
+                    nbEnfants,
+                    nbChambres
+            );
+
+            if (reservation != null) {
+                JOptionPane.showMessageDialog(this, "Réservation confirmée !");
+                new PaymentFrame(reservation, hebergement, reduction, () -> {}).setVisible(true);
+
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erreur lors de la réservation.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Champs invalides ou erreur interne.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
 }

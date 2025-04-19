@@ -26,7 +26,6 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
 
     private HebergementViewPanel hebergementViewPanel;
-    private JPanel reservationsPanel;
     private JPanel avisPanel;
     private JPanel promotionsPanel;
 
@@ -75,33 +74,31 @@ public class MainFrame extends JFrame {
         headerPanel.add(titleLabel);
         headerPanel.add(Box.createVerticalStrut(10));
         headerPanel.add(menuPanel);
-
         add(headerPanel, BorderLayout.NORTH);
 
         // CONTENU CENTRAL
         cardLayout = new CardLayout();
         contentPanel = new JPanel(cardLayout);
 
-        // PANEL PRINCIPAL (hébergements)
+        // PANEL PRINCIPAL HÉBERGEMENTS
         hebergementViewPanel = new HebergementViewPanel();
         hebergementViewPanel.setReduction(promotionRate);
         hebergementViewPanel.getHebergementPanel().setClientAndReduction(currentClient, promotionRate);
 
-        // ⚡ Connexion du SearchPanel avec le bon HebergementPanel
+        // Connexion recherche
         new SearchController(
                 hebergementViewPanel.getSearchPanel(),
                 hebergementViewPanel.getHebergementPanel()
         );
 
-        reservationsPanel = new JPanel();
-        reservationsPanel.add(new JLabel("Mes réservations"));
-
+        // AUTRES PANELS
+        JPanel reservationsPanel = new MesReservationsPanel(currentClient.getId());
         avisPanel = new JPanel();
         avisPanel.add(new JLabel("Avis"));
-
         promotionsPanel = new JPanel();
         promotionsPanel.add(new JLabel("Mes promotions"));
 
+        // Ajout au contentPanel
         contentPanel.add(hebergementViewPanel, "hebergement");
         contentPanel.add(reservationsPanel, "reservations");
         contentPanel.add(avisPanel, "avis");
@@ -111,7 +108,15 @@ public class MainFrame extends JFrame {
 
         // Navigation
         btnHebergement.addActionListener(e -> cardLayout.show(contentPanel, "hebergement"));
-        btnMesReservations.addActionListener(e -> cardLayout.show(contentPanel, "reservations"));
+
+        btnMesReservations.addActionListener(e -> {
+            // 🔄 Recharge à chaque fois pour avoir les dernières données
+            contentPanel.remove(1); // index = "reservations"
+            JPanel newPanel = new MesReservationsPanel(currentClient.getId());
+            contentPanel.add(newPanel, "reservations");
+            cardLayout.show(contentPanel, "reservations");
+        });
+
         btnAvis.addActionListener(e -> cardLayout.show(contentPanel, "avis"));
         btnMesPromotions.addActionListener(e -> cardLayout.show(contentPanel, "promotions"));
     }
