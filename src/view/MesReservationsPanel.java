@@ -103,7 +103,7 @@ public class MesReservationsPanel extends JPanel {
         right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
         right.setBorder(new EmptyBorder(10, 15, 10, 15));
         right.setOpaque(false);
-
+//m
         JButton btn;
         if (paiement != null) {
             btn = createActionButton("Voir facture");
