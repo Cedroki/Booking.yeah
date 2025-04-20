@@ -2,6 +2,7 @@ package DAO;
 
 import model.Avis;
 import util.DBConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class AvisDAO implements DAO<Avis> {
     @Override
     public Avis findById(int id) {
         Avis avis = null;
-        String sql = "SELECT * FROM Avis WHERE id = ?";
+        String sql = "SELECT * FROM avis WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -35,7 +36,7 @@ public class AvisDAO implements DAO<Avis> {
     @Override
     public List<Avis> findAll() {
         List<Avis> avisList = new ArrayList<>();
-        String sql = "SELECT * FROM Avis";
+        String sql = "SELECT * FROM avis";
         try (Connection conn = DBConnection.getConnection();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
@@ -58,7 +59,7 @@ public class AvisDAO implements DAO<Avis> {
 
     @Override
     public boolean insert(Avis avis) {
-        String sql = "INSERT INTO Avis (client_id, hebergement_id, rating, comment) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO avis (client_id, hebergement_id, rating, comment) VALUES (?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, avis.getClientId());
@@ -67,9 +68,10 @@ public class AvisDAO implements DAO<Avis> {
             ps.setString(4, avis.getComment());
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
-                ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    avis.setId(rs.getInt(1));
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        avis.setId(rs.getInt(1));
+                    }
                 }
                 return true;
             }
@@ -81,7 +83,7 @@ public class AvisDAO implements DAO<Avis> {
 
     @Override
     public boolean update(Avis avis) {
-        String sql = "UPDATE Avis SET client_id = ?, hebergement_id = ?, rating = ?, comment = ? WHERE id = ?";
+        String sql = "UPDATE avis SET client_id = ?, hebergement_id = ?, rating = ?, comment = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, avis.getClientId());
@@ -98,11 +100,30 @@ public class AvisDAO implements DAO<Avis> {
 
     @Override
     public boolean delete(Avis avis) {
-        String sql = "DELETE FROM Avis WHERE id = ?";
+        String sql = "DELETE FROM avis WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, avis.getId());
             return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Indique si le client a déjà laissé un avis pour cet hébergement.
+     */
+    public boolean hasAvis(int clientId, int hebergementId) {
+        String sql = "SELECT COUNT(*) FROM avis WHERE client_id = ? AND hebergement_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, clientId);
+            ps.setInt(2, hebergementId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

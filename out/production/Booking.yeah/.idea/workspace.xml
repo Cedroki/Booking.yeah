@@ -4,12 +4,65 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="paiement reservations">
+    <list default="true" id="f972b6b5-6c0c-4429-bdd8-228f0c2c8e93" name="Changes" comment="ok">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/HebergementDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/HebergementDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PaiementDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PaiementDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/ReservationDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/ReservationDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/controller/ReservationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/controller/ReservationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/controller/SearchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/controller/SearchController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/model/Paiement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/model/Paiement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/FactureFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MesReservationsPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/util/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/util/DBConnection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/FactureFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/FactureFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementViewPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementViewPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MesReservationsPanel$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/MesReservationsPanel$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MesReservationsPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/MesReservationsPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MesReservationsPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/MesReservationsPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,247 +77,282 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="jules &lt;jules.mortreux@gmail.com&gt;" />
-      </list>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;julesmortreux&quot;
+    &quot;assignee&quot;: &quot;axelthoum&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Cedroki/Booking.yeah&quot;,
-    &quot;accountId&quot;: &quot;0990e517-71bd-4332-91e0-e092ba8fd79d&quot;
+    &quot;url&quot;: &quot;https://github.com/Cedroki/Booking.yeah.git&quot;,
+    &quot;accountId&quot;: &quot;2fb8171e-ccba-45f3-a4e1-62d1cee9224d&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
 }</component>
-  <component name="ProjectId" id="2v7imAyTGkTzcZmDrv0Lh9PuLgk" />
+  <component name="ProjectId" id="2vlceLEY0TWX7SaVylhiae7QVtj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MainApp.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-9.2.0",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/axelt/IdeaProjects/Booking.yeah/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\axelt\IdeaProjects\Booking.yeah\src" />
+      <recent name="C:\Users\axelt\IdeaProjects\Booking.yeah" />
+      <recent name="C:\Users\axelt\IdeaProjects\Booking.yeah\assets\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\axelt\IdeaProjects\Booking.yeah\assets\images" />
+      <recent name="C:\Users\axelt\IdeaProjects\Booking.yeah\src\assets" />
+      <recent name="C:\Users\axelt\IdeaProjects\Booking.yeah\src\assets\images" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="" />
-      <created>1743502669928</created>
+      <changelist id="f972b6b5-6c0c-4429-bdd8-228f0c2c8e93" name="Changes" comment="" />
+      <created>1744723196009</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1743502669928</updated>
-      <workItem from="1743502671053" duration="1058000" />
-      <workItem from="1744723871392" duration="1035000" />
-      <workItem from="1744724948451" duration="307000" />
-      <workItem from="1744725369656" duration="41989000" />
+      <updated>1744723196009</updated>
+      <workItem from="1744723197361" duration="18808000" />
+      <workItem from="1744884916267" duration="1706000" />
+      <workItem from="1745076308657" duration="6184000" />
+      <workItem from="1745083455612" duration="14000" />
+      <workItem from="1745083504185" duration="124000" />
+      <workItem from="1745083638839" duration="6158000" />
     </task>
-    <task id="LOCAL-00001" summary="test">
+    <task id="LOCAL-00001" summary="j'ai supp">
       <option name="closed" value="true" />
-      <created>1744724487998</created>
+      <created>1744723311223</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1744724487998</updated>
+      <updated>1744723311223</updated>
     </task>
-    <task id="LOCAL-00002" summary="test">
+    <task id="LOCAL-00002" summary="j'ai supp la db">
       <option name="closed" value="true" />
-      <created>1744724559446</created>
+      <created>1744723539960</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1744724559446</updated>
+      <updated>1744723539960</updated>
     </task>
-    <task id="LOCAL-00003" summary="test">
+    <task id="LOCAL-00003" summary="mise en place des packages">
       <option name="closed" value="true" />
-      <created>1744724611426</created>
+      <created>1744725232157</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1744724611426</updated>
+      <updated>1744725232157</updated>
     </task>
-    <task id="LOCAL-00004" summary="creation d'un nouveau compte">
+    <task id="LOCAL-00004" summary="mise en place des packages">
       <option name="closed" value="true" />
-      <created>1744815424953</created>
+      <created>1744725318903</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1744815424953</updated>
+      <updated>1744725318903</updated>
     </task>
-    <task id="LOCAL-00005" summary="filtre">
+    <task id="LOCAL-00005" summary="mise en place des packages">
       <option name="closed" value="true" />
-      <created>1744818287263</created>
+      <created>1744725480840</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1744818287263</updated>
+      <updated>1744725480840</updated>
     </task>
-    <task id="LOCAL-00006" summary="filtre complet avec categorie destination et prix">
+    <task id="LOCAL-00006" summary="mise en place des packages">
       <option name="closed" value="true" />
-      <created>1744820678258</created>
+      <created>1744725621263</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1744820678258</updated>
+      <updated>1744725621263</updated>
     </task>
-    <task id="LOCAL-00007" summary="ajout BDD">
+    <task id="LOCAL-00007" summary="mise en place des packages + 2 codes">
       <option name="closed" value="true" />
-      <created>1744820926790</created>
+      <created>1744725798590</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1744820926790</updated>
+      <updated>1744725798590</updated>
     </task>
-    <task id="LOCAL-00008" summary="ajout connexion admin">
+    <task id="LOCAL-00008" summary="+1 codes">
       <option name="closed" value="true" />
-      <created>1744886339005</created>
+      <created>1744725974281</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1744886339005</updated>
+      <updated>1744725974281</updated>
     </task>
-    <task id="LOCAL-00009" summary="ajout connexion admin">
+    <task id="LOCAL-00009" summary="+1 codes">
       <option name="closed" value="true" />
-      <created>1744887104112</created>
+      <created>1744726701629</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1744887104112</updated>
+      <updated>1744726701629</updated>
     </task>
-    <task id="LOCAL-00010" summary="ajout connexion admin">
+    <task id="LOCAL-00010" summary="DB">
       <option name="closed" value="true" />
-      <created>1744887483746</created>
+      <created>1744727154504</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1744887483746</updated>
+      <updated>1744727154504</updated>
     </task>
-    <task id="LOCAL-00011" summary="ajout connexion admin">
+    <task id="LOCAL-00011" summary="Images">
       <option name="closed" value="true" />
-      <created>1744887867895</created>
+      <created>1744732128407</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1744887867895</updated>
+      <updated>1744732128407</updated>
     </task>
-    <task id="LOCAL-00012" summary="ajout admin et reduction">
+    <task id="LOCAL-00012" summary="Reservation">
       <option name="closed" value="true" />
-      <created>1744910514681</created>
+      <created>1744819940991</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1744910514682</updated>
+      <updated>1744819940991</updated>
     </task>
-    <task id="LOCAL-00013" summary="ajout reduction et ancienneté promo">
+    <task id="LOCAL-00013" summary="Reservation">
       <option name="closed" value="true" />
-      <created>1744979486584</created>
+      <created>1744885056832</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1744979486584</updated>
+      <updated>1744885056832</updated>
     </task>
-    <task id="LOCAL-00014" summary="paiement">
+    <task id="LOCAL-00014" summary="Reservation">
       <option name="closed" value="true" />
-      <created>1745075808318</created>
+      <created>1744885296842</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1745075808318</updated>
+      <updated>1744885296842</updated>
     </task>
-    <task id="LOCAL-00015" summary="paiement">
+    <task id="LOCAL-00015" summary="ok">
       <option name="closed" value="true" />
-      <created>1745075821832</created>
+      <created>1745076855513</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1745075821832</updated>
+      <updated>1745076855515</updated>
     </task>
-    <task id="LOCAL-00016" summary="paiement reservations">
+    <task id="LOCAL-00016" summary="AVIS">
       <option name="closed" value="true" />
-      <created>1745082111410</created>
+      <created>1745082265992</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1745082111410</updated>
+      <updated>1745082265992</updated>
     </task>
-    <task id="LOCAL-00017" summary="paiement reservations">
+    <task id="LOCAL-00017" summary="AVIS">
       <option name="closed" value="true" />
-      <created>1745082129591</created>
+      <created>1745082302851</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1745082129591</updated>
+      <updated>1745082302851</updated>
     </task>
-    <task id="LOCAL-00018" summary="paiement reservations">
+    <task id="LOCAL-00018" summary="AVIS">
       <option name="closed" value="true" />
-      <created>1745082176079</created>
+      <created>1745083710836</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1745082176079</updated>
+      <updated>1745083710836</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="db connection my bad">
+      <option name="closed" value="true" />
+      <created>1745093367252</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1745093367252</updated>
+    </task>
+    <task id="LOCAL-00020" summary="ok">
+      <option name="closed" value="true" />
+      <created>1745167767560</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1745167767560</updated>
+    </task>
+    <task id="LOCAL-00021" summary="ok">
+      <option name="closed" value="true" />
+      <created>1745167811112</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1745167811112</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="test" />
-    <MESSAGE value="creation d'un nouveau compte" />
-    <MESSAGE value="filtre" />
-    <MESSAGE value="filtre complet avec categorie destination et prix" />
-    <MESSAGE value="ajout BDD" />
-    <MESSAGE value="ajout connexion admin" />
-    <MESSAGE value="ajout admin et reduction" />
-    <MESSAGE value="ajout reduction et ancienneté promo" />
-    <MESSAGE value="paiement" />
-    <MESSAGE value="paiement reservations" />
-    <option name="LAST_COMMIT_MESSAGE" value="paiement reservations" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/AdminFrame.java</url>
-          <line>204</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="j'ai supp" />
+    <MESSAGE value="j'ai supp la db" />
+    <MESSAGE value="mise en place des packages" />
+    <MESSAGE value="mise en place des packages + 2 codes" />
+    <MESSAGE value="+1 codes" />
+    <MESSAGE value="DB" />
+    <MESSAGE value="Images" />
+    <MESSAGE value="Reservation" />
+    <MESSAGE value="AVIS" />
+    <MESSAGE value="db connection my bad" />
+    <MESSAGE value="ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="ok" />
   </component>
 </project>

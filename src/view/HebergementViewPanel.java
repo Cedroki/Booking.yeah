@@ -1,41 +1,47 @@
 package view;
 
+import DAO.HebergementDAO;
+import model.Hebergement;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import DAO.HebergementDAO;
-import model.Hebergement;
 import controller.SearchController;
 
+/**
+ * Vue principale des hébergements avec panneau de recherche.
+ */
 public class HebergementViewPanel extends JPanel {
-
-    private SearchPanel searchPanel;
-    private HebergementPanel hebergementPanel;
-    private HebergementDAO hebergementDAO = new HebergementDAO();
+    private final SearchPanel searchPanel;
+    private final HebergementPanel hebergementPanel;
+    private final HebergementDAO hebergementDAO = new HebergementDAO();
     private double reduction = 0.0;
 
     public HebergementViewPanel() {
         setLayout(new BorderLayout());
 
+        // Panneau de recherche en haut
         searchPanel = new SearchPanel();
-        hebergementPanel = new HebergementPanel();
-
         add(searchPanel, BorderLayout.NORTH);
+
+        // Panneau d'affichage des hébergements
+        hebergementPanel = new HebergementPanel();
         add(hebergementPanel, BorderLayout.CENTER);
 
-        // ❌ Supprimé : Action manuelle du bouton "Rechercher"
-        // ✅ Replacé par SearchController
+        // Chargement initial
+        List<Hebergement> initial = hebergementDAO.findAll();
+        hebergementPanel.updateHebergements(initial, reduction);
 
-        // 🔥 Affichage initial avec promo si applicable
-        List<Hebergement> initialList = hebergementDAO.findAll();
-        hebergementPanel.updateHebergements(initialList, reduction);
-
-        // ✅ Activation du SearchController pour gérer tous les filtres y compris les dates
+        // Lancer le contrôleur de recherche
         new SearchController(searchPanel, hebergementPanel);
     }
 
+    /**
+     * Définit la réduction à appliquer et recharge la liste.
+     */
     public void setReduction(double reduction) {
         this.reduction = reduction;
+        List<Hebergement> all = hebergementDAO.findAll();
+        hebergementPanel.updateHebergements(all, reduction);
     }
 
     public SearchPanel getSearchPanel() {
