@@ -11,6 +11,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.List;
 
+
 public class HebergementPanel extends JPanel {
     private HebergementDAO hebergementDAO;
     private JPanel hebergementListPanel;
@@ -146,7 +147,10 @@ public class HebergementPanel extends JPanel {
 
     public void updateHebergements(List<Hebergement> hebergements, double reduction) {
         this.currentReduction = reduction;
-        hebergementListPanel.removeAll();
+
+        hebergementListPanel.removeAll();  // 🔁 Nettoyer les anciens
+        hebergementListPanel.revalidate(); // 🔁 Remet à jour la mise en page
+        hebergementListPanel.repaint();    // 🔁 Redessine proprement
 
         for (Hebergement h : hebergements) {
             hebergementListPanel.add(createHebergementItem(h));
@@ -157,11 +161,18 @@ public class HebergementPanel extends JPanel {
         hebergementListPanel.repaint();
     }
 
+
     public void updateHebergements(List<Hebergement> hebergements) {
         this.isAccueil = false;
         setFeaturedPanelVisible(false);
+
+        hebergementListPanel.removeAll();  // 🔁 Vider le panneau
+        hebergementListPanel.revalidate(); // 🔁 Forcer le layout
+        hebergementListPanel.repaint();    // 🔁 Rafraîchir
+
         updateHebergements(hebergements, currentReduction);
     }
+
 
     private JPanel createHebergementItem(Hebergement h) {
         JPanel panel = new JPanel(new BorderLayout());

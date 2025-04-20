@@ -10,6 +10,7 @@ import java.awt.*;
 import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
@@ -22,7 +23,6 @@ public class ReservationFrame extends JFrame {
     private JLabel lblTotal;
     private JSpinner spinnerArrivee, spinnerDepart;
     private JTextField adultsField, childrenField, roomsField;
-    private JPanel roomsLine;
     private ReservationController reservationController;
 
     private long nuits = 0;
@@ -86,8 +86,18 @@ public class ReservationFrame extends JFrame {
         spinnerArrivee = new JSpinner(new SpinnerDateModel(new java.util.Date(), null, null, Calendar.DAY_OF_MONTH));
         spinnerArrivee.setEditor(new JSpinner.DateEditor(spinnerArrivee, "dd/MM/yyyy"));
 
-        spinnerDepart = new JSpinner(new SpinnerDateModel(new java.util.Date(), null, null, Calendar.DAY_OF_MONTH));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime((java.util.Date) spinnerArrivee.getValue());
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        spinnerDepart = new JSpinner(new SpinnerDateModel(cal.getTime(), null, null, Calendar.DAY_OF_MONTH));
         spinnerDepart.setEditor(new JSpinner.DateEditor(spinnerDepart, "dd/MM/yyyy"));
+
+        spinnerArrivee.addChangeListener(e -> {
+            Calendar tmp = Calendar.getInstance();
+            tmp.setTime((java.util.Date) spinnerArrivee.getValue());
+            tmp.add(Calendar.DAY_OF_MONTH, 1);
+            spinnerDepart.setValue(tmp.getTime());
+        });
 
         adultsField = new JTextField("1");
         childrenField = new JTextField("0");
@@ -168,15 +178,19 @@ public class ReservationFrame extends JFrame {
 
     private void calculerTotal() {
         try {
-            LocalDate d1 = new Date(((java.util.Date) spinnerArrivee.getValue()).getTime()).toLocalDate();
-            LocalDate d2 = new Date(((java.util.Date) spinnerDepart.getValue()).getTime()).toLocalDate();
+            java.util.Date dateArrivee = (java.util.Date) spinnerArrivee.getValue();
+            java.util.Date dateDepart = (java.util.Date) spinnerDepart.getValue();
 
-            nuits = ChronoUnit.DAYS.between(d1, d2);
+            LocalDate d1 = dateArrivee.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate d2 = dateDepart.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            if (nuits < 1) {
-                lblTotal.setText("Le séjour doit durer au moins une nuit ❌");
+            if (!d2.isAfter(d1)) {
+                lblTotal.setText("⚠️ La date de départ doit être après la date d'arrivée.");
+                nuits = 0;
                 return;
             }
+
+            nuits = ChronoUnit.DAYS.between(d1, d2);
 
             int chambres = isHotel ? Integer.parseInt(roomsField.getText()) : 1;
             double prixUnitaire = hebergement.getPrix();
@@ -185,7 +199,7 @@ public class ReservationFrame extends JFrame {
 
             lblTotal.setText(String.format("Total estimé : %.2f €", total));
         } catch (Exception e) {
-            lblTotal.setText("Erreur dans le calcul");
+            lblTotal.setText("Erreur dans le calcul ❌");
             e.printStackTrace();
         }
     }
@@ -207,7 +221,10 @@ public class ReservationFrame extends JFrame {
                 new PaymentFrame(reservation, hebergement, reduction, () -> {}).setVisible(true);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Erreur lors de la réservation.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "⚠️ Ce logement est déjà réservé à ces dates.\nVeuillez choisir une autre période.",
+                        "Indisponible",
+                        JOptionPane.WARNING_MESSAGE);
             }
 
         } catch (Exception e) {
