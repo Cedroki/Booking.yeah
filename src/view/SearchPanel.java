@@ -38,31 +38,45 @@ public class SearchPanel extends JPanel {
         destinationField.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         add(destinationField);
 
-        // Date arrivée
+        // Dates
         JLabel arrivalLabel = new JLabel("Arrivée:");
         arrivalLabel.setFont(labelFont);
         add(arrivalLabel);
 
-        SpinnerDateModel arrivalModel = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+
+        SpinnerDateModel arrivalModel = new SpinnerDateModel(today, null, null, Calendar.DAY_OF_MONTH);
         dateArriveeSpinner = new JSpinner(arrivalModel);
-        dateArriveeSpinner.setEditor(new JSpinner.DateEditor(dateArriveeSpinner, "dd/MM"));
+        dateArriveeSpinner.setEditor(new JSpinner.DateEditor(dateArriveeSpinner, "dd/MM/yyyy"));
         dateArriveeSpinner.setPreferredSize(inputSize);
         dateArriveeSpinner.setFont(labelFont);
         dateArriveeSpinner.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         add(dateArriveeSpinner);
 
-        // Date départ
         JLabel departLabel = new JLabel("Départ:");
         departLabel.setFont(labelFont);
         add(departLabel);
 
-        SpinnerDateModel departModel = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        Date defaultDepart = cal.getTime();
+        SpinnerDateModel departModel = new SpinnerDateModel(defaultDepart, null, null, Calendar.DAY_OF_MONTH);
         dateDepartSpinner = new JSpinner(departModel);
-        dateDepartSpinner.setEditor(new JSpinner.DateEditor(dateDepartSpinner, "dd/MM"));
+        dateDepartSpinner.setEditor(new JSpinner.DateEditor(dateDepartSpinner, "dd/MM/yyyy"));
         dateDepartSpinner.setPreferredSize(inputSize);
         dateDepartSpinner.setFont(labelFont);
         dateDepartSpinner.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         add(dateDepartSpinner);
+
+        // 🔁 Synchronisation : arrivée +1 jour pour départ
+        dateArriveeSpinner.addChangeListener(e -> {
+            Date newArrivee = (Date) dateArriveeSpinner.getValue();
+            Calendar temp = Calendar.getInstance();
+            temp.setTime(newArrivee);
+            temp.add(Calendar.DAY_OF_MONTH, 1);
+            dateDepartSpinner.setValue(temp.getTime());
+        });
 
         // Catégorie
         JLabel categoryLabel = new JLabel("Catégorie:");
@@ -90,7 +104,7 @@ public class SearchPanel extends JPanel {
         priceComboBox.setFocusable(false);
         add(priceComboBox);
 
-        // Bouton Rechercher personnalisé
+        // Bouton Rechercher
         searchButton = new JButton("Rechercher") {
             private boolean isHovered = false;
 
@@ -139,6 +153,7 @@ public class SearchPanel extends JPanel {
         add(searchButton);
     }
 
+    // Getters
     public String getSelectedDestination() {
         return destinationField.getText().trim();
     }

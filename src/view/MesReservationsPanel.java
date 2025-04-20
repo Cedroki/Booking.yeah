@@ -12,33 +12,54 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
 
 public class MesReservationsPanel extends JPanel {
 
     private int clientId;
+    private JPanel contentPanel;
 
     public MesReservationsPanel(int clientId) {
         this.clientId = clientId;
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(Color.WHITE);
-        setBorder(new EmptyBorder(20, 30, 20, 30));
+        setLayout(new BorderLayout());
+        setBackground(new Color(245, 245, 245)); // Gris clair
+
+        contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBackground(new Color(245, 245, 245));
+        contentPanel.setBorder(new EmptyBorder(20, 30, 20, 30));
+
+        JScrollPane scrollPane = new JScrollPane(contentPanel);
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        add(scrollPane, BorderLayout.CENTER);
+
+        initUI();
+    }
+
+    private void initUI() {
+        JLabel title = new JLabel("🗂️ Voici vos réservations");
+        title.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        title.setForeground(new Color(0, 53, 128));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        contentPanel.add(title);
+        contentPanel.add(Box.createVerticalStrut(20));
         loadReservations();
     }
 
     private void loadReservations() {
-        removeAll();
-
         ReservationDAO reservationDAO = new ReservationDAO();
         HebergementDAO hebergementDAO = new HebergementDAO();
         PaiementDAO paiementDAO = new PaiementDAO();
 
         List<Reservation> reservations = reservationDAO.findByClientId(clientId);
-        Collections.reverse(reservations); // ✅ pour afficher les + récentes en haut
+
+        // ✅ Trie les réservations par ID décroissant (les + récentes d'abord)
+        reservations.sort((r1, r2) -> Integer.compare(r2.getId(), r1.getId()));
 
         if (reservations.isEmpty()) {
-            add(createStyledLabel("Aucune réservation effectuée."));
+            contentPanel.add(createStyledLabel("Aucune réservation effectuée."));
             return;
         }
 
@@ -47,61 +68,63 @@ public class MesReservationsPanel extends JPanel {
             if (heb != null) {
                 Paiement paiement = paiementDAO.findByReservationId(res.getId());
                 JPanel card = createReservationCard(res, heb, paiement);
-                add(card);
-                add(Box.createVerticalStrut(15));
+                contentPanel.add(card);
+                contentPanel.add(Box.createVerticalStrut(15));
             }
         }
 
-        revalidate();
-        repaint();
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
+
 
     private JPanel createReservationCard(Reservation res, Hebergement heb, Paiement paiement) {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
-        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.LIGHT_GRAY),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
         panel.setMaximumSize(new Dimension(1000, 160));
-        panel.setPreferredSize(new Dimension(1000, 160));
+        panel.setBackground(Color.WHITE);
 
-        // ---- LEFT : Infos hébergement ----
-        JPanel left = new JPanel();
-        left.setLayout(new BoxLayout(left, BoxLayout.X_AXIS));
-        left.setOpaque(false);
-        left.setBorder(new EmptyBorder(10, 10, 10, 10));
-
+        // LEFT - Image
         JLabel imageLabel = new JLabel();
-        imageLabel.setPreferredSize(new Dimension(140, 100));
+        imageLabel.setPreferredSize(new Dimension(160, 100));
         String path = "src/assets/images/" + heb.getPhotos();
-        ImageIcon icon = new ImageIcon(path);
-        if (icon.getIconWidth() > 0) {
-            Image scaled = icon.getImage().getScaledInstance(140, 100, Image.SCALE_SMOOTH);
+        File imgFile = new File(path);
+        if (imgFile.exists()) {
+            ImageIcon icon = new ImageIcon(path);
+            Image scaled = icon.getImage().getScaledInstance(160, 100, Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(scaled));
         } else {
             imageLabel.setText("Image non dispo");
         }
+        panel.add(imageLabel, BorderLayout.WEST);
 
+        // CENTER - Infos
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
-        info.setOpaque(false);
+        info.setBorder(new EmptyBorder(0, 15, 0, 15));
+        info.setBackground(Color.WHITE);
+
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        info.add(createStyledLabel("🏨 " + heb.getNom()));
+        JLabel name = new JLabel("🏨 " + heb.getNom());
+        name.setFont(new Font("Segoe UI", Font.BOLD, 15));
+
+        info.add(name);
         info.add(new JLabel("Adresse : " + heb.getAdresse()));
         info.add(new JLabel("Du " + res.getDateArrivee().toLocalDate().format(fmt) + " au " +
                 res.getDateDepart().toLocalDate().format(fmt)));
         info.add(new JLabel("Chambres : " + res.getNbChambres() + " | Adultes : " + res.getNbAdultes() +
                 " | Enfants : " + res.getNbEnfants()));
 
-        left.add(imageLabel);
-        left.add(Box.createHorizontalStrut(15));
-        left.add(info);
+        panel.add(info, BorderLayout.CENTER);
 
-        panel.add(left, BorderLayout.CENTER);
-
-        // ---- RIGHT : bouton ----
+        // RIGHT - Bouton + statut
         JPanel right = new JPanel();
         right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
-        right.setBorder(new EmptyBorder(10, 15, 10, 15));
+        right.setBorder(new EmptyBorder(5, 10, 5, 10));
         right.setOpaque(false);
 //m
         JButton btn;
@@ -110,10 +133,7 @@ public class MesReservationsPanel extends JPanel {
             btn.addActionListener(e -> new FactureFrame(res, heb).setVisible(true));
         } else {
             btn = createActionButton("Finaliser paiement");
-            btn.addActionListener(e -> {
-                new PaymentFrame(res, heb, 0.0, this::loadReservations).setVisible(true);
-            });
-
+            btn.addActionListener(e -> new PaymentFrame(res, heb, 0.0, this::reload).setVisible(true));
         }
 
         JLabel statut = new JLabel(paiement != null ? "✅ Paiement validé" : "⏳ Paiement en attente");
@@ -131,37 +151,55 @@ public class MesReservationsPanel extends JPanel {
         return panel;
     }
 
+    private void reload() {
+        contentPanel.removeAll();
+        initUI();
+    }
+
     private JLabel createStyledLabel(String text) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        label.setForeground(Color.GRAY);
         label.setAlignmentX(Component.LEFT_ALIGNMENT);
         return label;
     }
 
     private JButton createActionButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        button.setForeground(Color.WHITE);
-        button.setBackground(new Color(0, 120, 215));
-        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button.setFocusPainted(false);
-        button.setOpaque(true);
-        button.setContentAreaFilled(true); // ✅ force le fond à être peint
-        button.setBorderPainted(false);   // ✅ supprime l'effet 3D ou bordure système
-        button.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12)); // padding custom
+        JButton button = new JButton(text) {
+            boolean hovered = false;
 
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(0, 100, 200));
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Color bg = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
+                g2.setColor(bg);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
+                g2.dispose();
+                super.paintComponent(g);
             }
 
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(0, 120, 215));
-            }
-        });
+            {
+                setOpaque(false);
+                setContentAreaFilled(false);
+                setBorderPainted(false);
+                setForeground(Color.WHITE);
+                setFont(new Font("Segoe UI", Font.BOLD, 13));
+                setPreferredSize(new Dimension(140, 36));
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
+                addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseEntered(java.awt.event.MouseEvent e) {
+                        hovered = true;
+                        repaint();
+                    }
+
+                    public void mouseExited(java.awt.event.MouseEvent e) {
+                        hovered = false;
+                        repaint();
+                    }
+                });
+            }
+        };
         return button;
     }
-
-
 }

@@ -2,7 +2,7 @@ package DAO;
 
 import model.Reservation;
 import util.DBConnection;
-//m
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +66,7 @@ public class ReservationDAO implements DAO<Reservation> {
         String sql = "INSERT INTO reservation (utilisateur_id, hebergement_id, date_arrivee, date_depart, nb_adultes, nb_enfants, nb_chambres) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
             ps.setInt(1, reservation.getUtilisateurId());
             ps.setInt(2, reservation.getHebergementId());
             ps.setDate(3, reservation.getDateArrivee());
@@ -73,6 +74,7 @@ public class ReservationDAO implements DAO<Reservation> {
             ps.setInt(5, reservation.getNbAdultes());
             ps.setInt(6, reservation.getNbEnfants());
             ps.setInt(7, reservation.getNbChambres());
+
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
@@ -89,7 +91,7 @@ public class ReservationDAO implements DAO<Reservation> {
 
     @Override
     public boolean update(Reservation reservation) {
-        // Implémentation à réaliser si nécessaire
+        // À implémenter si besoin
         return false;
     }
 
@@ -137,4 +139,33 @@ public class ReservationDAO implements DAO<Reservation> {
         return list;
     }
 
+    /**
+     * Vérifie si l'hébergement est libre entre la date d'arrivée et de départ
+     */
+    public boolean isHebergementDisponible(int hebergementId, Date arrivee, Date depart) {
+        String sql = """
+            SELECT COUNT(*) FROM reservation 
+            WHERE hebergement_id = ? 
+              AND NOT (date_depart <= ? OR date_arrivee >= ?)
+        """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, hebergementId);
+            ps.setDate(2, arrivee); // on vérifie que les dates n’entrent pas en conflit
+            ps.setDate(3, depart);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count == 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

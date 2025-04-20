@@ -6,6 +6,7 @@ import model.Paiement;
 import model.Reservation;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.time.temporal.ChronoUnit;
 
@@ -19,8 +20,6 @@ public class PaymentFrame extends JFrame {
     private JLabel lblMontant;
     private JComboBox<String> cbMoyenPaiement;
     private JPanel panelFormulaire;
-    private JButton btnPayer;
-
     private double montantTotal;
     private String moyen;
 
@@ -36,57 +35,86 @@ public class PaymentFrame extends JFrame {
         this.onSuccessCallback = onSuccessCallback;
 
         setTitle("Paiement - Réservation #" + reservation.getId());
-        setSize(500, 420);
+        setSize(550, 480);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         initUI();
     }
 
     private void initUI() {
-        setLayout(new BorderLayout());
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(new EmptyBorder(20, 30, 20, 30));
 
-        JPanel panelHaut = new JPanel(new GridLayout(3, 1));
-        panelHaut.setBorder(BorderFactory.createEmptyBorder(15, 20, 5, 20));
+        JLabel title = new JLabel("💳 Paiement de votre réservation");
+        title.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        title.setForeground(new Color(0, 53, 128));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(title);
+        panel.add(Box.createVerticalStrut(20));
 
-        long nuits = ChronoUnit.DAYS.between(
-                reservation.getDateArrivee().toLocalDate(),
-                reservation.getDateDepart().toLocalDate()
-        );
+        // Résumé
+        long nuits = ChronoUnit.DAYS.between(reservation.getDateArrivee().toLocalDate(), reservation.getDateDepart().toLocalDate());
         double prixUnitaire = hebergement.getPrix();
         if (reduction > 0) prixUnitaire *= (1 - reduction);
         montantTotal = prixUnitaire * nuits * reservation.getNbChambres();
 
-        JLabel lblResume = new JLabel("Réservation #" + reservation.getId() + " - " + hebergement.getNom());
-        lblResume.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        JLabel lblDates = new JLabel("Du " + reservation.getDateArrivee() + " au " + reservation.getDateDepart() + " - " + nuits + " nuits");
-        lblMontant = new JLabel("Montant total : " + String.format("%.2f €", montantTotal));
-        lblMontant.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        panel.add(createInfo("🏨 Hébergement :", hebergement.getNom()));
+        panel.add(createInfo("📅 Dates :", reservation.getDateArrivee() + " ➜ " + reservation.getDateDepart()));
+        panel.add(createInfo("⏳ Nombre de nuits :", String.valueOf(nuits)));
+        panel.add(createInfo("💰 Montant à payer :", String.format("%.2f €", montantTotal)));
+        panel.add(Box.createVerticalStrut(15));
 
-        panelHaut.add(lblResume);
-        panelHaut.add(lblDates);
-        panelHaut.add(lblMontant);
-        add(panelHaut, BorderLayout.NORTH);
-
-        JPanel panelCentre = new JPanel(new BorderLayout());
-        panelCentre.setBorder(BorderFactory.createTitledBorder("Moyen de paiement"));
-
+        // Moyens de paiement
+        panel.add(createLabel("Moyen de paiement :"));
         cbMoyenPaiement = new JComboBox<>(new String[]{"Carte bancaire", "PayPal", "Apple Pay"});
+        cbMoyenPaiement.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        cbMoyenPaiement.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         cbMoyenPaiement.addActionListener(e -> majFormulairePaiement());
-        panelCentre.add(cbMoyenPaiement, BorderLayout.NORTH);
+        panel.add(cbMoyenPaiement);
 
-        panelFormulaire = new JPanel(new GridLayout(4, 2, 5, 5));
-        panelFormulaire.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        panelCentre.add(panelFormulaire, BorderLayout.CENTER);
-        add(panelCentre, BorderLayout.CENTER);
+        panel.add(Box.createVerticalStrut(10));
+        panelFormulaire = new JPanel();
+        panelFormulaire.setLayout(new GridLayout(4, 2, 8, 8));
+        panelFormulaire.setOpaque(false);
+        panel.add(panelFormulaire);
 
-        JPanel panelBas = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        btnPayer = new JButton("Payer maintenant");
+        // Bouton
+        panel.add(Box.createVerticalStrut(20));
+        JButton btnPayer = new StyledButton("Payer maintenant");
+        btnPayer.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnPayer.addActionListener(e -> simulerPaiement());
-        panelBas.add(btnPayer);
-        add(panelBas, BorderLayout.SOUTH);
+        panel.add(btnPayer);
 
+        add(panel);
         majFormulairePaiement();
+    }
+
+    private JLabel createLabel(String text) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        return label;
+    }
+
+    private JPanel createInfo(String label, String value) {
+        JPanel ligne = new JPanel(new BorderLayout());
+        ligne.setOpaque(false);
+        ligne.setMaximumSize(new Dimension(600, 30));
+
+        JLabel lbl1 = new JLabel(label);
+        lbl1.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        JLabel lbl2 = new JLabel(value);
+        lbl2.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        lbl2.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        ligne.add(lbl1, BorderLayout.WEST);
+        ligne.add(lbl2, BorderLayout.EAST);
+
+        return ligne;
     }
 
     private void majFormulairePaiement() {
@@ -98,15 +126,15 @@ public class PaymentFrame extends JFrame {
             tfDateExpiration = new JTextField();
             tfCrypto = new JTextField();
 
-            panelFormulaire.add(new JLabel("Numéro de carte:"));
+            panelFormulaire.add(new JLabel("Numéro de carte :"));
             panelFormulaire.add(tfNumeroCarte);
-            panelFormulaire.add(new JLabel("Date d'expiration (MM/AA):"));
+            panelFormulaire.add(new JLabel("Expiration (MM/AA) :"));
             panelFormulaire.add(tfDateExpiration);
-            panelFormulaire.add(new JLabel("Cryptogramme (CVV):"));
+            panelFormulaire.add(new JLabel("Cryptogramme (CVV) :"));
             panelFormulaire.add(tfCrypto);
         } else {
             tfEmail = new JTextField();
-            panelFormulaire.add(new JLabel("Adresse e-mail:"));
+            panelFormulaire.add(new JLabel("Adresse email :"));
             panelFormulaire.add(tfEmail);
         }
 
@@ -138,16 +166,52 @@ public class PaymentFrame extends JFrame {
 
         if (success) {
             JOptionPane.showMessageDialog(this, "✅ Paiement validé avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
-
             new FactureFrame(reservation, hebergement).setVisible(true);
             dispose();
 
-            if (onSuccessCallback != null) {
-                onSuccessCallback.run();
-            }
+            if (onSuccessCallback != null) onSuccessCallback.run();
 
         } else {
             JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement du paiement.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Reprise du style bouton cohérent
+    private static class StyledButton extends JButton {
+        private boolean hovered = false;
+
+        public StyledButton(String text) {
+            super(text);
+            setOpaque(false);
+            setContentAreaFilled(false);
+            setBorderPainted(false);
+            setForeground(Color.WHITE);
+            setFont(new Font("Segoe UI", Font.BOLD, 13));
+            setPreferredSize(new Dimension(160, 36));
+            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+            addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent e) {
+                    hovered = true;
+                    repaint();
+                }
+
+                public void mouseExited(java.awt.event.MouseEvent e) {
+                    hovered = false;
+                    repaint();
+                }
+            });
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            Color bg = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
+            g2.setColor(bg);
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
+            g2.dispose();
+            super.paintComponent(g);
         }
     }
 }
