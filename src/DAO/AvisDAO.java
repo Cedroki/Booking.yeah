@@ -129,4 +129,30 @@ public class AvisDAO implements DAO<Avis> {
         }
         return false;
     }
+
+    /**
+     * Renvoie tous les avis d’un hébergement donné.
+     */
+    public List<Avis> findByHebergementId(int hebergementId) {
+        List<Avis> list = new ArrayList<>();
+        String sql = "SELECT * FROM avis WHERE hebergement_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, hebergementId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Avis(
+                        rs.getInt("id"),
+                        rs.getInt("client_id"),
+                        rs.getInt("hebergement_id"),
+                        rs.getInt("rating"),
+                        rs.getString("comment"),
+                        rs.getTimestamp("date_avis")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
