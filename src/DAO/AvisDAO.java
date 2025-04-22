@@ -155,4 +155,23 @@ public class AvisDAO implements DAO<Avis> {
         }
         return list;
     }
+
+    /**
+     * Calcule la note moyenne pour un hébergement donné.
+     */
+    public double getMoyennePourHebergement(int hebergementId) {
+        String sql = "SELECT AVG(rating) FROM avis WHERE hebergement_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, hebergementId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1); // retourne 0.0 si aucun avis
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.0;
+    }
+
 }

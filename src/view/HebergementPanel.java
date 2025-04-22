@@ -10,6 +10,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
+import DAO.AvisDAO;
+
 
 public class HebergementPanel extends JPanel {
     private final HebergementDAO hebergementDAO;
@@ -17,6 +19,8 @@ public class HebergementPanel extends JPanel {
     private Client currentClient;
     private double currentReduction = 0.0;
     private final JPanel featuredPanel;
+    private final AvisDAO avisDAO = new AvisDAO();
+
 
     public HebergementPanel() {
         super(new BorderLayout());
@@ -44,6 +48,11 @@ public class HebergementPanel extends JPanel {
         featuredPanel.setVisible(true);
         updateHebergements(hebergementDAO.findAll(), reduction);
     }
+
+    public void reload() {
+        updateHebergements(hebergementDAO.findAll(), currentReduction);
+    }
+
 
     /**
      * Met à jour l’affichage des hébergements avec le taux de réduction.
@@ -162,6 +171,8 @@ public class HebergementPanel extends JPanel {
         JLabel lblName = new JLabel(h.getNom());
         lblName.setFont(new Font("Segoe UI", Font.BOLD, 16));
         info.add(lblName);
+        double moyenne = avisDAO.getMoyennePourHebergement(h.getId());
+        info.add(createRatingDisplay(moyenne));
         info.add(new JLabel(h.getAdresse()));
         info.add(new JLabel("<html>" + h.getDescription() + "</html>"));
         panel.add(info, BorderLayout.CENTER);
@@ -266,4 +277,38 @@ public class HebergementPanel extends JPanel {
         };
         return button;
     }
+
+    private JPanel createRatingDisplay(double moyenne) {
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
+        panel.setOpaque(false);
+
+        int fullStars = (int) moyenne;
+        boolean halfStar = (moyenne - fullStars) >= 0.25 && (moyenne - fullStars) < 0.75;
+        int emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+        for (int i = 0; i < fullStars; i++) {
+            panel.add(createStarLabel("★"));
+        }
+        if (halfStar) {
+            panel.add(createStarLabel("⯨")); // demi-étoile (peut remplacer par image plus tard)
+        }
+        for (int i = 0; i < emptyStars; i++) {
+            panel.add(createStarLabel("☆"));
+        }
+
+        JLabel score = new JLabel(String.format(" %.1f", moyenne));
+        score.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        score.setForeground(Color.DARK_GRAY);
+        panel.add(score);
+
+        return panel;
+    }
+
+    private JLabel createStarLabel(String symbol) {
+        JLabel star = new JLabel(symbol);
+        star.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        star.setForeground(new Color(255, 180, 0));
+        return star;
+    }
+
 }

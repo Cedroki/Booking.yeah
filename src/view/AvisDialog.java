@@ -4,17 +4,17 @@ import DAO.AvisDAO;
 import model.Avis;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.RenderingHints;
 
-/**
- * Boîte de dialogue pour laisser un avis sous forme d'étoiles + commentaire.
- */
+
 public class AvisDialog extends JDialog {
     private final int clientId;
     private final int hebergementId;
-    private int rating = 0;                  // Note sélectionnée (1 à 5)
+    private int rating = 0;
     private final JLabel[] starLabels = new JLabel[5];
     private final JTextArea commentArea;
 
@@ -23,34 +23,49 @@ public class AvisDialog extends JDialog {
         this.clientId = clientId;
         this.hebergementId = hebergementId;
 
-        // Configuration de la fenêtre
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout(10, 10));
-        setSize(600, 400);               // dimensions plus larges
-        setResizable(true);
+        setSize(600, 420);
+        setLocationRelativeTo(owner);
+        setResizable(false);
+        setLayout(new BorderLayout());
 
-        // --- Panel des étoiles avec libellé "Note :" ---
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(Color.WHITE);
+        mainPanel.setBorder(new EmptyBorder(20, 30, 20, 30));
+
+        // --- Titre
+        JLabel title = new JLabel("📝 Donner votre avis");
+        title.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        title.setForeground(new Color(0, 53, 128));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(title);
+        mainPanel.add(Box.createVerticalStrut(20));
+
+        // --- Étoiles
         JPanel starPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 10));
+        starPanel.setOpaque(false);
         JLabel noteLabel = new JLabel("Note :");
-        noteLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        noteLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         starPanel.add(noteLabel);
 
         for (int i = 0; i < 5; i++) {
             final int index = i;
-            JLabel star = new JLabel("\u2606"); // étoile vide
+            JLabel star = new JLabel("\u2606"); // ☆
             star.setFont(new Font("SansSerif", Font.PLAIN, 32));
+            star.setForeground(new Color(255, 180, 0));
             star.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
             star.addMouseListener(new MouseAdapter() {
-                @Override
                 public void mouseClicked(MouseEvent e) {
                     rating = index + 1;
                     updateStars(rating);
                 }
-                @Override
+
                 public void mouseEntered(MouseEvent e) {
                     updateStars(index + 1);
                 }
-                @Override
+
                 public void mouseExited(MouseEvent e) {
                     updateStars(rating);
                 }
@@ -58,42 +73,84 @@ public class AvisDialog extends JDialog {
             starLabels[i] = star;
             starPanel.add(star);
         }
-        add(starPanel, BorderLayout.NORTH);
 
-        // --- Zone de commentaire ---
-        commentArea = new JTextArea(8, 40);
-        commentArea.setLineWrap(true);
+        mainPanel.add(starPanel);
+
+        // --- Champ commentaire
+        commentArea = new JTextArea(6, 40);
+        commentArea.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         commentArea.setWrapStyleWord(true);
-        JScrollPane scroll = new JScrollPane(commentArea,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setBorder(BorderFactory.createTitledBorder("Votre commentaire"));
-        add(scroll, BorderLayout.CENTER);
+        commentArea.setLineWrap(true);
+        commentArea.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        JScrollPane scrollPane = new JScrollPane(commentArea);
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Votre commentaire"));
+        scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(scrollPane);
 
-        // --- Bouton Envoyer ---
-        JButton btnSend = new JButton("Envoyer l'avis");
+        JPanel commentPanel = new JPanel();
+        commentPanel.setOpaque(false);
+        commentPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        scrollPane.setPreferredSize(new Dimension(500, 120));
+        commentPanel.add(scrollPane);
+
+        mainPanel.add(commentPanel);
+
+        add(mainPanel, BorderLayout.CENTER);
+
+        // --- Bouton Envoyer stylé
+        JButton btnSend = new JButton("Envoyer l'avis") {
+            private boolean hovered = false;
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Color bg = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
+                g2.setColor(bg);
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+                g2.dispose();
+                super.paintComponent(g);
+            }
+
+            {
+                setOpaque(false);
+                setContentAreaFilled(false);
+                setBorderPainted(false);
+                setForeground(Color.WHITE);
+                setFont(new Font("Segoe UI", Font.BOLD, 14));
+                setFocusPainted(false);
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                setPreferredSize(new Dimension(160, 40));
+
+                addMouseListener(new MouseAdapter() {
+                    public void mouseEntered(MouseEvent e) {
+                        hovered = true;
+                        repaint();
+                    }
+
+                    public void mouseExited(MouseEvent e) {
+                        hovered = false;
+                        repaint();
+                    }
+                });
+            }
+        };
+
         btnSend.addActionListener(e -> submitAvis());
-        JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        south.add(btnSend);
-        add(south, BorderLayout.SOUTH);
 
-        // Centrer et afficher
-        setLocationRelativeTo(owner);
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        btnPanel.setBackground(Color.WHITE);
+        btnPanel.add(btnSend);
+
+        add(btnPanel, BorderLayout.SOUTH);
     }
 
-    /**
-     * Met à jour l'affichage des étoiles :
-     * étoiles remplies (★) pour i < selected, vides (☆) pour le reste.
-     */
     private void updateStars(int selected) {
         for (int i = 0; i < starLabels.length; i++) {
-            starLabels[i].setText(i < selected ? "\u2605" : "\u2606");
+            starLabels[i].setText(i < selected ? "\u2605" : "\u2606"); // ★ ou ☆
         }
     }
 
-    /**
-     * Valide et envoie l'avis via le DAO.
-     */
     private void submitAvis() {
         String comment = commentArea.getText().trim();
         if (rating == 0) {
@@ -115,6 +172,11 @@ public class AvisDialog extends JDialog {
             JOptionPane.showMessageDialog(this,
                     "Merci pour votre avis !",
                     "Succès", JOptionPane.INFORMATION_MESSAGE);
+            Window parent = getOwner();
+            if (parent instanceof MainFrame mainFrame) {
+                mainFrame.reloadHebergements();
+            }
+
             dispose();
         } else {
             JOptionPane.showMessageDialog(this,

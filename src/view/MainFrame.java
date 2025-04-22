@@ -25,6 +25,15 @@ public class MainFrame extends JFrame {
     private HebergementViewPanel hebergementViewPanel;
     private JPanel avisPanel;
     private JPanel promotionsPanel;
+    private HebergementPanel hebergementPanel; // ✔️ maintenant utilisé correctement
+
+    private MesReservationsPanel reservationsPanel;
+
+    public void reloadHebergements() {
+        if (hebergementPanel != null) {
+            hebergementPanel.reload();
+        }
+    }
 
     public MainFrame(Client client) {
         super("Booking.molko");
@@ -42,8 +51,8 @@ public class MainFrame extends JFrame {
         // ====== HEADER ======
         JPanel headerPanel = new JPanel();
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
-        headerPanel.setBackground(new Color(0,53,128));
-        headerPanel.setBorder(new EmptyBorder(10,15,10,15));
+        headerPanel.setBackground(new Color(0, 53, 128));
+        headerPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
 
         // Ligne du titre + profil
         JLabel titleLabel = new JLabel("Booking.molko");
@@ -51,19 +60,19 @@ public class MainFrame extends JFrame {
         titleLabel.setForeground(Color.WHITE);
 
         JLabel profilLabel = new JLabel(
-                "👤 "+currentClient.getNom()+" - "+currentClient.getEmail()
+                "👤 " + currentClient.getNom() + " - " + currentClient.getEmail()
         );
         profilLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         profilLabel.setForeground(Color.WHITE);
 
         JPanel topRow = new JPanel(new BorderLayout());
-        topRow.setBackground(new Color(0,53,128));
-        topRow.add(titleLabel,    BorderLayout.WEST);
-        topRow.add(profilLabel,   BorderLayout.EAST);
+        topRow.setBackground(new Color(0, 53, 128));
+        topRow.add(titleLabel, BorderLayout.WEST);
+        topRow.add(profilLabel, BorderLayout.EAST);
 
         // Menu de navigation
-        JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,20,10));
-        menuPanel.setBackground(new Color(0,53,128));
+        JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        menuPanel.setBackground(new Color(0, 53, 128));
 
         btnHebergement     = createMenuButton("Hébergement");
         btnMesReservations = createMenuButton("Mes réservations");
@@ -86,16 +95,13 @@ public class MainFrame extends JFrame {
 
         // 1) Vue Hébergements
         hebergementViewPanel = new HebergementViewPanel();
-        hebergementViewPanel.setReduction(promotionRate);
-        hebergementViewPanel
-                .getHebergementPanel()
-                .setClientAndReduction(currentClient, promotionRate);
+        hebergementPanel = hebergementViewPanel.getHebergementPanel(); // ✔️ assignation correcte
+        hebergementPanel.setClientAndReduction(currentClient, promotionRate);
 
         // 2) Mes réservations
-        MesReservationsPanel reservationsPanel =
-                new MesReservationsPanel(currentClient.getId());
+        reservationsPanel = new MesReservationsPanel(currentClient.getId());
 
-        // 3) Avis (vide, sauf si besoin)
+        // 3) Avis
         avisPanel = new JPanel();
         avisPanel.add(new JLabel("Vos avis"));
 
@@ -103,10 +109,10 @@ public class MainFrame extends JFrame {
         promotionsPanel = new JPanel();
         promotionsPanel.add(new JLabel("Vos promotions"));
 
-        contentPanel.add(hebergementViewPanel,    "hebergement");
-        contentPanel.add(reservationsPanel,       "reservations");
-        contentPanel.add(avisPanel,               "avis");
-        contentPanel.add(promotionsPanel,         "promotions");
+        contentPanel.add(hebergementViewPanel, "hebergement");
+        contentPanel.add(reservationsPanel, "reservations");
+        contentPanel.add(avisPanel, "avis");
+        contentPanel.add(promotionsPanel, "promotions");
 
         add(contentPanel, BorderLayout.CENTER);
 
@@ -114,12 +120,16 @@ public class MainFrame extends JFrame {
         btnHebergement.addActionListener(e ->
                 cardLayout.show(contentPanel, "hebergement")
         );
-        btnMesReservations.addActionListener(e ->
-                cardLayout.show(contentPanel, "reservations")
-        );
+
+        btnMesReservations.addActionListener(e -> {
+            reservationsPanel.reload(); // ✔️ rechargement
+            cardLayout.show(contentPanel, "reservations");
+        });
+
         btnAvis.addActionListener(e ->
                 cardLayout.show(contentPanel, "avis")
         );
+
         btnMesPromotions.addActionListener(e ->
                 cardLayout.show(contentPanel, "promotions")
         );
@@ -133,15 +143,16 @@ public class MainFrame extends JFrame {
         btn.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         btn.setPreferredSize(new Dimension(180, 40));
         btn.setBackground(Color.WHITE);
-        btn.setForeground(new Color(0,53,128));
+        btn.setForeground(new Color(0, 53, 128));
         btn.setFocusPainted(false);
         btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setBorder(BorderFactory.createLineBorder(new Color(255,200,0),2,true));
+        btn.setBorder(BorderFactory.createLineBorder(new Color(255, 200, 0), 2, true));
         btn.setOpaque(true);
         btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent e) {
-                btn.setBackground(new Color(230,230,250));
+                btn.setBackground(new Color(230, 230, 250));
             }
+
             public void mouseExited(java.awt.event.MouseEvent e) {
                 btn.setBackground(Color.WHITE);
             }

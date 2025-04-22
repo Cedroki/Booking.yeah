@@ -184,7 +184,7 @@ public class MesReservationsPanel extends JPanel {
         return panel;
     }
 
-    private void reload() {
+    public void reload() {
         contentPanel.removeAll();
         initUI();
     }
