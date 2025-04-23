@@ -74,10 +74,10 @@ public class MainFrame extends JFrame {
         JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         menuPanel.setBackground(new Color(0, 53, 128));
 
-        btnHebergement     = createMenuButton("Hébergement");
+        btnHebergement     = createMenuButton("Hébergements");
         btnMesReservations = createMenuButton("Mes réservations");
-        btnAvis            = createMenuButton("Avis");
-        btnMesPromotions   = createMenuButton("Mes promotions");
+        btnAvis            = createMenuButton("Mes Avis");
+        btnMesPromotions   = createMenuButton("Contacts");
 
         menuPanel.add(btnHebergement);
         menuPanel.add(btnMesReservations);
@@ -102,8 +102,8 @@ public class MainFrame extends JFrame {
         reservationsPanel = new MesReservationsPanel(currentClient.getId());
 
         // 3) Avis
-        avisPanel = new JPanel();
-        avisPanel.add(new JLabel("Vos avis"));
+        avisPanel = new MesAvisPanel(currentClient.getId());
+
 
         // 4) Promotions
         promotionsPanel = new JPanel();

@@ -145,42 +145,61 @@ public class HebergementPanel extends JPanel {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.LIGHT_GRAY),
-                BorderFactory.createEmptyBorder(10,10,10,10)
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
         panel.setBackground(Color.WHITE);
-        panel.setMaximumSize(new Dimension(900,150));
+        panel.setMaximumSize(new Dimension(900, 160));
 
-        // Photo
+        // ----- PHOTO -----
         JLabel photo = new JLabel();
-        photo.setPreferredSize(new Dimension(160,120));
+        photo.setPreferredSize(new Dimension(160, 120));
         File f = new File("src/assets/images/" + h.getPhotos());
         if (f.exists()) {
             ImageIcon ic = new ImageIcon(f.getPath());
-            photo.setIcon(new ImageIcon(ic.getImage()
-                    .getScaledInstance(160,120,Image.SCALE_SMOOTH)));
+            photo.setIcon(new ImageIcon(ic.getImage().getScaledInstance(160, 120, Image.SCALE_SMOOTH)));
         } else {
             photo.setText("Image non dispo");
         }
         panel.add(photo, BorderLayout.WEST);
 
-        // Informations (centre)
+        // ----- INFOS CENTRE -----
         JPanel info = new JPanel();
         info.setOpaque(false);
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
-        info.setBorder(BorderFactory.createEmptyBorder(5,10,5,10));
+        info.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
+        double moyenne = avisDAO.getMoyennePourHebergement(h.getId());
+
+        // Nom + note moyenne sur la même ligne
+        JPanel nameAndRating = new JPanel();
+        nameAndRating.setLayout(new BoxLayout(nameAndRating, BoxLayout.X_AXIS));
+        nameAndRating.setOpaque(false);
+
         JLabel lblName = new JLabel(h.getNom());
         lblName.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        info.add(lblName);
-        double moyenne = avisDAO.getMoyennePourHebergement(h.getId());
-        info.add(createRatingDisplay(moyenne));
-        info.add(new JLabel(h.getAdresse()));
-        info.add(new JLabel("<html>" + h.getDescription() + "</html>"));
+        lblName.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 10));
+        nameAndRating.add(lblName);
+        nameAndRating.add(createRatingDisplay(moyenne));
+
+        info.add(nameAndRating);
+        info.add(Box.createVerticalStrut(5));
+
+        JLabel adresse = new JLabel(h.getAdresse());
+        adresse.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        info.add(adresse);
+
+        info.add(Box.createVerticalStrut(5));
+
+        JLabel description = new JLabel("<html>" + h.getDescription() + "</html>");
+        description.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        info.add(description);
+
         panel.add(info, BorderLayout.CENTER);
 
-        // Prix + boutons à droite
+        // ----- PRIX + BOUTONS -----
         JPanel right = new JPanel(new BorderLayout());
         right.setOpaque(false);
-        right.setBorder(BorderFactory.createEmptyBorder(5,10,5,10));
+        right.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 
         String prixStr = String.format("%.2f € / nuit", h.getPrix());
         if (currentReduction > 0) {
@@ -194,15 +213,14 @@ public class HebergementPanel extends JPanel {
         lblPrice.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         right.add(lblPrice, BorderLayout.NORTH);
 
-        JPanel btns = new JPanel(new FlowLayout(FlowLayout.CENTER,5,5));
+        JPanel btns = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         btns.setOpaque(false);
 
-        // Bouton Réserver
+        // --- Bouton Réserver ---
         JButton btnRes = createActionButton("Réserver");
         btnRes.addActionListener(e -> {
             if (currentClient != null) {
-                new ReservationFrame(h, currentClient.getId(), currentReduction)
-                        .setVisible(true);
+                new ReservationFrame(h, currentClient.getId(), currentReduction).setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(
                         this,
@@ -214,11 +232,10 @@ public class HebergementPanel extends JPanel {
         });
         btns.add(btnRes);
 
-        // Bouton Avis (affiche tous les avis)
+        // --- Bouton Avis ---
         JButton btnAvis = createActionButton("Avis");
         btnAvis.addActionListener(e -> {
             if (currentClient != null) {
-                // Ouvre la boîte de dialogue listant TOUS les avis de cet hébergement
                 Window win = SwingUtilities.getWindowAncestor(this);
                 new AvisListDialog(win, h.getId()).setVisible(true);
             } else {
@@ -237,6 +254,7 @@ public class HebergementPanel extends JPanel {
 
         return panel;
     }
+
 
     /**
      * Crée un bouton arrondi avec gestion du hover et
@@ -297,7 +315,7 @@ public class HebergementPanel extends JPanel {
         }
 
         JLabel score = new JLabel(String.format(" %.1f", moyenne));
-        score.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        score.setFont(new Font("Segoe UI", Font.BOLD, 13)); // gras
         score.setForeground(Color.DARK_GRAY);
         panel.add(score);
 
