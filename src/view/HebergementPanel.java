@@ -1,6 +1,7 @@
 package view;
 
 import DAO.HebergementDAO;
+import DAO.AvisDAO;
 import model.Client;
 import model.Hebergement;
 
@@ -10,16 +11,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
-import DAO.AvisDAO;
-
 
 public class HebergementPanel extends JPanel {
     private final HebergementDAO hebergementDAO;
     private final JPanel hebergementListPanel;
-    private Client currentClient;
-    private double currentReduction = 0.0;
     private final JPanel featuredPanel;
     private final AvisDAO avisDAO = new AvisDAO();
+
+    private Client currentClient;
+    private double currentReduction = 0.0;
+    private final JLabel titleLabel = new JLabel("Nos Hébergements");
 
 
     public HebergementPanel() {
@@ -30,36 +31,69 @@ public class HebergementPanel extends JPanel {
         featuredPanel = createFeaturedPanel();
         add(featuredPanel, BorderLayout.NORTH);
 
-        // Liste déroulante des hébergements
+        // Liste des hébergements
+        // Liste des hébergements avec un titre
         hebergementListPanel = new JPanel();
         hebergementListPanel.setLayout(new BoxLayout(hebergementListPanel, BoxLayout.Y_AXIS));
-        add(new JScrollPane(hebergementListPanel), BorderLayout.CENTER);
 
-        // Affichage initial
-        updateHebergements(hebergementDAO.findAll(), currentReduction);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titleLabel.setForeground(new Color(0, 53, 128));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
+
+        JPanel listWrapper = new JPanel();
+        listWrapper.setLayout(new BorderLayout());
+        listWrapper.setBackground(Color.WHITE);
+        listWrapper.add(titleLabel, BorderLayout.NORTH);
+        listWrapper.add(hebergementListPanel, BorderLayout.CENTER);
+
+        add(new JScrollPane(listWrapper), BorderLayout.CENTER);
+
+
+        // Affichage initial avec coup de cœur visible
+        updateHebergements(hebergementDAO.findAll(), currentReduction, true);
     }
 
     /**
-     * Appelé après connexion : définit le client et la réduction, puis rafraîchit la liste.
+     * Appelé après connexion : définit le client et la réduction, puis rafraîchit la liste avec coup de cœur.
      */
     public void setClientAndReduction(Client client, double reduction) {
-        this.currentClient    = client;
+        this.currentClient = client;
         this.currentReduction = reduction;
-        featuredPanel.setVisible(true);
-        updateHebergements(hebergementDAO.findAll(), reduction);
+        featuredPanel.setVisible(true); // affiché si besoin
+        updateHebergements(hebergementDAO.findAll(), reduction, true);
     }
 
     public void reload() {
-        updateHebergements(hebergementDAO.findAll(), currentReduction);
+        updateHebergements(hebergementDAO.findAll(), currentReduction, true);
     }
 
+    public void updateHebergements(List<Hebergement> list) {
+        updateHebergements(list, currentReduction, false);
+    }
+
+    public double getCurrentReduction() {
+        return currentReduction;
+    }
+
+    public void updateHebergements(List<Hebergement> list, double reduction) {
+        updateHebergements(list, reduction, false);
+    }
 
     /**
-     * Met à jour l’affichage des hébergements avec le taux de réduction.
+     * Affiche les hébergements, avec contrôle du panneau coup de cœur.
      */
-    public void updateHebergements(List<Hebergement> list, double reduction) {
+
+    public void setCustomTitle(String text) {
+        if (text == null || text.isEmpty()) {
+            titleLabel.setText("Nos Hébergements");
+        } else {
+            titleLabel.setText(text);
+        }
+    }
+
+    public void updateHebergements(List<Hebergement> list, double reduction, boolean showFeatured) {
         this.currentReduction = reduction;
-        featuredPanel.setVisible(false);
+        featuredPanel.setVisible(showFeatured);
 
         hebergementListPanel.removeAll();
         for (Hebergement h : list) {
@@ -68,13 +102,6 @@ public class HebergementPanel extends JPanel {
         }
         hebergementListPanel.revalidate();
         hebergementListPanel.repaint();
-    }
-
-    /**
-     * Surcharge utilisée par SearchController (conserve currentReduction).
-     */
-    public void updateHebergements(List<Hebergement> list) {
-        updateHebergements(list, currentReduction);
     }
 
     // ——— « Coup de cœur » en haut ———
