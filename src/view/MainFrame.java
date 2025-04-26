@@ -7,9 +7,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * Fenêtre principale après connexion client.
- */
 public class MainFrame extends JFrame {
     private final Client currentClient;
     private final double promotionRate;
@@ -23,23 +20,25 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
 
     private HebergementViewPanel hebergementViewPanel;
+    private HebergementPanel hebergementPanel;
+    private MesReservationsPanel reservationsPanel;
     private JPanel avisPanel;
     private JPanel promotionsPanel;
-    private HebergementPanel hebergementPanel; // ✔️ maintenant utilisé correctement
-
-    private MesReservationsPanel reservationsPanel;
-
-    public void reloadHebergements() {
-        if (hebergementPanel != null) {
-            hebergementPanel.reload();
-        }
-    }
 
     public MainFrame(Client client) {
         super("Booking.molko");
-        this.currentClient   = client;
-        this.promotionRate   = new PromotionDAO()
-                .getDiscountForClientType(client.getType());
+        this.currentClient = client;
+
+        // ── Nouvel endroit pour calculer la promotion ──
+        int promoPercent = client.getPromotionId();
+        if (promoPercent > 0) {
+            // Si admin a attribué une promo spécifique
+            this.promotionRate = promoPercent / 100.0;
+        } else {
+            // Sinon, on reste sur l'ancien mécanisme
+            this.promotionRate = new PromotionDAO()
+                    .getDiscountForClientType(client.getType());
+        }
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
@@ -54,13 +53,15 @@ public class MainFrame extends JFrame {
         headerPanel.setBackground(new Color(0, 53, 128));
         headerPanel.setBorder(new EmptyBorder(10, 15, 10, 15));
 
-        // Ligne du titre + profil
+        // Titre + profil
         JLabel titleLabel = new JLabel("Booking.molko");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
         titleLabel.setForeground(Color.WHITE);
 
-        JLabel profilLabel = new JLabel(
-                "👤 " + currentClient.getNom() + " - " + currentClient.getEmail()
+        JLabel profilLabel = new JLabel("👤 "
+                + currentClient.getNom()
+                + " - "
+                + currentClient.getEmail()
         );
         profilLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         profilLabel.setForeground(Color.WHITE);
@@ -79,10 +80,18 @@ public class MainFrame extends JFrame {
         btnAvis            = createMenuButton("Mes Avis");
         btnMesPromotions   = createMenuButton("Contacts");
 
+        // Bouton Déconnexion
+        JButton logoutButton = createMenuButton("Déconnexion");
+        logoutButton.addActionListener(e -> {
+            dispose();                       // ferme MainFrame
+            new StartFrame().setVisible(true); // rouvre l'écran d'accueil
+        });
+
         menuPanel.add(btnHebergement);
         menuPanel.add(btnMesReservations);
         menuPanel.add(btnAvis);
         menuPanel.add(btnMesPromotions);
+        menuPanel.add(logoutButton);
 
         headerPanel.add(topRow);
         headerPanel.add(Box.createVerticalStrut(10));
@@ -93,55 +102,49 @@ public class MainFrame extends JFrame {
         cardLayout    = new CardLayout();
         contentPanel  = new JPanel(cardLayout);
 
-        // 1) Vue Hébergements
         hebergementViewPanel = new HebergementViewPanel();
-        hebergementPanel = hebergementViewPanel.getHebergementPanel(); // ✔️ assignation correcte
+        hebergementPanel     = hebergementViewPanel.getHebergementPanel();
+        // On transmet la bonne promotion
         hebergementPanel.setClientAndReduction(currentClient, promotionRate);
 
-        // 2) Mes réservations
         reservationsPanel = new MesReservationsPanel(currentClient.getId());
-
-        // 3) Avis
-        avisPanel = new MesAvisPanel(currentClient.getId());
-
-
-        // 4) Promotions
-        promotionsPanel = new JPanel();
+        avisPanel         = new MesAvisPanel(currentClient.getId());
+        promotionsPanel   = new JPanel();
         promotionsPanel.add(new JLabel("Vos promotions"));
 
         contentPanel.add(hebergementViewPanel, "hebergement");
-        contentPanel.add(reservationsPanel, "reservations");
-        contentPanel.add(avisPanel, "avis");
-        contentPanel.add(promotionsPanel, "promotions");
+        contentPanel.add(reservationsPanel,  "reservations");
+        contentPanel.add(avisPanel,          "avis");
+        contentPanel.add(promotionsPanel,    "promotions");
 
         add(contentPanel, BorderLayout.CENTER);
 
-        // ====== ACTION NAVIGATION ======
-        btnHebergement.addActionListener(e ->
-                cardLayout.show(contentPanel, "hebergement")
-        );
-
+        // ====== NAV ACTIONS ======
+        btnHebergement.addActionListener(e -> cardLayout.show(contentPanel, "hebergement"));
         btnMesReservations.addActionListener(e -> {
-            reservationsPanel.reload(); // ✔️ rechargement
+            reservationsPanel.reload();
             cardLayout.show(contentPanel, "reservations");
         });
-
-        btnAvis.addActionListener(e ->
-                cardLayout.show(contentPanel, "avis")
-        );
-
-        btnMesPromotions.addActionListener(e ->
-                cardLayout.show(contentPanel, "promotions")
-        );
+        btnAvis.addActionListener(e -> cardLayout.show(contentPanel, "avis"));
+        btnMesPromotions.addActionListener(e -> cardLayout.show(contentPanel, "promotions"));
     }
 
     /**
-     * Crée un bouton de menu.
+     * Rechargement des hébergements (appelé depuis AvisDialog après ajout d'un avis).
+     */
+    public void reloadHebergements() {
+        if (hebergementPanel != null) {
+            hebergementPanel.reload();
+        }
+    }
+
+    /**
+     * Crée un bouton de menu stylé.
      */
     private JButton createMenuButton(String text) {
         JButton btn = new JButton(text);
         btn.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn.setPreferredSize(new Dimension(180, 40));
+        btn.setPreferredSize(new Dimension(160, 40));
         btn.setBackground(Color.WHITE);
         btn.setForeground(new Color(0, 53, 128));
         btn.setFocusPainted(false);
@@ -152,7 +155,6 @@ public class MainFrame extends JFrame {
             public void mouseEntered(java.awt.event.MouseEvent e) {
                 btn.setBackground(new Color(230, 230, 250));
             }
-
             public void mouseExited(java.awt.event.MouseEvent e) {
                 btn.setBackground(Color.WHITE);
             }
