@@ -353,5 +353,73 @@ public class HebergementDAO implements DAO<Hebergement> {
         return result;
     }
 
+    public List<Hebergement> findAvailableByFilters(String ville, String fourchette, String categorie, Date arrivee, Date depart) {
+        List<Hebergement> result = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder("""
+        SELECT * FROM Hebergement h
+        WHERE 1=1
+    """);
+
+        List<Object> params = new ArrayList<>();
+
+        if (ville != null && !ville.isBlank()) {
+            sql.append(" AND LOWER(h.ville) = LOWER(?)");
+            params.add(ville);
+        }
+
+        if (fourchette != null && !fourchette.equalsIgnoreCase("Aucun")) {
+            sql.append(" AND h.fourchette = ?");
+            params.add(fourchette);
+        }
+
+        if (categorie != null && !categorie.equalsIgnoreCase("Aucune")) {
+            sql.append(" AND LOWER(h.categorie) = LOWER(?)");
+            params.add(categorie);
+        }
+
+        // 🛑 Exclure les hébergements qui ont des réservations qui se chevauchent
+        sql.append("""
+        AND h.id NOT IN (
+            SELECT r.hebergement_id FROM reservation r
+            WHERE NOT (r.date_depart <= ? OR r.date_arrivee >= ?)
+        )
+    """);
+
+        params.add(arrivee); // r.date_depart <= arrivee → pas en conflit
+        params.add(depart);  // r.date_arrivee >= depart → pas en conflit
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Hebergement h = new Hebergement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("description"),
+                        rs.getString("photos"),
+                        rs.getDouble("prix"),
+                        rs.getString("categorie"),
+                        rs.getString("fourchette"),
+                        rs.getString("ville")
+                );
+                result.add(h);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
+
+
 
 }

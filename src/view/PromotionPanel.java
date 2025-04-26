@@ -4,125 +4,125 @@ import DAO.PromotionDAO;
 import model.Promotion;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.List;
 
 public class PromotionPanel extends JPanel {
 
     private final PromotionDAO promotionDAO = new PromotionDAO();
-    private final DefaultTableModel tableModel;
-    private final JTable table;
+    private JPanel cardsContainer;
 
     public PromotionPanel() {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        setBackground(new Color(245, 247, 250));
+        setBackground(Color.WHITE);
 
-        tableModel = new DefaultTableModel(new String[]{"ID", "Type Client", "Réduction", "Description"}, 0);
-        table = new JTable(tableModel);
-        table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        table.setRowHeight(25);
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        add(scrollPane, BorderLayout.CENTER);
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.setBackground(new Color(245, 247, 250));
-
-        JButton addButton = createStyledButton("Ajouter");
-        JButton deleteButton = createStyledButton("Supprimer");
-
-        buttonPanel.add(addButton);
-        buttonPanel.add(deleteButton);
-        add(buttonPanel, BorderLayout.SOUTH);
-
-        // Ajout d'une promotion
+        JButton addButton = createStyledButton("➕ Ajouter une promotion");
+        addButton.setPreferredSize(new Dimension(220, 40));
         addButton.addActionListener(e -> showAddDialog());
 
-        // Suppression
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        topPanel.setOpaque(false);
+        topPanel.add(addButton);
+
+        cardsContainer = new JPanel();
+        cardsContainer.setLayout(new BoxLayout(cardsContainer, BoxLayout.Y_AXIS));
+        cardsContainer.setBackground(Color.WHITE);
+
+        JScrollPane scrollPane = new JScrollPane(cardsContainer);
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
+        add(topPanel, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
+
+        refreshPromotions();
+    }
+
+    private void refreshPromotions() {
+        cardsContainer.removeAll();
+        List<Promotion> promotions = promotionDAO.findAll();
+
+        for (Promotion promo : promotions) {
+            cardsContainer.add(createPromotionCard(promo));
+            cardsContainer.add(Box.createVerticalStrut(15));
+        }
+
+        cardsContainer.revalidate();
+        cardsContainer.repaint();
+    }
+
+    private JPanel createPromotionCard(Promotion promo) {
+        JPanel card = new JPanel(new BorderLayout(10, 10));
+        card.setBackground(Color.WHITE);
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200)),
+                new EmptyBorder(15, 15, 15, 15)));
+
+        JLabel clientTypeLabel = new JLabel("Client : " + promo.getClientType());
+        clientTypeLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+
+        JLabel discountLabel = new JLabel("Réduction : " + (int) (promo.getDiscount() * 100) + "%");
+        discountLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+        JLabel descLabel = new JLabel("\"" + promo.getDescription() + "\"");
+        descLabel.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+
+        JPanel textPanel = new JPanel();
+        textPanel.setOpaque(false);
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+        textPanel.add(clientTypeLabel);
+        textPanel.add(Box.createVerticalStrut(5));
+        textPanel.add(discountLabel);
+        textPanel.add(Box.createVerticalStrut(5));
+        textPanel.add(descLabel);
+
+        JButton editButton = createStyledButton("Modifier");
+        JButton deleteButton = createStyledButton("Supprimer");
+
+        editButton.addActionListener(e -> showEditDialog(promo));
         deleteButton.addActionListener(e -> {
-            int row = table.getSelectedRow();
-            if (row >= 0) {
-                int id = (int) tableModel.getValueAt(row, 0);
-                int confirm = JOptionPane.showConfirmDialog(this, "Supprimer la promotion ?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION && promotionDAO.delete(id)) {
-                    JOptionPane.showMessageDialog(this, "Promotion supprimée.");
-                    refreshTable();
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Sélectionnez une promotion à supprimer.");
+            int confirm = JOptionPane.showConfirmDialog(this, "Supprimer cette promotion ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION && promotionDAO.delete(promo.getId())) {
+                JOptionPane.showMessageDialog(this, "Promotion supprimée.");
+                refreshPromotions();
             }
         });
 
-        refreshTable();
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setOpaque(false);
+        buttonPanel.add(editButton);
+        buttonPanel.add(deleteButton);
+
+        card.add(textPanel, BorderLayout.CENTER);
+        card.add(buttonPanel, BorderLayout.SOUTH);
+
+        return card;
     }
 
     private void showAddDialog() {
-        JTextField typeField = createPlaceholderField("ancien / nouveau");
-        JTextField discountField = createPlaceholderField("ex: 0.10");
-        JTextField descField = createPlaceholderField("Description");
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Color.WHITE);
-        panel.setPreferredSize(new Dimension(350, 200));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        panel.add(new JLabel("Type client :"));
-        panel.add(typeField);
-        panel.add(Box.createVerticalStrut(10));
-
-        panel.add(new JLabel("Réduction :"));
-        panel.add(discountField);
-        panel.add(Box.createVerticalStrut(10));
-
-        panel.add(new JLabel("Description :"));
-        panel.add(descField);
-
-        int result = JOptionPane.showConfirmDialog(this, panel, "Ajouter une promotion", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-        if (result == JOptionPane.OK_OPTION) {
-            try {
-                String type = typeField.getText().trim();
-                double discount = Double.parseDouble(discountField.getText().trim());
-                String desc = descField.getText().trim();
-
-                Promotion p = new Promotion(type, discount, desc);
-                if (promotionDAO.insert(p)) {
-                    JOptionPane.showMessageDialog(this, "Promotion ajoutée !");
-                    refreshTable();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout.");
+        PromotionFormDialog dialog = new PromotionFormDialog(
+                SwingUtilities.getWindowAncestor(this),
+                null,
+                p -> {
+                    promotionDAO.insert(p);
+                    refreshPromotions();
                 }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Champs invalides.");
-            }
-        }
+        );
+        dialog.setVisible(true);
     }
 
-    private JTextField createPlaceholderField(String placeholder) {
-        JTextField field = new JTextField(placeholder);
-        field.setForeground(Color.GRAY);
-        field.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        field.setMaximumSize(new Dimension(300, 30));
-
-        field.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent e) {
-                if (field.getText().equals(placeholder)) {
-                    field.setText("");
-                    field.setForeground(Color.BLACK);
+    private void showEditDialog(Promotion promo) {
+        PromotionFormDialog dialog = new PromotionFormDialog(
+                SwingUtilities.getWindowAncestor(this),
+                promo,
+                p -> {
+                    promotionDAO.update(p);
+                    refreshPromotions();
                 }
-            }
-
-            public void focusLost(java.awt.event.FocusEvent e) {
-                if (field.getText().isEmpty()) {
-                    field.setForeground(Color.GRAY);
-                    field.setText(placeholder);
-                }
-            }
-        });
-
-        return field;
+        );
+        dialog.setVisible(true);
     }
 
     private JButton createStyledButton(String text) {
@@ -133,8 +133,8 @@ public class PromotionPanel extends JPanel {
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g.create();
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                Color bgColor = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
-                g2.setColor(bgColor);
+                Color bg = hovered ? new Color(0, 100, 210) : new Color(0, 120, 255);
+                g2.setColor(bg);
                 g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
                 g2.dispose();
                 super.paintComponent(g);
@@ -149,7 +149,6 @@ public class PromotionPanel extends JPanel {
                 setFocusPainted(false);
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 setPreferredSize(new Dimension(130, 35));
-
                 addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseEntered(java.awt.event.MouseEvent e) {
                         hovered = true;
@@ -164,18 +163,5 @@ public class PromotionPanel extends JPanel {
             }
         };
         return button;
-    }
-
-    public void refreshTable() {
-        tableModel.setRowCount(0);
-        List<Promotion> promos = promotionDAO.findAll();
-        for (Promotion p : promos) {
-            tableModel.addRow(new Object[]{
-                    p.getId(),
-                    p.getClientType(),
-                    p.getDiscount(),
-                    p.getDescription()
-            });
-        }
     }
 }

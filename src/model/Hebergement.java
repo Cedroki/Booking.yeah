@@ -100,4 +100,8 @@ public class Hebergement {
                 ", fourchette='" + fourchette + '\'' +
                 '}';
     }
+    public Hebergement() {
+        // Constructeur vide utile pour les initialisations personnalisées
+    }
+
 }

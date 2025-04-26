@@ -32,11 +32,17 @@ public class ReservationController {
     public Reservation addReservation(int clientId, int hebergementId,
                                       java.util.Date dateArrivee, java.util.Date dateDepart,
                                       int nbAdultes, int nbEnfants, int nbChambres) {
-        // Conversion des dates
+
         Date sqlDateArrivee = new Date(dateArrivee.getTime());
         Date sqlDateDepart = new Date(dateDepart.getTime());
 
-        // Création de l'objet réservation sans ID (id auto-généré après insertion)
+        // ✅ Vérification de disponibilité
+        boolean dispo = reservationDAO.isHebergementDisponible(hebergementId, sqlDateArrivee, sqlDateDepart);
+        if (!dispo) {
+            System.out.println("⚠️ Hébergement indisponible sur cette période.");
+            return null;
+        }
+
         Reservation reservation = new Reservation(
                 clientId,
                 hebergementId,
@@ -47,10 +53,8 @@ public class ReservationController {
                 nbChambres
         );
 
-        // Insertion via DAO
         boolean success = reservationDAO.insert(reservation);
 
-        // Si succès, le DAO aura rempli reservation.setId(...)
         return success ? reservation : null;
     }
 }

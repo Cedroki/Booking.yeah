@@ -4,34 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="971d65e4-eef5-4729-b5ee-16ad64bc558a" name="Changes" comment="commit test">
-      <change beforePath="$PROJECT_DIR$/.idea/Booking.yeah.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Booking.yeah.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/Booking.yeah.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/Booking.yeah.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/libraries/mysql_connector_j_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/libraries/mysql_connector_j_9_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/libraries/mysql_connector_j_9_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="admin">
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/util/DBConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/util/DBConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementViewPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementViewPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HebergementViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HebergementViewPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SearchPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SearchPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="ChangesViewManager">
-    <option name="groupingKeys">
-      <option value="directory" />
-    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -41,24 +21,30 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="jules &lt;jules.mortreux@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Cedroki&quot;
+    &quot;assignee&quot;: &quot;julesmortreux&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Cedroki/Booking.yeah&quot;,
-    &quot;accountId&quot;: &quot;7d5b1df0-3c35-47c8-9575-b2ca12b60b4c&quot;
+    &quot;accountId&quot;: &quot;0990e517-71bd-4332-91e0-e092ba8fd79d&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
+  &quot;associatedIndex&quot;: 6
 }</component>
-  <component name="ProjectId" id="2v7hBxWuL9VCuUmlbRuBpsvxglF" />
+  <component name="ProjectId" id="2v7imAyTGkTzcZmDrv0Lh9PuLgk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -72,15 +58,15 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-9.2.0/mysql-connector-j-9.2.0.jar",
+    "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-9.2.0",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.31445312",
-    "project.structure.side.proportion": "0.34236804",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -95,42 +81,242 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="971d65e4-eef5-4729-b5ee-16ad64bc558a" name="Changes" comment="" />
-      <created>1743501887375</created>
+      <changelist id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="" />
+      <created>1743502669928</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1743501887375</updated>
-      <workItem from="1743501888688" duration="1610000" />
-      <workItem from="1743600145210" duration="1902000" />
-      <workItem from="1744818753116" duration="1284000" />
-      <workItem from="1744978529172" duration="1000000" />
-      <workItem from="1744979548587" duration="7674000" />
+      <updated>1743502669928</updated>
+      <workItem from="1743502671053" duration="1058000" />
+      <workItem from="1744723871392" duration="1035000" />
+      <workItem from="1744724948451" duration="307000" />
+      <workItem from="1744725369656" duration="81908000" />
+      <workItem from="1745680163554" duration="3755000" />
     </task>
-    <task id="LOCAL-00001" summary="ceci est le premier commit">
+    <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
-      <created>1743502248714</created>
+      <created>1744724487998</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1743502248714</updated>
+      <updated>1744724487998</updated>
     </task>
-    <task id="LOCAL-00002" summary="commit test">
+    <task id="LOCAL-00002" summary="test">
       <option name="closed" value="true" />
-      <created>1744818889963</created>
+      <created>1744724559446</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1744818889963</updated>
+      <updated>1744724559446</updated>
     </task>
-    <task id="LOCAL-00003" summary="commit test">
+    <task id="LOCAL-00003" summary="test">
       <option name="closed" value="true" />
-      <created>1744979440903</created>
+      <created>1744724611426</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1744979440903</updated>
+      <updated>1744724611426</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="creation d'un nouveau compte">
+      <option name="closed" value="true" />
+      <created>1744815424953</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744815424953</updated>
+    </task>
+    <task id="LOCAL-00005" summary="filtre">
+      <option name="closed" value="true" />
+      <created>1744818287263</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744818287263</updated>
+    </task>
+    <task id="LOCAL-00006" summary="filtre complet avec categorie destination et prix">
+      <option name="closed" value="true" />
+      <created>1744820678258</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744820678258</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ajout BDD">
+      <option name="closed" value="true" />
+      <created>1744820926790</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744820926790</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ajout connexion admin">
+      <option name="closed" value="true" />
+      <created>1744886339005</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744886339005</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ajout connexion admin">
+      <option name="closed" value="true" />
+      <created>1744887104112</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744887104112</updated>
+    </task>
+    <task id="LOCAL-00010" summary="ajout connexion admin">
+      <option name="closed" value="true" />
+      <created>1744887483746</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744887483746</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ajout connexion admin">
+      <option name="closed" value="true" />
+      <created>1744887867895</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1744887867895</updated>
+    </task>
+    <task id="LOCAL-00012" summary="ajout admin et reduction">
+      <option name="closed" value="true" />
+      <created>1744910514681</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1744910514682</updated>
+    </task>
+    <task id="LOCAL-00013" summary="ajout reduction et ancienneté promo">
+      <option name="closed" value="true" />
+      <created>1744979486584</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1744979486584</updated>
+    </task>
+    <task id="LOCAL-00014" summary="paiement">
+      <option name="closed" value="true" />
+      <created>1745075808318</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745075808318</updated>
+    </task>
+    <task id="LOCAL-00015" summary="paiement">
+      <option name="closed" value="true" />
+      <created>1745075821832</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745075821832</updated>
+    </task>
+    <task id="LOCAL-00016" summary="paiement reservations">
+      <option name="closed" value="true" />
+      <created>1745082111410</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1745082111410</updated>
+    </task>
+    <task id="LOCAL-00017" summary="paiement reservations">
+      <option name="closed" value="true" />
+      <created>1745082129591</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1745082129591</updated>
+    </task>
+    <task id="LOCAL-00018" summary="paiement reservations">
+      <option name="closed" value="true" />
+      <created>1745082176079</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1745082176079</updated>
+    </task>
+    <task id="LOCAL-00019" summary="paiement reservations">
+      <option name="closed" value="true" />
+      <created>1745082450409</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1745082450409</updated>
+    </task>
+    <task id="LOCAL-00020" summary="paiement reservations">
+      <option name="closed" value="true" />
+      <created>1745087154636</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1745087154636</updated>
+    </task>
+    <task id="LOCAL-00021" summary="interface">
+      <option name="closed" value="true" />
+      <created>1745157356822</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1745157356822</updated>
+    </task>
+    <task id="LOCAL-00022" summary="interface">
+      <option name="closed" value="true" />
+      <created>1745158067498</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1745158067498</updated>
+    </task>
+    <task id="LOCAL-00023" summary="dates reservations">
+      <option name="closed" value="true" />
+      <created>1745167035872</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1745167035872</updated>
+    </task>
+    <task id="LOCAL-00024" summary="dates reservations">
+      <option name="closed" value="true" />
+      <created>1745346426302</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1745346426302</updated>
+    </task>
+    <task id="LOCAL-00025" summary="avis">
+      <option name="closed" value="true" />
+      <created>1745430607661</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745430607661</updated>
+    </task>
+    <task id="LOCAL-00026" summary="admin">
+      <option name="closed" value="true" />
+      <created>1745436361040</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1745436361040</updated>
+    </task>
+    <task id="LOCAL-00027" summary="admin">
+      <option name="closed" value="true" />
+      <created>1745683549383</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1745683549383</updated>
+    </task>
+    <task id="LOCAL-00028" summary="admin">
+      <option name="closed" value="true" />
+      <created>1745683792351</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1745683792351</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,8 +334,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ceci est le premier commit" />
-    <MESSAGE value="commit test" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit test" />
+    <MESSAGE value="test" />
+    <MESSAGE value="creation d'un nouveau compte" />
+    <MESSAGE value="filtre" />
+    <MESSAGE value="filtre complet avec categorie destination et prix" />
+    <MESSAGE value="ajout BDD" />
+    <MESSAGE value="ajout connexion admin" />
+    <MESSAGE value="ajout admin et reduction" />
+    <MESSAGE value="ajout reduction et ancienneté promo" />
+    <MESSAGE value="paiement" />
+    <MESSAGE value="paiement reservations" />
+    <MESSAGE value="interface" />
+    <MESSAGE value="dates reservations" />
+    <MESSAGE value="avis" />
+    <MESSAGE value="admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="admin" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/view/AdminFrame.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

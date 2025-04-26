@@ -70,4 +70,24 @@ public class PromotionDAO {
         }
         return 0.0;
     }
+
+    public boolean update(Promotion promotion) {
+        String sql = "UPDATE promotion SET client_type = ?, discount = ?, description = ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, promotion.getClientType());
+            stmt.setDouble(2, promotion.getDiscount());
+            stmt.setString(3, promotion.getDescription());
+            stmt.setInt(4, promotion.getId());
+
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

@@ -3,7 +3,7 @@ import view.StartFrame;
 
 //gg
 
-public class MainApp {
+public class    MainApp {
     public static void main(String[] args) {
         // Look & Feel système (optionnel mais joli)
         try {
