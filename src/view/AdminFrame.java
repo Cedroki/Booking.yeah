@@ -15,6 +15,8 @@ public class AdminFrame extends JFrame {
     private JPanel promotionPanel;
     private ClientsPanel clientsPanel;
     private JPanel hebergementCardsContainer;
+    private FacturePanel facturePanel;
+
 
     public AdminFrame() {
         setTitle("Espace Administrateur - Booking.molko");
@@ -42,6 +44,7 @@ public class AdminFrame extends JFrame {
         JButton hebergementsButton = createMenuButton("Hébergements");
         JButton promotionsButton   = createMenuButton("Promotions");
         JButton clientsButton      = createMenuButton("Clients");
+        JButton facturesButton = createMenuButton("Factures");
         JButton logoutButton       = createMenuButton("Déconnexion");
 
         sidePanel.add(titleLabel);
@@ -51,6 +54,8 @@ public class AdminFrame extends JFrame {
         sidePanel.add(promotionsButton);
         sidePanel.add(Box.createVerticalStrut(10));
         sidePanel.add(clientsButton);
+        sidePanel.add(Box.createVerticalStrut(10));
+        sidePanel.add(facturesButton);
         sidePanel.add(Box.createVerticalStrut(10));
         sidePanel.add(logoutButton);
         sidePanel.add(Box.createVerticalGlue());
@@ -65,10 +70,13 @@ public class AdminFrame extends JFrame {
         hebergementPanel = createHebergementPanel();
         promotionPanel   = new PromotionPanel();
         clientsPanel     = new ClientsPanel();
+        facturePanel = new FacturePanel();
+
 
         mainPanel.add(hebergementPanel, "HEBERGEMENT");
         mainPanel.add(promotionPanel,   "PROMOTION");
         mainPanel.add(clientsPanel,     "CLIENTS");
+        mainPanel.add(facturePanel, "FACTURE");
 
         add(mainPanel, BorderLayout.CENTER);
 
@@ -82,6 +90,7 @@ public class AdminFrame extends JFrame {
             clientsPanel.refreshTable();
             cardLayout.show(mainPanel, "CLIENTS");
         });
+        facturesButton.addActionListener(e -> cardLayout.show(mainPanel, "FACTURE"));
         logoutButton.addActionListener(e -> {
             dispose();
             new StartFrame().setVisible(true);
