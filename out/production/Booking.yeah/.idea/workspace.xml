@@ -9,14 +9,64 @@
       <change afterPath="$PROJECT_DIR$/src/model/Facture.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/view/FacturePanel.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/view/PromotionFormDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/AdminDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/AdminDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/ClientDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/ClientDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/DAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/DAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/HebergementDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/HebergementDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PaiementDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PaiementDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PromotionDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PromotionDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/ReservationDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/ReservationDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/MainApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/MainApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/controller/AdminLoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/controller/AdminLoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/controller/AvisController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/controller/AvisController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/controller/ReservationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/controller/ReservationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/model/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/model/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/model/Avis.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/model/Avis.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/model/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/model/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/model/Paiement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/model/Paiement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/model/Promotion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/model/Promotion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/model/Reservation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/model/Reservation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminLoginFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminLoginFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AvisPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AvisPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/FactureFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/FactureFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementAddDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/HebergementEditDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/LoginFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame$StyledButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PaymentFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/RegisterFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame$StyledButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/ReservationFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/SearchPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/StartFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/PromotionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PromotionDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DBConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AdminFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminFrame.java" afterDir="false" />
@@ -78,7 +128,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
@@ -104,6 +154,7 @@
       <workItem from="1744723871392" duration="1035000" />
       <workItem from="1744724948451" duration="307000" />
       <workItem from="1744725369656" duration="81908000" />
+      <workItem from="1745680163554" duration="1965000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
@@ -319,6 +370,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test" />
     <MESSAGE value="creation d'un nouveau compte" />
@@ -341,7 +403,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/AdminFrame.java</url>
-          <line>182</line>
+          <line>183</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
