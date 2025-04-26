@@ -16,6 +16,8 @@ public class AdminFrame extends JFrame {
     private JPanel hebergementPanel;
     private JPanel promotionPanel;
     private JPanel hebergementCardsContainer;
+    private JPanel facturePanel;
+
 
     public AdminFrame() {
         setTitle("Espace Administrateur - Booking.molko");
@@ -42,12 +44,15 @@ public class AdminFrame extends JFrame {
 
         JButton hebergementsButton = createMenuButton("Hébergements");
         JButton promotionsButton = createMenuButton("Promotions");
+        JButton facturesButton = createMenuButton("Factures");
 
         sidePanel.add(titleLabel);
-        sidePanel.add(Box.createVerticalStrut(20));
+        sidePanel.add(Box.createVerticalStrut(60));
         sidePanel.add(hebergementsButton);
-        sidePanel.add(Box.createVerticalStrut(10));
+        sidePanel.add(Box.createVerticalStrut(30));
         sidePanel.add(promotionsButton);
+        sidePanel.add(Box.createVerticalStrut(30));
+        sidePanel.add(facturesButton);
         sidePanel.add(Box.createVerticalGlue());
 
         add(sidePanel, BorderLayout.WEST);
@@ -62,6 +67,10 @@ public class AdminFrame extends JFrame {
 
         mainPanel.add(hebergementPanel, "HEBERGEMENT");
         mainPanel.add(promotionPanel, "PROMOTION");
+
+        facturePanel = new FacturePanel(); // 💡 à créer après
+        mainPanel.add(facturePanel, "FACTURE");
+        facturesButton.addActionListener(e -> cardLayout.show(mainPanel, "FACTURE"));
 
         add(mainPanel, BorderLayout.CENTER);
 

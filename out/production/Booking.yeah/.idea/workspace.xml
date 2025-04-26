@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="dates reservations" />
+    <list default="true" id="c3504c77-50b8-4eb0-9703-340754d29779" name="Changes" comment="admin">
+      <change afterPath="$PROJECT_DIR$/src/DAO/FactureDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Facture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/FacturePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/PromotionFormDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PromotionDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/DAO/PromotionDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/AdminFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booking.yeah/view/PromotionPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PromotionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PromotionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AdminFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EditHebergementDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EditHebergementDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/PromotionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PromotionPanel.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +103,7 @@
       <workItem from="1743502671053" duration="1058000" />
       <workItem from="1744723871392" duration="1035000" />
       <workItem from="1744724948451" duration="307000" />
-      <workItem from="1744725369656" duration="63663000" />
+      <workItem from="1744725369656" duration="81908000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
@@ -271,7 +289,31 @@
       <option name="project" value="LOCAL" />
       <updated>1745167035872</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="dates reservations">
+      <option name="closed" value="true" />
+      <created>1745346426302</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1745346426302</updated>
+    </task>
+    <task id="LOCAL-00025" summary="avis">
+      <option name="closed" value="true" />
+      <created>1745430607661</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745430607661</updated>
+    </task>
+    <task id="LOCAL-00026" summary="admin">
+      <option name="closed" value="true" />
+      <created>1745436361040</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1745436361040</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,14 +332,16 @@
     <MESSAGE value="paiement reservations" />
     <MESSAGE value="interface" />
     <MESSAGE value="dates reservations" />
-    <option name="LAST_COMMIT_MESSAGE" value="dates reservations" />
+    <MESSAGE value="avis" />
+    <MESSAGE value="admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="admin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/AdminFrame.java</url>
-          <line>204</line>
+          <line>182</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
