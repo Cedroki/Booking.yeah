@@ -22,7 +22,7 @@ public class AdminHebergementCardPanel extends JPanel {
                 new EmptyBorder(10, 10, 10, 10)
         ));
 
-        // ----- IMAGE -----
+
         JLabel imageLabel = new JLabel();
         imageLabel.setPreferredSize(new Dimension(160, 120));
         File imgFile = new File("src/assets/images/" + h.getPhotos());
@@ -35,7 +35,7 @@ public class AdminHebergementCardPanel extends JPanel {
         }
         add(imageLabel, BorderLayout.WEST);
 
-        // ----- INFOS -----
+
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setOpaque(false);
@@ -54,7 +54,7 @@ public class AdminHebergementCardPanel extends JPanel {
         centerPanel.add(priceLabel);
         centerPanel.add(categoryLabel);
 
-        // Affichage des options disponibles en gras
+
         StringBuilder options = new StringBuilder("<html><b>Options : </b>");
         if (h.isWifi()) options.append("Wi-Fi, ");
         if (h.isPiscine()) options.append("Piscine, ");
@@ -79,7 +79,6 @@ public class AdminHebergementCardPanel extends JPanel {
 
         add(centerPanel, BorderLayout.CENTER);
 
-        // ----- BOUTONS -----
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         rightPanel.setOpaque(false);

@@ -88,7 +88,6 @@ public class MainFrame extends JFrame {
         headerPanel.add(menuPanel);
         add(headerPanel, BorderLayout.NORTH);
 
-        // ====== CONTENT ======
         cardLayout = new CardLayout();
         contentPanel = new JPanel(cardLayout);
 
@@ -108,7 +107,7 @@ public class MainFrame extends JFrame {
 
         add(contentPanel, BorderLayout.CENTER);
 
-        // ====== NAV ACTIONS ======
+
         btnHebergement.addActionListener(e -> cardLayout.show(contentPanel, "hebergement"));
 
         btnMesReservations.addActionListener(e -> {

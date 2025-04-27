@@ -6,7 +6,6 @@ public class Admin {
     private String email;
     private String motDePasse;
 
-    // Constructeur complet (pour récupération depuis la base de données)
     public Admin(int id, String nom, String email, String motDePasse) {
         this.id = id;
         this.nom = nom;
@@ -14,14 +13,12 @@ public class Admin {
         this.motDePasse = motDePasse;
     }
 
-    // Constructeur sans id (pour insertion)
     public Admin(String nom, String email, String motDePasse) {
         this.nom = nom;
         this.email = email;
         this.motDePasse = motDePasse;
     }
 
-    // Getters et Setters
     public int getId() {
         return id;
     }

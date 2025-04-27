@@ -30,19 +30,18 @@ public class MesAvisPanel extends JPanel {
         setLayout(new BorderLayout());
         setBackground(new Color(245, 245, 245)); // 🌟 Fond général gris clair
 
-        // --- Création du panneau liste
+
         avisListPanel = new JPanel();
         avisListPanel.setLayout(new BoxLayout(avisListPanel, BoxLayout.Y_AXIS));
         avisListPanel.setBackground(new Color(245, 245, 245)); // 🌟 Liste aussi fond gris clair
 
-        // --- Titre centré
+
         titleLabel = new JLabel("📝 Voici vos avis publiés", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 26));
         titleLabel.setForeground(new Color(0, 53, 128));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        // --- Wrapper liste + titre
         listWrapper = new JPanel(new BorderLayout());
         listWrapper.setBackground(new Color(245, 245, 245)); // 🌟 Wrapper fond gris clair
         listWrapper.add(titleLabel, BorderLayout.NORTH);
@@ -57,9 +56,7 @@ public class MesAvisPanel extends JPanel {
         updateAvis(); // 🔥 Chargement initial
     }
 
-    /**
-     * Recharge la liste des avis
-     */
+
     public void updateAvis() {
         avisListPanel.removeAll(); // Vide avant de recharger
         List<Avis> avisList = avisDAO.findAll();

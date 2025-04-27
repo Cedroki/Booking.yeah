@@ -39,7 +39,7 @@ public class AvisDialog extends JDialog {
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setBorder(new EmptyBorder(20, 30, 20, 30));
 
-        // --- Titre
+
         JLabel title = new JLabel("📝 Donner votre avis");
         title.setFont(new Font("Segoe UI", Font.BOLD, 22));
         title.setForeground(new Color(0, 53, 128));
@@ -47,7 +47,7 @@ public class AvisDialog extends JDialog {
         mainPanel.add(title);
         mainPanel.add(Box.createVerticalStrut(20));
 
-        // --- Étoiles
+
         JPanel starPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 10));
         starPanel.setOpaque(false);
         JLabel noteLabel = new JLabel("Note :");
@@ -79,7 +79,7 @@ public class AvisDialog extends JDialog {
 
         mainPanel.add(starPanel);
 
-        // --- Champ commentaire
+
         commentArea.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         commentArea.setWrapStyleWord(true);
         commentArea.setLineWrap(true);
@@ -97,7 +97,7 @@ public class AvisDialog extends JDialog {
 
         add(mainPanel, BorderLayout.CENTER);
 
-        // --- Bouton Envoyer
+
         JButton btnSend = createStyledButton("Envoyer l'avis");
         btnSend.addActionListener(e -> submitAvis());
 

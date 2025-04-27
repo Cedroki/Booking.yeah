@@ -7,9 +7,6 @@ import java.awt.*;
 import java.util.List;
 import controller.SearchController;
 
-/**
- * Vue principale des hébergements avec panneau de recherche.
- */
 public class HebergementViewPanel extends JPanel {
     private final SearchPanel searchPanel;
     private final HebergementPanel hebergementPanel;
@@ -35,9 +32,7 @@ public class HebergementViewPanel extends JPanel {
         new SearchController(searchPanel, hebergementPanel);
     }
 
-    /**
-     * Définit la réduction à appliquer et recharge la liste.
-     */
+
     public void setReduction(double reduction) {
         this.reduction = reduction;
         List<Hebergement> all = hebergementDAO.findAll();

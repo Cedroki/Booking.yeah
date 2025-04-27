@@ -22,7 +22,7 @@ public class FacturePanel extends JPanel {
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Top panel (titre + tri)
+
         JPanel topPanel = new JPanel(new BorderLayout(10, 10));
         topPanel.setOpaque(false);
 
@@ -68,7 +68,6 @@ public class FacturePanel extends JPanel {
             factures.sort(Comparator.comparing(Facture::getDateReservation).reversed());
         }
 
-        // Création cartes
         for (Facture f : factures) {
             factureCardsContainer.add(createFactureCard(f));
             factureCardsContainer.add(Box.createVerticalStrut(15));
@@ -86,7 +85,7 @@ public class FacturePanel extends JPanel {
                 new EmptyBorder(15, 15, 15, 15)
         ));
 
-        // Formatage de la date
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         JLabel nameLabel = new JLabel("Client : " + f.getNomClient());

@@ -31,8 +31,7 @@ public class HebergementPanel extends JPanel {
         featuredPanel = createFeaturedPanel();
         add(featuredPanel, BorderLayout.NORTH);
 
-        // Liste des hébergements
-        // Liste des hébergements avec un titre
+
         hebergementListPanel = new JPanel();
         hebergementListPanel.setLayout(new BoxLayout(hebergementListPanel, BoxLayout.Y_AXIS));
 
@@ -53,9 +52,7 @@ public class HebergementPanel extends JPanel {
         updateHebergements(hebergementDAO.findAll(), currentReduction, true);
     }
 
-    /**
-     * Appelé après connexion : définit le client et la réduction, puis rafraîchit la liste avec coup de cœur.
-     */
+
     public void setClientAndReduction(Client client, double reduction) {
         this.currentClient = client;
         this.currentReduction = reduction;
@@ -79,9 +76,7 @@ public class HebergementPanel extends JPanel {
         updateHebergements(list, reduction, false);
     }
 
-    /**
-     * Affiche les hébergements, avec contrôle du panneau coup de cœur.
-     */
+
 
     public void setCustomTitle(String text) {
         if (text == null || text.isEmpty()) {
@@ -104,7 +99,6 @@ public class HebergementPanel extends JPanel {
         hebergementListPanel.repaint();
     }
 
-    // ——— « Coup de cœur » en haut ———
     private JPanel createFeaturedPanel() {
         Hebergement h = hebergementDAO.findAll().stream().findFirst().orElse(null);
         if (h == null) return new JPanel();
@@ -116,7 +110,7 @@ public class HebergementPanel extends JPanel {
         ));
         p.setBackground(new Color(255,248,230));
 
-        // Image
+
         JLabel img = new JLabel();
         img.setPreferredSize(new Dimension(150,100));
         File fImg = new File("src/assets/images/" + h.getPhotos());
@@ -167,7 +161,7 @@ public class HebergementPanel extends JPanel {
         return p;
     }
 
-    // ——— Création de chaque item Hébergement ———
+
     private JPanel createHebergementItem(Hebergement h) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
@@ -177,7 +171,7 @@ public class HebergementPanel extends JPanel {
         panel.setBackground(Color.WHITE);
         panel.setMaximumSize(new Dimension(900, 200)); // légèrement plus haut car on ajoute les options
 
-        // ----- PHOTO -----
+
         JLabel photo = new JLabel();
         photo.setPreferredSize(new Dimension(160, 120));
         File f = new File("src/assets/images/" + h.getPhotos());
@@ -189,7 +183,6 @@ public class HebergementPanel extends JPanel {
         }
         panel.add(photo, BorderLayout.WEST);
 
-        // ----- INFOS CENTRE -----
         JPanel info = new JPanel();
         info.setOpaque(false);
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
@@ -197,7 +190,7 @@ public class HebergementPanel extends JPanel {
 
         double moyenne = avisDAO.getMoyennePourHebergement(h.getId());
 
-        // Nom + note moyenne
+
         JPanel nameAndRating = new JPanel();
         nameAndRating.setLayout(new BoxLayout(nameAndRating, BoxLayout.X_AXIS));
         nameAndRating.setOpaque(false);
@@ -223,7 +216,7 @@ public class HebergementPanel extends JPanel {
 
         info.add(Box.createVerticalStrut(20)); // un peu plus d'espace entre la description et les options
 
-// ----- OPTIONS (WiFi, Piscine, etc.) -----
+
         JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0)); // spacing entre les options
         optionsPanel.setOpaque(false);
         Font optionFont = new Font("Segoe UI", Font.BOLD, 12);
@@ -305,7 +298,7 @@ public class HebergementPanel extends JPanel {
 
         panel.add(info, BorderLayout.CENTER);
 
-        // ----- PRIX + BOUTONS -----
+
         JPanel right = new JPanel(new BorderLayout());
         right.setOpaque(false);
         right.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
@@ -325,7 +318,6 @@ public class HebergementPanel extends JPanel {
         JPanel btns = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         btns.setOpaque(false);
 
-        // Bouton Réserver
         JButton btnRes = createActionButton("Réserver");
         btnRes.addActionListener(e -> {
             if (currentClient != null) {
@@ -366,10 +358,7 @@ public class HebergementPanel extends JPanel {
 
 
 
-    /**
-     * Crée un bouton arrondi avec gestion du hover et
-     * surcharge correcte de paintComponent().
-     */
+
     private JButton createActionButton(String text) {
         JButton button = new JButton(text) {
             private boolean hovered = false;

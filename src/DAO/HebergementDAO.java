@@ -182,13 +182,7 @@ public class HebergementDAO implements DAO<Hebergement> {
         return false;
     }
 
-    /**
-     * Recherche des hébergements en fonction du filtre catégorie uniquement.
-     *
-     * @param lieu Ignoré (on passe une chaîne vide).
-     * @param categorie La catégorie sélectionnée (ou "Aucune" pour ne pas filtrer).
-     * @return Une liste d'objets Hebergement correspondant au filtre sur la catégorie.
-     */
+
     public List<Hebergement> findByCriteria(String lieu, String categorie) {
         System.out.println("findByCriteria called with: lieu=[" + lieu + "], categorie=[" + categorie + "]");
         List<Hebergement> list = new ArrayList<>();

@@ -116,7 +116,7 @@ public class AvisListDialog extends JDialog {
         lblDate.setForeground(Color.GRAY);
         card.add(lblDate);
 
-        // Panel étoiles façon AvisDialog
+
         JPanel starsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 3, 0));
         starsPanel.setOpaque(false);
         for (int i = 0; i < 5; i++) {

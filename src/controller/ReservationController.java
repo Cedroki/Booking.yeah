@@ -5,9 +5,7 @@ import model.Reservation;
 
 import java.sql.Date;
 
-/**
- * Contrôleur de réservation, chargé de gérer l'ajout d'une réservation.
- */
+
 public class ReservationController {
 
     private ReservationDAO reservationDAO;
@@ -36,10 +34,10 @@ public class ReservationController {
         Date sqlDateArrivee = new Date(dateArrivee.getTime());
         Date sqlDateDepart = new Date(dateDepart.getTime());
 
-        // ✅ Vérification de disponibilité
+
         boolean dispo = reservationDAO.isHebergementDisponible(hebergementId, sqlDateArrivee, sqlDateDepart);
         if (!dispo) {
-            System.out.println("⚠️ Hébergement indisponible sur cette période.");
+            System.out.println(" Hébergement indisponible sur cette période.");
             return null;
         }
 

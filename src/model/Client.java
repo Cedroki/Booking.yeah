@@ -2,19 +2,17 @@ package model;
 
 import java.sql.Timestamp;
 
-/**
- * Représente un client avec gestion d'une promotion personnalisée.
- */
+
 public class Client {
     private int id;
     private String nom;
     private String email;
     private String motDePasse;
-    private String type;           // "nouveau" ou "ancien"
-    private Timestamp dateCreation; // Renseigné par la BDD
-    private int promotionId;       // Nouvel attribut : id de la promotion appliquée
+    private String type;
+    private Timestamp dateCreation;
+    private int promotionId;
 
-    // Constructeur complet (récupération depuis la BDD)
+
     public Client(int id, String nom, String email,
                   String motDePasse, String type,
                   Timestamp dateCreation, int promotionId) {

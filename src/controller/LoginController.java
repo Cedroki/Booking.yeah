@@ -36,7 +36,7 @@ public class LoginController {
             Client client = clientDAO.findByEmail(email);
             if (client != null && client.getMotDePasse().equals(password)) {
 
-                // 🔥 Si c'est un "nouveau" client, on le passe à "ancien"
+
                 if ("nouveau".equalsIgnoreCase(client.getType())) {
                     JOptionPane.showMessageDialog(loginFrame,
                             "Bienvenue " + client.getNom() + " ! Vous bénéficiez d'une remise spéciale de bienvenue 🎉");

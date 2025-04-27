@@ -111,9 +111,7 @@ public class AvisDAO implements DAO<Avis> {
         return false;
     }
 
-    /**
-     * Indique si le client a déjà laissé un avis pour cet hébergement.
-     */
+
     public boolean hasAvis(int clientId, int hebergementId) {
         String sql = "SELECT COUNT(*) FROM avis WHERE client_id = ? AND hebergement_id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -130,9 +128,7 @@ public class AvisDAO implements DAO<Avis> {
         return false;
     }
 
-    /**
-     * Renvoie tous les avis d’un hébergement donné.
-     */
+
     public List<Avis> findByHebergementId(int hebergementId) {
         List<Avis> list = new ArrayList<>();
         String sql = "SELECT * FROM avis WHERE hebergement_id = ?";
@@ -156,9 +152,7 @@ public class AvisDAO implements DAO<Avis> {
         return list;
     }
 
-    /**
-     * Calcule la note moyenne pour un hébergement donné.
-     */
+
     public double getMoyennePourHebergement(int hebergementId) {
         String sql = "SELECT AVG(rating) FROM avis WHERE hebergement_id = ?";
         try (Connection conn = DBConnection.getConnection();

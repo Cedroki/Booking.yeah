@@ -139,9 +139,6 @@ public class ReservationDAO implements DAO<Reservation> {
         return list;
     }
 
-    /**
-     * Vérifie si l'hébergement est libre entre la date d'arrivée et de départ
-     */
     public boolean isHebergementDisponible(int hebergementId, Date arrivee, Date depart) {
         String sql = """
             SELECT COUNT(*) FROM reservation 

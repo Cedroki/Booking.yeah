@@ -62,7 +62,7 @@ public class AdminFrame extends JFrame {
 
         add(sidePanel, BorderLayout.WEST);
 
-        // CONTENU PRINCIPAL
+
         cardLayout      = new CardLayout();
         mainPanel       = new JPanel(cardLayout);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -80,7 +80,7 @@ public class AdminFrame extends JFrame {
 
         add(mainPanel, BorderLayout.CENTER);
 
-        // ACTIONS DU MENU
+
         hebergementsButton.addActionListener(e -> {
             cardLayout.show(mainPanel, "HEBERGEMENT");
             refreshHebergementPanel();

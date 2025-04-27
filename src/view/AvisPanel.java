@@ -18,7 +18,7 @@ public class AvisPanel extends JPanel {
         gbc.insets = new Insets(10,10,10,10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Champ Client ID
+
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(new JLabel("ID Client:"), gbc);
@@ -26,7 +26,7 @@ public class AvisPanel extends JPanel {
         clientIdField = new JTextField(10);
         add(clientIdField, gbc);
 
-        // Champ Hébergement ID
+
         gbc.gridx = 0;
         gbc.gridy = 1;
         add(new JLabel("ID Hébergement:"), gbc);

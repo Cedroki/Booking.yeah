@@ -11,7 +11,7 @@ public class Hebergement {
     private String fourchette;
     private String ville;
 
-    // 🔥 NOUVEAUX CHAMPS
+
     private boolean wifi;
     private boolean piscine;
     private boolean parking;
@@ -23,10 +23,9 @@ public class Hebergement {
     private boolean vueMer;
     private boolean salleDeSport;
 
-    // 🔵 CONSTRUCTEURS
 
     public Hebergement() {
-        // Constructeur vide utile pour initialisations
+
     }
 
     public Hebergement(int id, String nom, String adresse, String description, String photos, double prix,
@@ -55,7 +54,7 @@ public class Hebergement {
         this.salleDeSport = salleDeSport;
     }
 
-    // Constructeur sans ID (insertion)
+
     public Hebergement(String nom, String adresse, String description, String photos, double prix,
                        String categorie, String fourchette, String ville,
                        boolean wifi, boolean piscine, boolean parking, boolean climatisation,
@@ -81,7 +80,7 @@ public class Hebergement {
         this.salleDeSport = salleDeSport;
     }
 
-    // 🔵 GETTERS ET SETTERS
+
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -140,7 +139,7 @@ public class Hebergement {
     public boolean isSalleDeSport() { return salleDeSport; }
     public void setSalleDeSport(boolean salleDeSport) { this.salleDeSport = salleDeSport; }
 
-    // 🔵 toString()
+
     @Override
     public String toString() {
         return "Hebergement{" +

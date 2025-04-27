@@ -18,7 +18,7 @@ public class PaiementDAO {
             ps.setString(3, paiement.getStatut());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
-            e.printStackTrace(); // Important pour voir l'erreur exacte en console
+            e.printStackTrace();
             return false;
         }
     }

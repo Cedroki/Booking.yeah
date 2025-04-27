@@ -6,11 +6,11 @@ public class Avis {
     private int id;
     private int clientId;
     private int hebergementId;
-    private int rating;       // Note de 1 à 5
-    private String comment;   // Commentaire libre
-    private Timestamp dateAvis; // Date de l'avis (CURRENT_TIMESTAMP par défaut dans la BDD)
+    private int rating;
+    private String comment;
+    private Timestamp dateAvis;
 
-    // Constructeur complet (pour récupération depuis la BDD)
+
     public Avis(int id, int clientId, int hebergementId, int rating, String comment, Timestamp dateAvis) {
         this.id = id;
         this.clientId = clientId;
@@ -20,7 +20,6 @@ public class Avis {
         this.dateAvis = dateAvis;
     }
 
-    // Constructeur sans id (pour insertion, la date sera renseignée automatiquement)
     public Avis(int clientId, int hebergementId, int rating, String comment) {
         this.clientId = clientId;
         this.hebergementId = hebergementId;
@@ -28,7 +27,6 @@ public class Avis {
         this.comment = comment;
     }
 
-    // Getters et Setters
     public int getId() {
         return id;
     }

@@ -1,7 +1,7 @@
 package model;
 
 import java.sql.Date;
-//m
+
 public class Reservation {
     private int id;
     private int utilisateurId;
@@ -12,7 +12,7 @@ public class Reservation {
     private int nbEnfants;
     private int nbChambres;
 
-    // Constructeur pour l'insertion (sans id)
+
     public Reservation(int utilisateurId, int hebergementId, Date dateArrivee, Date dateDepart, int nbAdultes, int nbEnfants, int nbChambres) {
         this.utilisateurId = utilisateurId;
         this.hebergementId = hebergementId;
@@ -23,7 +23,7 @@ public class Reservation {
         this.nbChambres = nbChambres;
     }
 
-    // Constructeur complet (pour récupération depuis la BDD)
+
     public Reservation(int id, int utilisateurId, int hebergementId, Date dateArrivee, Date dateDepart, int nbAdultes, int nbEnfants, int nbChambres) {
         this.id = id;
         this.utilisateurId = utilisateurId;

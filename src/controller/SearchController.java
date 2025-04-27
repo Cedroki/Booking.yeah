@@ -11,10 +11,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * Lie SearchPanel et HebergementPanel, effectue la recherche
- * d’hébergements disponibles selon filtres + dates.
- */
+
 public class SearchController {
     private final SearchPanel searchPanel;
     private final HebergementPanel hebergementPanel;
@@ -50,14 +47,14 @@ public class SearchController {
             dateDepart  = new Date(dateDepartUtil.getTime());
         }
 
-        // Recherche avec tous les filtres
+
         List<Hebergement> resultats = hebergementDAO
                 .findAvailableByFilters(destination, fourchette, categorie, dateArrivee, dateDepart);
 
-        // Génère le titre dynamique selon les filtres
+
         String titre = construireTitre(destination, fourchette, categorie, dateArrivee, dateDepart);
 
-        // Applique le titre et met à jour les hébergements (sans coup de cœur)
+
         double reduction = hebergementPanel.getCurrentReduction();
         hebergementPanel.setCustomTitle(titre);
         hebergementPanel.updateHebergements(resultats, reduction, false);

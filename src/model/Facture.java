@@ -10,7 +10,6 @@ public class Facture {
     private Date dateReservation;
     private boolean estPaye;
 
-    // --- Constructeur complet ---
     public Facture(int id, String nomClient, String nomHebergement, double montant, Date dateReservation, boolean estPaye) {
         this.id = id;
         this.nomClient = nomClient;
@@ -20,7 +19,7 @@ public class Facture {
         this.estPaye = estPaye;
     }
 
-    // --- Getters ---
+
     public int getId() {
         return id;
     }
