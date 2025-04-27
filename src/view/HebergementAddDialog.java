@@ -17,6 +17,18 @@ public class HebergementAddDialog extends JDialog {
     private JTextField photoField;
     private JTextField prixField;
     private JComboBox<String> categorieBox;
+    // Champs pour les options
+    private JCheckBox wifiBox;
+    private JCheckBox piscineBox;
+    private JCheckBox parkingBox;
+    private JCheckBox climBox;
+    private JCheckBox restoBox;
+    private JCheckBox roomServiceBox;
+    private JCheckBox spaBox;
+    private JCheckBox animauxBox;
+    private JCheckBox vueMerBox;
+    private JCheckBox salleDeSportBox;
+
 
     private final HebergementDAO hebergementDAO;
 
@@ -34,6 +46,7 @@ public class HebergementAddDialog extends JDialog {
         formPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
         formPanel.setBackground(new Color(245, 247, 250));
 
+// — Titre
         JLabel titleLabel = new JLabel("Ajouter un hébergement");
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
         titleLabel.setForeground(new Color(0, 53, 128));
@@ -41,6 +54,7 @@ public class HebergementAddDialog extends JDialog {
         formPanel.add(titleLabel);
         formPanel.add(Box.createVerticalStrut(20));
 
+// — Champs texte
         nomField = new JTextField("Nom");
         adresseField = new JTextField("Adresse");
         villeField = new JTextField("Ville");
@@ -54,19 +68,45 @@ public class HebergementAddDialog extends JDialog {
             formPanel.add(Box.createVerticalStrut(10));
         }
 
+// — Catégorie
+        formPanel.add(new JLabel("Catégorie :"));
         categorieBox = new JComboBox<>(new String[]{"Hotel", "Villa", "Appartement", "Chalet", "Studio"});
         categorieBox.setPreferredSize(new Dimension(300, 32));
         categorieBox.setMaximumSize(new Dimension(400, 32));
         categorieBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        formPanel.add(new JLabel("Catégorie :"));
         formPanel.add(categorieBox);
+        formPanel.add(Box.createVerticalStrut(20));
+
+// — Options
+        formPanel.add(new JLabel("Options disponibles :"));
+        wifiBox = new JCheckBox("Wi-Fi");
+        piscineBox = new JCheckBox("Piscine");
+        parkingBox = new JCheckBox("Parking");
+        climBox = new JCheckBox("Climatisation");
+        restoBox = new JCheckBox("Restaurant");
+        roomServiceBox = new JCheckBox("Room Service");
+        spaBox = new JCheckBox("Spa");
+        animauxBox = new JCheckBox("Animaux acceptés");
+        vueMerBox = new JCheckBox("Vue sur mer");
+        salleDeSportBox = new JCheckBox("Salle de sport");
+
+        for (JCheckBox option : new JCheckBox[]{wifiBox, piscineBox, parkingBox, climBox, restoBox,
+                roomServiceBox, spaBox, animauxBox, vueMerBox, salleDeSportBox}) {
+            option.setOpaque(false);
+            formPanel.add(option);
+        }
+
         formPanel.add(Box.createVerticalStrut(25));
 
+// — Bouton Enregistrer
         JButton saveButton = createStyledButton("Enregistrer");
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         saveButton.addActionListener(e -> saveHebergement());
 
         formPanel.add(saveButton);
+
+// —> add(formPanel, BorderLayout.CENTER); est déjà correct chez toi
+
 
         add(formPanel, BorderLayout.CENTER);
     }
@@ -153,17 +193,25 @@ public class HebergementAddDialog extends JDialog {
             double prix = Double.parseDouble(prixText);
             String categorie = (String) categorieBox.getSelectedItem();
 
-            Hebergement h = new Hebergement(0, nom, adresse, description, photo, prix, categorie, null, ville);
+            Hebergement h = new Hebergement(
+                    nom, adresse, description, photo, prix, categorie, null, ville,
+                    wifiBox.isSelected(), piscineBox.isSelected(), parkingBox.isSelected(), climBox.isSelected(),
+                    restoBox.isSelected(), roomServiceBox.isSelected(), spaBox.isSelected(), animauxBox.isSelected(),
+                    vueMerBox.isSelected(), salleDeSportBox.isSelected()
+            );
+
             boolean success = hebergementDAO.insert(h);
 
             if (success) {
-                JOptionPane.showMessageDialog(this, "Hébergement ajouté !");
+                JOptionPane.showMessageDialog(this, "Hébergement ajouté avec succès !");
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout !");
+                JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout de l'hébergement.");
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Champs invalides ou vides !");
         }
     }
+
 }

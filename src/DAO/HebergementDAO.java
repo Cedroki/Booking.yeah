@@ -14,25 +14,38 @@ public class HebergementDAO implements DAO<Hebergement> {
         String sql = "SELECT * FROM Hebergement WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int idValue = rs.getInt("id");
-                String nom = rs.getString("nom");
-                String adresse = rs.getString("adresse");
-                String description = rs.getString("description");
-                String photos = rs.getString("photos");
-                double prix = rs.getDouble("prix");
-                String cat = rs.getString("categorie");
-                String fourchette = rs.getString("fourchette");
-                String ville = rs.getString("ville");
-                hebergement = new Hebergement(idValue, nom, adresse, description, photos, prix, cat, fourchette, ville);
+                hebergement = new Hebergement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("description"),
+                        rs.getString("photos"),
+                        rs.getDouble("prix"),
+                        rs.getString("categorie"),
+                        rs.getString("fourchette"),
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return hebergement;
     }
+
 
     @Override
     public List<Hebergement> findAll() {
@@ -41,17 +54,29 @@ public class HebergementDAO implements DAO<Hebergement> {
         try (Connection conn = DBConnection.getConnection();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
+
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nom = rs.getString("nom");
-                String adresse = rs.getString("adresse");
-                String description = rs.getString("description");
-                String photos = rs.getString("photos");
-                double prix = rs.getDouble("prix");
-                String cat = rs.getString("categorie");
-                String fourchette = rs.getString("fourchette");
-                String ville = rs.getString("ville");
-                Hebergement h = new Hebergement(id, nom, adresse, description, photos, prix, cat, fourchette, ville);
+                Hebergement h = new Hebergement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("description"),
+                        rs.getString("photos"),
+                        rs.getDouble("prix"),
+                        rs.getString("categorie"),
+                        rs.getString("fourchette"),
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
+                );
                 list.add(h);
             }
         } catch (SQLException e) {
@@ -60,10 +85,15 @@ public class HebergementDAO implements DAO<Hebergement> {
         return list;
     }
 
+
     @Override
     public boolean insert(Hebergement hebergement) {
-        // Le trigger se charge de calculer "fourchette" automatiquement.
-        String sql = "INSERT INTO Hebergement (nom, adresse, description, photos, prix, categorie, ville) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = """
+        INSERT INTO Hebergement (nom, adresse, description, photos, prix, categorie, ville,
+                                  wifi, piscine, parking, climatisation, restaurant, room_service,
+                                  spa, animaux_acceptes, vue_mer, salle_de_sport)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """;
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -74,6 +104,16 @@ public class HebergementDAO implements DAO<Hebergement> {
             ps.setDouble(5, hebergement.getPrix());
             ps.setString(6, hebergement.getCategorie());
             ps.setString(7, hebergement.getVille());
+            ps.setBoolean(8, hebergement.isWifi());
+            ps.setBoolean(9, hebergement.isPiscine());
+            ps.setBoolean(10, hebergement.isParking());
+            ps.setBoolean(11, hebergement.isClimatisation());
+            ps.setBoolean(12, hebergement.isRestaurant());
+            ps.setBoolean(13, hebergement.isRoomService());
+            ps.setBoolean(14, hebergement.isSpa());
+            ps.setBoolean(15, hebergement.isAnimauxAcceptes());
+            ps.setBoolean(16, hebergement.isVueMer());
+            ps.setBoolean(17, hebergement.isSalleDeSport());
 
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
@@ -92,8 +132,13 @@ public class HebergementDAO implements DAO<Hebergement> {
 
     @Override
     public boolean update(Hebergement hebergement) {
-        // Le trigger se charge de mettre à jour "fourchette" automatiquement.
-        String sql = "UPDATE Hebergement SET nom = ?, adresse = ?, description = ?, photos = ?, prix = ?, categorie = ?, ville = ? WHERE id = ?";
+        String sql = """
+        UPDATE Hebergement SET 
+            nom = ?, adresse = ?, description = ?, photos = ?, prix = ?, categorie = ?, ville = ?,
+            wifi = ?, piscine = ?, parking = ?, climatisation = ?, restaurant = ?, room_service = ?,
+            spa = ?, animaux_acceptes = ?, vue_mer = ?, salle_de_sport = ?
+        WHERE id = ?
+    """;
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -103,14 +148,26 @@ public class HebergementDAO implements DAO<Hebergement> {
             ps.setString(4, hebergement.getPhotos());
             ps.setDouble(5, hebergement.getPrix());
             ps.setString(6, hebergement.getCategorie());
-            ps.setString(7, hebergement.getVille());   // ✅ ici
-            ps.setInt(8, hebergement.getId());
+            ps.setString(7, hebergement.getVille());
+            ps.setBoolean(8, hebergement.isWifi());
+            ps.setBoolean(9, hebergement.isPiscine());
+            ps.setBoolean(10, hebergement.isParking());
+            ps.setBoolean(11, hebergement.isClimatisation());
+            ps.setBoolean(12, hebergement.isRestaurant());
+            ps.setBoolean(13, hebergement.isRoomService());
+            ps.setBoolean(14, hebergement.isSpa());
+            ps.setBoolean(15, hebergement.isAnimauxAcceptes());
+            ps.setBoolean(16, hebergement.isVueMer());
+            ps.setBoolean(17, hebergement.isSalleDeSport());
+            ps.setInt(18, hebergement.getId());
+
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
+
 
     @Override
     public boolean delete(Hebergement hebergement) {
@@ -145,7 +202,7 @@ public class HebergementDAO implements DAO<Hebergement> {
             System.out.println("Filtre catégorie ajouté : " + categorie);
         }
 
-        System.out.println("Final SQL Query: " + sql.toString());
+        System.out.println("Final SQL Query: " + sql);
         System.out.println("Final parameters: " + params);
 
         try (Connection conn = DBConnection.getConnection();
@@ -155,16 +212,27 @@ public class HebergementDAO implements DAO<Hebergement> {
             }
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nom = rs.getString("nom");
-                String adresse = rs.getString("adresse");
-                String description = rs.getString("description");
-                String photos = rs.getString("photos");
-                double prix = rs.getDouble("prix");
-                String cat = rs.getString("categorie");
-                String fourchette = rs.getString("fourchette");
-                String ville =  rs.getString("ville");
-                Hebergement h = new Hebergement(id, nom, adresse, description, photos, prix, cat, fourchette,ville);
+                Hebergement h = new Hebergement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("description"),
+                        rs.getString("photos"),
+                        rs.getDouble("prix"),
+                        rs.getString("categorie"),
+                        rs.getString("fourchette"),
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
+                );
                 list.add(h);
             }
         } catch (SQLException e) {
@@ -175,7 +243,6 @@ public class HebergementDAO implements DAO<Hebergement> {
 
     public List<Hebergement> findByFourchette(String fourchette) {
         List<Hebergement> result = new ArrayList<>();
-
         String sql = "SELECT * FROM hebergement WHERE fourchette = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -194,17 +261,27 @@ public class HebergementDAO implements DAO<Hebergement> {
                         rs.getDouble("prix"),
                         rs.getString("categorie"),
                         rs.getString("fourchette"),
-                        rs.getString("ville")
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
                 );
                 result.add(h);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return result;
     }
+
 
     public List<Hebergement> findByFourchetteAndCategorie(String fourchette, String categorie) {
         List<Hebergement> result = new ArrayList<>();
@@ -227,17 +304,26 @@ public class HebergementDAO implements DAO<Hebergement> {
                         rs.getDouble("prix"),
                         rs.getString("categorie"),
                         rs.getString("fourchette"),
-                        rs.getString("ville")
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
                 );
                 result.add(h);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return result;
     }
+
 
     public List<Hebergement> findByCategorie(String categorie) {
         List<Hebergement> result = new ArrayList<>();
@@ -259,17 +345,26 @@ public class HebergementDAO implements DAO<Hebergement> {
                         rs.getDouble("prix"),
                         rs.getString("categorie"),
                         rs.getString("fourchette"),
-                        rs.getString("ville")
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
                 );
                 result.add(h);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return result;
     }
+
 
     public List<Hebergement> findByVille(String ville) {
         List<Hebergement> result = new ArrayList<>();
@@ -291,15 +386,23 @@ public class HebergementDAO implements DAO<Hebergement> {
                         rs.getDouble("prix"),
                         rs.getString("categorie"),
                         rs.getString("fourchette"),
-                        rs.getString("ville")
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
                 );
                 result.add(h);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return result;
     }
 
@@ -341,7 +444,17 @@ public class HebergementDAO implements DAO<Hebergement> {
                         rs.getDouble("prix"),
                         rs.getString("categorie"),
                         rs.getString("fourchette"),
-                        rs.getString("ville")
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
                 );
                 result.add(h);
             }
@@ -352,6 +465,7 @@ public class HebergementDAO implements DAO<Hebergement> {
 
         return result;
     }
+
 
     public List<Hebergement> findAvailableByFilters(String ville, String fourchette, String categorie, Date arrivee, Date depart) {
         List<Hebergement> result = new ArrayList<>();
@@ -378,7 +492,7 @@ public class HebergementDAO implements DAO<Hebergement> {
             params.add(categorie);
         }
 
-        // 🛑 Exclure les hébergements qui ont des réservations qui se chevauchent
+        // Exclure les hébergements qui ont des réservations qui se chevauchent
         sql.append("""
         AND h.id NOT IN (
             SELECT r.hebergement_id FROM reservation r
@@ -386,8 +500,8 @@ public class HebergementDAO implements DAO<Hebergement> {
         )
     """);
 
-        params.add(arrivee); // r.date_depart <= arrivee → pas en conflit
-        params.add(depart);  // r.date_arrivee >= depart → pas en conflit
+        params.add(arrivee);
+        params.add(depart);
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql.toString())) {
@@ -407,7 +521,17 @@ public class HebergementDAO implements DAO<Hebergement> {
                         rs.getDouble("prix"),
                         rs.getString("categorie"),
                         rs.getString("fourchette"),
-                        rs.getString("ville")
+                        rs.getString("ville"),
+                        rs.getBoolean("wifi"),
+                        rs.getBoolean("piscine"),
+                        rs.getBoolean("parking"),
+                        rs.getBoolean("climatisation"),
+                        rs.getBoolean("restaurant"),
+                        rs.getBoolean("room_service"),
+                        rs.getBoolean("spa"),
+                        rs.getBoolean("animaux_acceptes"),
+                        rs.getBoolean("vue_mer"),
+                        rs.getBoolean("salle_de_sport")
                 );
                 result.add(h);
             }
@@ -417,6 +541,7 @@ public class HebergementDAO implements DAO<Hebergement> {
 
         return result;
     }
+
 
 
 

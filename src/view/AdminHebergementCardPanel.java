@@ -5,6 +5,7 @@ import model.Hebergement;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.File;
 import java.util.function.Consumer;
 
 public class AdminHebergementCardPanel extends JPanel {
@@ -24,8 +25,14 @@ public class AdminHebergementCardPanel extends JPanel {
         // ----- IMAGE -----
         JLabel imageLabel = new JLabel();
         imageLabel.setPreferredSize(new Dimension(160, 120));
-        ImageIcon icon = new ImageIcon("src/assets/images/" + h.getPhotos());
-        imageLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(160, 120, Image.SCALE_SMOOTH)));
+        File imgFile = new File("src/assets/images/" + h.getPhotos());
+        if (imgFile.exists()) {
+            ImageIcon icon = new ImageIcon(imgFile.getPath());
+            imageLabel.setIcon(new ImageIcon(icon.getImage().getScaledInstance(160, 120, Image.SCALE_SMOOTH)));
+        } else {
+            imageLabel.setText("Pas d'image");
+            imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        }
         add(imageLabel, BorderLayout.WEST);
 
         // ----- INFOS -----
@@ -46,6 +53,29 @@ public class AdminHebergementCardPanel extends JPanel {
         centerPanel.add(descriptionLabel);
         centerPanel.add(priceLabel);
         centerPanel.add(categoryLabel);
+
+        // Affichage des options disponibles en gras
+        StringBuilder options = new StringBuilder("<html><b>Options : </b>");
+        if (h.isWifi()) options.append("Wi-Fi, ");
+        if (h.isPiscine()) options.append("Piscine, ");
+        if (h.isParking()) options.append("Parking, ");
+        if (h.isClimatisation()) options.append("Climatisation, ");
+        if (h.isRestaurant()) options.append("Restaurant, ");
+        if (h.isRoomService()) options.append("Room Service, ");
+        if (h.isSpa()) options.append("Spa, ");
+        if (h.isAnimauxAcceptes()) options.append("Animaux acceptés, ");
+        if (h.isVueMer()) options.append("Vue sur mer, ");
+        if (h.isSalleDeSport()) options.append("Salle de sport, ");
+
+        if (options.toString().endsWith(", ")) {
+            options.setLength(options.length() - 2); // enlever la dernière virgule
+        }
+        options.append("</html>");
+
+        JLabel optionsLabel = new JLabel(options.toString());
+        optionsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        centerPanel.add(optionsLabel);
 
         add(centerPanel, BorderLayout.CENTER);
 

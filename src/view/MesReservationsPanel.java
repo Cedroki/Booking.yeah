@@ -148,9 +148,11 @@ public class MesReservationsPanel extends JPanel {
                         new AvisDialog(
                                 SwingUtilities.getWindowAncestor(this),
                                 clientId,
-                                heb.getId()
+                                heb.getId(),
+                                this::reload  // 🔥 on recharge la liste après avoir donné un avis
                         ).setVisible(true)
                 );
+
             }
         } else {
             btnFacture = createActionButton("Finaliser paiement");

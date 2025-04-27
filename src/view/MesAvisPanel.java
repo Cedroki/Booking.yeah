@@ -8,62 +8,63 @@ import model.Hebergement;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 
 public class MesAvisPanel extends JPanel {
+
     private final int clientId;
-    private final JPanel content;
+    private final JPanel avisListPanel;
+    private final JScrollPane scrollPane;
+    private final JPanel listWrapper;
+    private final JLabel titleLabel;
+
+    private final AvisDAO avisDAO = new AvisDAO();
+    private final HebergementDAO hebergementDAO = new HebergementDAO();
 
     public MesAvisPanel(int clientId) {
         this.clientId = clientId;
         setLayout(new BorderLayout());
-        setBackground(new Color(245, 245, 245)); // gris clair
+        setBackground(new Color(245, 245, 245)); // 🌟 Fond général gris clair
 
-        content = new JPanel();
-        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-        content.setBorder(new EmptyBorder(20, 30, 20, 30));
-        content.setBackground(new Color(245, 245, 245));
+        // --- Création du panneau liste
+        avisListPanel = new JPanel();
+        avisListPanel.setLayout(new BoxLayout(avisListPanel, BoxLayout.Y_AXIS));
+        avisListPanel.setBackground(new Color(245, 245, 245)); // 🌟 Liste aussi fond gris clair
 
-        JLabel title = new JLabel("📝 Voici vos avis publiés");
-        title.setFont(new Font("Segoe UI", Font.BOLD, 26));
-        title.setForeground(new Color(0, 53, 128));
-        title.setAlignmentX(Component.LEFT_ALIGNMENT);
-        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        titlePanel.setOpaque(false);
-        titlePanel.add(title);
-        content.add(titlePanel);
+        // --- Titre centré
+        titleLabel = new JLabel("📝 Voici vos avis publiés", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        titleLabel.setForeground(new Color(0, 53, 128));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        content.add(Box.createVerticalStrut(20));
+        // --- Wrapper liste + titre
+        listWrapper = new JPanel(new BorderLayout());
+        listWrapper.setBackground(new Color(245, 245, 245)); // 🌟 Wrapper fond gris clair
+        listWrapper.add(titleLabel, BorderLayout.NORTH);
+        listWrapper.add(avisListPanel, BorderLayout.CENTER);
 
-        loadAvis();
+        scrollPane = new JScrollPane(listWrapper);
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
-        JScrollPane scroll = new JScrollPane(content);
-        scroll.setBorder(null);
-        scroll.getVerticalScrollBar().setUnitIncrement(16);
-        add(scroll, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
+
+        updateAvis(); // 🔥 Chargement initial
     }
 
-    public void reload() {
-        content.removeAll();
-        JLabel title = new JLabel("📝 Voici vos avis publiés");
-        title.setFont(new Font("Segoe UI", Font.BOLD, 26));
-        title.setForeground(new Color(0, 53, 128));
-        title.setAlignmentX(Component.LEFT_ALIGNMENT);
-        content.add(title);
-        content.add(Box.createVerticalStrut(20));
-        loadAvis();
-        content.revalidate();
-        content.repaint();
-    }
-
-    private void loadAvis() {
-        AvisDAO avisDAO = new AvisDAO();
-        HebergementDAO hebergementDAO = new HebergementDAO();
+    /**
+     * Recharge la liste des avis
+     */
+    public void updateAvis() {
+        avisListPanel.removeAll(); // Vide avant de recharger
         List<Avis> avisList = avisDAO.findAll();
+
+        Collections.reverse(avisList); // Derniers avis d'abord
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         boolean found = false;
@@ -71,10 +72,11 @@ public class MesAvisPanel extends JPanel {
             if (a.getClientId() == clientId) {
                 found = true;
                 Hebergement h = hebergementDAO.findById(a.getHebergementId());
-                String nomHeb = h != null ? h.getNom() : "Hébergement #" + a.getHebergementId();
+                String hebergementNom = (h != null) ? h.getNom() : "Hébergement #" + a.getHebergementId();
                 String formattedDate = a.getDateAvis().toLocalDateTime().format(fmt);
-                content.add(createAvisCard(nomHeb, a.getRating(), a.getComment(), formattedDate, a));
-                content.add(Box.createVerticalStrut(15));
+
+                avisListPanel.add(createAvisCard(hebergementNom, a.getRating(), a.getComment(), formattedDate, a));
+                avisListPanel.add(Box.createVerticalStrut(15));
             }
         }
 
@@ -83,8 +85,12 @@ public class MesAvisPanel extends JPanel {
             noAvis.setFont(new Font("Segoe UI", Font.ITALIC, 15));
             noAvis.setForeground(Color.GRAY);
             noAvis.setAlignmentX(Component.CENTER_ALIGNMENT);
-            content.add(noAvis);
+            avisListPanel.add(noAvis);
         }
+
+        avisListPanel.revalidate();
+        avisListPanel.repaint();
+        SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
     }
 
     private JPanel createAvisCard(String hebergementNom, int rating, String commentaire, String date, Avis avis) {
@@ -93,10 +99,10 @@ public class MesAvisPanel extends JPanel {
                 BorderFactory.createLineBorder(Color.LIGHT_GRAY),
                 new EmptyBorder(10, 15, 10, 15)
         ));
-        card.setBackground(Color.WHITE);
+        card.setBackground(Color.WHITE); // 🌟 Chaque carte reste en blanc
         card.setMaximumSize(new Dimension(1000, 160));
 
-        // LEFT: Texte principal
+        // Infos à gauche
         JPanel info = new JPanel();
         info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
         info.setOpaque(false);
@@ -137,11 +143,23 @@ public class MesAvisPanel extends JPanel {
 
         card.add(info, BorderLayout.CENTER);
 
-        // RIGHT: Bouton Modifier
+        // Bouton Modifier à droite
         JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         right.setOpaque(false);
 
-        JButton btnModifier = new JButton("Modifier") {
+        JButton btnModifier = createStyledButton("Modifier");
+        btnModifier.addActionListener(e ->
+                new EditAvisDialog(SwingUtilities.getWindowAncestor(this), avis, this::updateAvis).setVisible(true)
+        );
+
+        right.add(btnModifier);
+        card.add(right, BorderLayout.EAST);
+
+        return card;
+    }
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text) {
             private boolean hovered = false;
 
             @Override
@@ -168,14 +186,6 @@ public class MesAvisPanel extends JPanel {
                 });
             }
         };
-
-        btnModifier.addActionListener(e -> {
-            new EditAvisDialog(SwingUtilities.getWindowAncestor(this), avis, this::reload).setVisible(true);
-        });
-
-        right.add(btnModifier);
-        card.add(right, BorderLayout.EAST);
-
-        return card;
+        return button;
     }
 }
