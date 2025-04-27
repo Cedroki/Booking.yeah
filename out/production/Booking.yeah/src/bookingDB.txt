@@ -285,3 +285,98 @@ UPDATE hebergement SET ville = 'Lyon' WHERE id = 3;
 UPDATE hebergement SET ville = 'Grenoble' WHERE id = 4;
 UPDATE hebergement SET ville = 'Marbella' WHERE id = 5;
 UPDATE hebergement SET ville = 'Lille' WHERE id = 6;
+
+-- 2. Ajouter les nouvelles colonnes
+ALTER TABLE hebergement
+ADD COLUMN wifi BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN piscine BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN parking BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN climatisation BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN restaurant BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN room_service BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN spa BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN animaux BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN vue_mer BOOLEAN NOT NULL DEFAULT 0,
+ADD COLUMN salle_de_sport BOOLEAN NOT NULL DEFAULT 0;
+
+-- Remplir les colonnes wifi, piscine, parking, etc. pour les hébergements existants
+
+UPDATE hebergement SET
+  wifi = 1,
+  piscine = 0,
+  parking = 1,
+  climatisation = 1,
+  restaurant = 1,
+  room_service = 1,
+  spa = 0,
+  animaux = 0,
+  vue_mer = 0,
+  salle_de_sport = 1
+WHERE id = 1;
+
+UPDATE hebergement SET
+  wifi = 1,
+  piscine = 1,
+  parking = 1,
+  climatisation = 1,
+  restaurant = 0,
+  room_service = 0,
+  spa = 0,
+  animaux = 1,
+  vue_mer = 0,
+  salle_de_sport = 0
+WHERE id = 2;
+
+UPDATE hebergement SET
+  wifi = 1,
+  piscine = 0,
+  parking = 0,
+  climatisation = 1,
+  restaurant = 0,
+  room_service = 0,
+  spa = 0,
+  animaux = 0,
+  vue_mer = 0,
+  salle_de_sport = 0
+WHERE id = 3;
+
+UPDATE hebergement SET
+  wifi = 1,
+  piscine = 0,
+  parking = 1,
+  climatisation = 1,
+  restaurant = 0,
+  room_service = 0,
+  spa = 1,
+  animaux = 1,
+  vue_mer = 0,
+  salle_de_sport = 0
+WHERE id = 4;
+
+UPDATE hebergement SET
+  wifi = 1,
+  piscine = 1,
+  parking = 1,
+  climatisation = 1,
+  restaurant = 0,
+  room_service = 0,
+  spa = 1,
+  animaux = 1,
+  vue_mer = 1,
+  salle_de_sport = 0
+WHERE id = 5;
+
+UPDATE hebergement SET
+  wifi = 1,
+  piscine = 0,
+  parking = 0,
+  climatisation = 1,
+  restaurant = 0,
+  room_service = 0,
+  spa = 0,
+  animaux = 0,
+  vue_mer = 0,
+  salle_de_sport = 0
+WHERE id = 6;
+
+ALTER TABLE hebergement CHANGE COLUMN animaux animaux_acceptes BOOLEAN NOT NULL DEFAULT 0;

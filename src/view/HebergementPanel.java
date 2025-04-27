@@ -175,7 +175,7 @@ public class HebergementPanel extends JPanel {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
         panel.setBackground(Color.WHITE);
-        panel.setMaximumSize(new Dimension(900, 160));
+        panel.setMaximumSize(new Dimension(900, 200)); // légèrement plus haut car on ajoute les options
 
         // ----- PHOTO -----
         JLabel photo = new JLabel();
@@ -197,7 +197,7 @@ public class HebergementPanel extends JPanel {
 
         double moyenne = avisDAO.getMoyennePourHebergement(h.getId());
 
-        // Nom + note moyenne sur la même ligne
+        // Nom + note moyenne
         JPanel nameAndRating = new JPanel();
         nameAndRating.setLayout(new BoxLayout(nameAndRating, BoxLayout.X_AXIS));
         nameAndRating.setOpaque(false);
@@ -221,6 +221,88 @@ public class HebergementPanel extends JPanel {
         description.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         info.add(description);
 
+        info.add(Box.createVerticalStrut(20)); // un peu plus d'espace entre la description et les options
+
+// ----- OPTIONS (WiFi, Piscine, etc.) -----
+        JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0)); // spacing entre les options
+        optionsPanel.setOpaque(false);
+        Font optionFont = new Font("Segoe UI", Font.BOLD, 12);
+
+        boolean firstOption = true; // pour gérer les séparateurs "|"
+
+        if (h.isWifi()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel wifiLabel = new JLabel("Wi-Fi");
+            wifiLabel.setFont(optionFont);
+            optionsPanel.add(wifiLabel);
+            firstOption = false;
+        }
+        if (h.isPiscine()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel piscineLabel = new JLabel("Piscine");
+            piscineLabel.setFont(optionFont);
+            optionsPanel.add(piscineLabel);
+            firstOption = false;
+        }
+        if (h.isParking()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel parkingLabel = new JLabel("Parking");
+            parkingLabel.setFont(optionFont);
+            optionsPanel.add(parkingLabel);
+            firstOption = false;
+        }
+        if (h.isClimatisation()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel climLabel = new JLabel("Climatisation");
+            climLabel.setFont(optionFont);
+            optionsPanel.add(climLabel);
+            firstOption = false;
+        }
+        if (h.isRestaurant()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel restoLabel = new JLabel("Restaurant");
+            restoLabel.setFont(optionFont);
+            optionsPanel.add(restoLabel);
+            firstOption = false;
+        }
+        if (h.isRoomService()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel roomServiceLabel = new JLabel("Room Service");
+            roomServiceLabel.setFont(optionFont);
+            optionsPanel.add(roomServiceLabel);
+            firstOption = false;
+        }
+        if (h.isSpa()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel spaLabel = new JLabel("Spa");
+            spaLabel.setFont(optionFont);
+            optionsPanel.add(spaLabel);
+            firstOption = false;
+        }
+        if (h.isAnimauxAcceptes()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel animauxLabel = new JLabel("Animaux acceptés");
+            animauxLabel.setFont(optionFont);
+            optionsPanel.add(animauxLabel);
+            firstOption = false;
+        }
+        if (h.isVueMer()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel vueMerLabel = new JLabel("Vue Mer");
+            vueMerLabel.setFont(optionFont);
+            optionsPanel.add(vueMerLabel);
+            firstOption = false;
+        }
+        if (h.isSalleDeSport()) {
+            if (!firstOption) optionsPanel.add(createSeparator());
+            JLabel sportLabel = new JLabel("Salle de sport");
+            sportLabel.setFont(optionFont);
+            optionsPanel.add(sportLabel);
+            firstOption = false;
+        }
+
+        info.add(optionsPanel); // Ajoute finalement le panel d'options au bloc info
+
         panel.add(info, BorderLayout.CENTER);
 
         // ----- PRIX + BOUTONS -----
@@ -243,7 +325,7 @@ public class HebergementPanel extends JPanel {
         JPanel btns = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         btns.setOpaque(false);
 
-        // --- Bouton Réserver ---
+        // Bouton Réserver
         JButton btnRes = createActionButton("Réserver");
         btnRes.addActionListener(e -> {
             if (currentClient != null) {
@@ -259,7 +341,7 @@ public class HebergementPanel extends JPanel {
         });
         btns.add(btnRes);
 
-        // --- Bouton Avis ---
+        // Bouton Avis
         JButton btnAvis = createActionButton("Avis");
         btnAvis.addActionListener(e -> {
             if (currentClient != null) {
@@ -281,6 +363,7 @@ public class HebergementPanel extends JPanel {
 
         return panel;
     }
+
 
 
     /**
@@ -355,5 +438,13 @@ public class HebergementPanel extends JPanel {
         star.setForeground(new Color(255, 180, 0));
         return star;
     }
+
+    private JLabel createSeparator() {
+        JLabel sep = new JLabel("|");
+        sep.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        sep.setForeground(Color.LIGHT_GRAY); // rendu plus doux et classe
+        return sep;
+    }
+
 
 }
